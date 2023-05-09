@@ -19,25 +19,26 @@ namespace Holo.Cards
         // private Effect effect;
         
         // components to update with data
-        [SerializeField] private TextMeshPro cardNameTMP;
-        [SerializeField] private TextMeshPro powerTMP;
-        [SerializeField] private TextMeshPro cardDescriptionTMP;
+        [SerializeField] private TextMeshProUGUI cardNameTMP;
+        [SerializeField] private TextMeshProUGUI powerTMP;
+        [SerializeField] private TextMeshProUGUI cardDescriptionTMP;
         [SerializeField] private Image imageImage;
         
         void Start()
         {
+            // get data from SO
             cardName = cardData.CardName;
             power = cardData.Power;
             cardDescription = cardData.CardDescription;
             image = cardData.Image;
             id = cardData.ID;
             // effect = cardData.Effect;
-        }
 
-        // Update is called once per frame
-        void Update()
-        {
-
+            // assign data to components 
+            cardNameTMP.text = cardName;
+            powerTMP.text = power.ToString();
+            cardDescriptionTMP.text = cardDescription;
+            imageImage.sprite = image;
         }
     }
 }
