@@ -209,7 +209,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6791326909794969255}
-  m_Father: {fileID: 6791326910361522024}
+  m_Father: {fileID: 2303996612501114493}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6791326910046018565
@@ -432,7 +432,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6791326910361522024}
+  - component: {fileID: 2303996612501114493}
   - component: {fileID: 6791326910361522038}
   - component: {fileID: 6791326910361522039}
   - component: {fileID: 6791326910361522025}
@@ -444,15 +444,15 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &6791326910361522024
-RectTransform:
+--- !u!4 &2303996612501114493
+Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6791326910361522036}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -461,11 +461,6 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.25}
-  m_SizeDelta: {x: 20, y: 5}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!65 &6791326910361522038
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -491,7 +486,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9a1f4f5015d1294d8bc99bf9554cb40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeLocation: {fileID: 0}
   moveSpeed: 5
   rotationSpeed: 540
 --- !u!23 &6791326910361522025
@@ -828,7 +822,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 6791326910361522024}
+    m_TransformParent: {fileID: 2303996612501114493}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 711ebcf0cfdd37145a09fe8cf43f293c,
         type: 3}
