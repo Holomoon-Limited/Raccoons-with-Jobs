@@ -591,6 +591,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 46a6e1f2dd643474fa6f61b9b00f5a4f, type: 2}
   - {fileID: 11400000, guid: 42c85ec7e0b067543803e4f7742be485, type: 2}
   - {fileID: 11400000, guid: fa6aea9bd54f99b4692d99dd753de78c, type: 2}
+  - {fileID: 11400000, guid: b39de1fcb0b426d48a71c6ad4cc28f5d, type: 2}
+  - {fileID: 11400000, guid: 1ae654d4532e20d4d8459ca6c45109fb, type: 2}
+  - {fileID: 11400000, guid: 02939bfaf6f1c3c43bbf61d81b0455e0, type: 2}
+  - {fileID: 11400000, guid: 77a2c418636b62d43b9b893820941848, type: 2}
+  - {fileID: 11400000, guid: 93a8b6e54e739b045b8f1417fdf0c7b1, type: 2}
+  - {fileID: 11400000, guid: 563252c501eee0d4e9b2985962405758, type: 2}
+  - {fileID: 11400000, guid: f7ba7c9e04b2a3545a4f0a9597650dc8, type: 2}
+  - {fileID: 11400000, guid: 5e2c0b0004698df49a742a9a0348a85d, type: 2}
+  - {fileID: 11400000, guid: 832dc0206aad407428406bce26ba76ee, type: 2}
   cardLocation: {fileID: 589217246}
 --- !u!4 &421498676
 Transform:
