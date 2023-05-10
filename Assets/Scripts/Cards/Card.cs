@@ -8,7 +8,7 @@ namespace Holo.Cards
     /// </summary>
     public class Card : MonoBehaviour, IRaycastable
     {
-        [SerializeField] CardLocation activeLocation;
+        CardLocation activeLocation;
 
         [SerializeField][Min(0f)] private float moveSpeed = 5f;
         [SerializeField][Min(0f)] private float rotationSpeed = 540f;
@@ -20,19 +20,25 @@ namespace Holo.Cards
 
         private void Awake()
         {
-            activeLocation.AddCardToLocation(this);
+
             targetPosition = this.transform.position;
             targetRotation = this.transform.rotation;
         }
 
+        public void SetActiveLocation(CardLocation activeLocation)
+        {
+            this.activeLocation = activeLocation;
+            this.activeLocation.AddCardToLocation(this);
+        }
+
         public void OnHover()
         {
-            activeLocation.SetHighlightedCard(this);
+            activeLocation?.SetHighlightedCard(this);
         }
 
         public void OnEndHover()
         {
-            activeLocation.SetHighlightedCard(null);
+            activeLocation?.SetHighlightedCard(null);
         }
 
         private void Update()

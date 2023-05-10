@@ -107,6 +107,7 @@ namespace Holo.Cards
         {
             if (heldCards.Contains(card)) return;
             heldCards.Add(card);
+            SetCardPositionsInHand();
         }
 
         public override void RemoveCardFromLocation(Card card)

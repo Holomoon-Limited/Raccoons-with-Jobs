@@ -9,7 +9,7 @@ namespace Holo.Cards
     /// </summary>
     public class CardDisplayInformation : MonoBehaviour
     {
-        // data from ScriptableObject
+        // required ScriptableObject
         [SerializeField] private CardScriptableObject cardData;
 
         // components to update with data
@@ -17,9 +17,18 @@ namespace Holo.Cards
         [SerializeField] private TextMeshProUGUI powerTMP;
         [SerializeField] private TextMeshProUGUI cardDescriptionTMP;
         [SerializeField] private Image imageImage;
-        
+
         void Start()
         {
+            // defaults to test card as set in prefab 
+            DisplayCard(cardData);
+        }
+
+        public void DisplayCard(CardScriptableObject newCardData)
+        {
+            // overwrites default with new value
+            cardData = newCardData;
+            
             // assign data to components 
             cardNameTMP.text = cardData.CardName;
             powerTMP.text = cardData.Power.ToString();
