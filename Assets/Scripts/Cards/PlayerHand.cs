@@ -38,7 +38,7 @@ namespace Holo.Cards
             Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
             if (Physics.Raycast(ray, out RaycastHit hit, 100f, boardMask))
             {
-                SelectedCard.MoveToPoint(hit.point + new Vector3(0f, 2f, 0f), Quaternion.identity);
+                SelectedCard.MoveToPoint(hit.point + new Vector3(0f, 2.75f, 0f), Quaternion.identity);
             }
         }
 
@@ -101,6 +101,11 @@ namespace Holo.Cards
         private void CancelSelection()
         {
             SetSelectedCard(null);
+        }
+
+        public void AddCardToHand(Card card)
+        {
+            AddCardToLocation(card);
         }
 
         public override void AddCardToLocation(Card card)
