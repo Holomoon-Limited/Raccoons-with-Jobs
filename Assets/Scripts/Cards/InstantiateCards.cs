@@ -25,8 +25,8 @@ namespace Holo.Cards
                 Card newCard = Instantiate(baseCard, new Vector3(0, 0, 0), Quaternion.identity);
                 newCard.name = cardScriptableObjects[i].CardName;
                 newCard.SetActiveLocation(cardLocation);
-                CardDisplayInformation cardDisplayInformation = newCard.GetComponent<CardDisplayInformation>();
-                cardDisplayInformation.DisplayCard(cardScriptableObjects[i]);
+                Card card = newCard.GetComponent<Card>();
+                card.DisplayCard(cardScriptableObjects[i]);
             }
         }
     }

@@ -436,7 +436,6 @@ GameObject:
   - component: {fileID: 6791326910361522038}
   - component: {fileID: 6791326910361522039}
   - component: {fileID: 6791326910361522025}
-  - component: {fileID: 6791326910361522027}
   m_Layer: 0
   m_Name: BaseCard
   m_TagString: Untagged
@@ -486,6 +485,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9a1f4f5015d1294d8bc99bf9554cb40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CardData: {fileID: 11400000, guid: fbc6cb4a727b7f140840c5376488dde5, type: 2}
+  cardNameTMP: {fileID: 6791326910325054729}
+  powerTMP: {fileID: 6791326910664537126}
+  cardDescriptionTMP: {fileID: 6791326910737324283}
+  imageImage: {fileID: 6791326909343702555}
   moveSpeed: 5
   rotationSpeed: 540
 --- !u!23 &6791326910361522025
@@ -530,22 +534,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6791326910361522027
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6791326910361522036}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53f751133e8bf084b9344ba8caf26da2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cardNameTMP: {fileID: 6791326910325054729}
-  powerTMP: {fileID: 6791326910664537126}
-  cardDescriptionTMP: {fileID: 6791326910737324283}
-  imageImage: {fileID: 6791326909343702555}
 --- !u!1 &6791326910664537124
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,32 +1,35 @@
 using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Input Manager", menuName = "Input/New Input Manager", order = 0)]
-public class InputManager : ScriptableObject
+namespace Holo.Input
 {
-    public PlayerControls Controls { get; private set; }
-
-    public event Action OnSubmitPressed;
-    public event Action OnCancelPressed;
-
-    private void OnEnable()
+    [CreateAssetMenu(fileName = "Input Manager", menuName = "Input/New Input Manager", order = 0)]
+    public class InputManager : ScriptableObject
     {
-        this.hideFlags = HideFlags.DontUnloadUnusedAsset;
+        public PlayerControls Controls { get; private set; }
 
-        Controls = new PlayerControls();
-        Controls.Enable();
+        public event Action OnSubmitPressed;
+        public event Action OnCancelPressed;
 
-        Controls.Player.Submit.performed += ctx => SubmitPressed();
-        Controls.Player.Cancel.performed += ctx => CancelPressed();
-    }
+        private void OnEnable()
+        {
+            this.hideFlags = HideFlags.DontUnloadUnusedAsset;
 
-    public void SubmitPressed()
-    {
-        OnSubmitPressed?.Invoke();
-    }
+            Controls = new PlayerControls();
+            Controls.Enable();
 
-    public void CancelPressed()
-    {
-        OnCancelPressed?.Invoke();
+            Controls.Player.Submit.performed += ctx => SubmitPressed();
+            Controls.Player.Cancel.performed += ctx => CancelPressed();
+        }
+
+        public void SubmitPressed()
+        {
+            OnSubmitPressed?.Invoke();
+        }
+
+        public void CancelPressed()
+        {
+            OnCancelPressed?.Invoke();
+        }
     }
 }

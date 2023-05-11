@@ -1,5 +1,7 @@
 using Holo.Input;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Holo.Cards
 {
@@ -8,6 +10,15 @@ namespace Holo.Cards
     /// </summary>
     public class Card : MonoBehaviour, IRaycastable
     {
+        // required ScriptableObject
+        public CardScriptableObject CardData;
+
+        // components to update with data
+        [SerializeField] private TextMeshProUGUI cardNameTMP;
+        [SerializeField] private TextMeshProUGUI powerTMP;
+        [SerializeField] private TextMeshProUGUI cardDescriptionTMP;
+        [SerializeField] private Image imageImage;
+        
         CardLocation activeLocation;
 
         [SerializeField][Min(0f)] private float moveSpeed = 5f;
@@ -20,9 +31,22 @@ namespace Holo.Cards
 
         private void Awake()
         {
-
+            DisplayCard(CardData);
+            
             targetPosition = this.transform.position;
             targetRotation = this.transform.rotation;
+        }
+        
+        public void DisplayCard(CardScriptableObject newCardData)
+        {
+            // overwrites default with new value
+            CardData = newCardData;
+            
+            // assign data to components 
+            cardNameTMP.text = CardData.CardName;
+            powerTMP.text = CardData.Power.ToString();
+            cardDescriptionTMP.text = CardData.CardDescription;
+            imageImage.sprite = CardData.Image;
         }
 
         public void SetActiveLocation(CardLocation activeLocation)
