@@ -6,6 +6,7 @@ namespace Holo.Racc.Draft
     [CreateAssetMenu(fileName = "Draft Handler", menuName = "Draft/New Draft Handler", order = 0)]
     public class DraftHandler : ScriptableObject
     {
+        [SerializeField] private InputManager input;
         public event Action OnStartDraft;
 
         private DraftPhase draftPhase;

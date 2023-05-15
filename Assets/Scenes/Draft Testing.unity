@@ -646,7 +646,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 514089707}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 978f0b57cda38bd48bc3e0d79cef98a0, type: 3}
+  m_Script: {fileID: 11500000, guid: 8e2f1c50c5c6a2949b734ae4a26cb199, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   input: {fileID: 11400000, guid: ac751458ea8ac0447bfd06189dc39bfe, type: 2}
@@ -661,7 +661,7 @@ MonoBehaviour:
   cardPrefab: {fileID: 6791326910361522039, guid: 93c8a6396d6e84447bebc50d5ec91bae,
     type: 3}
   deckLocation: {fileID: 2067008272}
-  timeBetweenCards: 0.3
+  timeBetweenCards: 0.2
 --- !u!1 &589217244
 GameObject:
   m_ObjectHideFlags: 0

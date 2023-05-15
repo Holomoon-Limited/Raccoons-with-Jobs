@@ -73,7 +73,7 @@ namespace Holo.Cards
             }
             if (HighlightedCard == null) return;
             if (SelectedCard != null) return;
-            HighlightedCard.MoveToPoint(cardPositions[HighlightedCard.Position] + new Vector3(0f, 2f, 0.3f), Quaternion.identity);
+            HighlightedCard.MoveToPoint(cardPositions[HighlightedCard.Position] + new Vector3(0f, 1f, 0.3f), Quaternion.identity);
         }
 
         public override void SetSelectedCard(Card card)

@@ -542,6 +542,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53f751133e8bf084b9344ba8caf26da2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardData: {fileID: 11400000, guid: fbc6cb4a727b7f140840c5376488dde5, type: 2}
   cardNameTMP: {fileID: 6791326910325054729}
   powerTMP: {fileID: 6791326910664537126}
   cardDescriptionTMP: {fileID: 6791326910737324283}
