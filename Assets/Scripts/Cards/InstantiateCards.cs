@@ -7,7 +7,7 @@ namespace Holo.Cards
     public class InstantiateCards : MonoBehaviour
     {
         [SerializeField] private Card baseCard;
-        [SerializeField] List<CardScriptableObject> cardScriptableObjects;
+        [SerializeField] List<CardData> cardScriptableObjects;
         [SerializeField] private CardLocation cardLocation;
 
         private void OnGUI()
@@ -18,7 +18,7 @@ namespace Holo.Cards
             }
         }
 
-        private void InstantiateAllCards(List<CardScriptableObject> cardScriptableObjects)
+        private void InstantiateAllCards(List<CardData> cardScriptableObjects)
         {
             for (int i = 0; i < cardScriptableObjects.Count; i++)
             {

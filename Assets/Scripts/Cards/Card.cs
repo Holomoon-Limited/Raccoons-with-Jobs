@@ -11,7 +11,7 @@ namespace Holo.Cards
     public class Card : MonoBehaviour, IRaycastable
     {
         // required ScriptableObject
-        public CardScriptableObject CardData;
+        public CardData CardData;
 
         // components to update with data
         [SerializeField] private TextMeshProUGUI cardNameTMP;
@@ -37,7 +37,7 @@ namespace Holo.Cards
             targetRotation = this.transform.rotation;
         }
         
-        public void DisplayCard(CardScriptableObject newCardData)
+        public void DisplayCard(CardData newCardData)
         {
             // overwrites default with new value
             CardData = newCardData;
