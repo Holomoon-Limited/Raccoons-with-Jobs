@@ -71,7 +71,7 @@ namespace Holo.Cards
                 }
             }
 
-            // will add the card into the deck if current less than max 
+            // add card into pool if current less than max 
             if (cardToAddCurrent < cardToAddMax)
             {
                 PoolOfCurrentCards.Add(cardToAdd);
