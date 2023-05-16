@@ -11,14 +11,14 @@ namespace Holo.Cards
     public class Card : MonoBehaviour, IRaycastable
     {
         // required ScriptableObject
-        public CardData CardData;
+        public CardData CardData { get; private set; }
 
         // components to update with data
         [SerializeField] private TextMeshProUGUI cardNameTMP;
         [SerializeField] private TextMeshProUGUI powerTMP;
         [SerializeField] private TextMeshProUGUI cardDescriptionTMP;
         [SerializeField] private Image imageImage;
-        
+
         CardLocation activeLocation;
 
         [SerializeField][Min(0f)] private float moveSpeed = 5f;
@@ -32,16 +32,16 @@ namespace Holo.Cards
         private void Awake()
         {
             DisplayCard(CardData);
-            
+
             targetPosition = this.transform.position;
             targetRotation = this.transform.rotation;
         }
-        
+
         public void DisplayCard(CardData newCardData)
         {
             // overwrites default with new value
             CardData = newCardData;
-            
+
             // assign data to components 
             cardNameTMP.text = CardData.CardName;
             powerTMP.text = CardData.Power.ToString();

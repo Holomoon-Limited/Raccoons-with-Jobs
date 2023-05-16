@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -11,7 +10,7 @@ namespace Holo.Cards
         [field: SerializeField]
         public List<CardData> DeckOfAllCards { get; private set; } = new List<CardData>();
 
-        [field: SerializeField] 
+        [field: SerializeField]
         public List<CardData> PoolOfCurrentCards { get; private set; } = new List<CardData>();
 
         private void OnEnable()
@@ -32,14 +31,14 @@ namespace Holo.Cards
 
         public void ShufflePoolOfCurrentCards()
         {
-            PoolOfCurrentCards = PoolOfCurrentCards.OrderBy( x => Random.value ).ToList( );
+            PoolOfCurrentCards = PoolOfCurrentCards.OrderBy(x => Random.value).ToList();
         }
 
         public CardData DrawCard()
         {
             CardData drawnCard = PoolOfCurrentCards[0];
             RemoveCardFromPool(PoolOfCurrentCards[0]);
-            
+
             return drawnCard;
         }
 

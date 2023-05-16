@@ -22,6 +22,16 @@ namespace Holo.Input
             Controls.Player.Cancel.performed += ctx => CancelPressed();
         }
 
+        public void EnableInput()
+        {
+            Controls.Player.Enable();
+        }
+
+        public void DisableInput()
+        {
+            Controls.Player.Disable();
+        }
+
         public void SubmitPressed()
         {
             OnSubmitPressed?.Invoke();

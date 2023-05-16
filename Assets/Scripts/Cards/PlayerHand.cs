@@ -17,6 +17,7 @@ namespace Holo.Cards
             }
             else
             {
+                DontDestroyOnLoad(this.gameObject);
                 Instance = this;
             }
         }

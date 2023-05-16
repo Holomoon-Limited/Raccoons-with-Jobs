@@ -13,7 +13,7 @@ namespace Holo.Racc.AI
         [SerializeField] private float timeBetweenSelection = 0.3f;
         [SerializeField] private Transform aiHandPoint;
 
-        private List<CardScriptableObject> heldCards = new List<CardScriptableObject>();
+        private List<CardData> heldCards = new List<CardData>();
 
         private void OnEnable()
         {
