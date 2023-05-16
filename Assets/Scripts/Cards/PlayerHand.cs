@@ -7,6 +7,20 @@ namespace Holo.Cards
 {
     public class PlayerHand : CardLocation
     {
+        public static PlayerHand Instance;
+
+        private void Awake()
+        {
+            if (Instance != null && Instance != this)
+            {
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                Instance = this;
+            }
+        }
+
         [SerializeField] InputManager input;
 
         [SerializeField] private Transform minPosition;
@@ -15,6 +29,8 @@ namespace Holo.Cards
         [SerializeField] LayerMask boardMask = -1;
 
         private List<Vector3> cardPositions = new List<Vector3>();
+
+
 
         private void OnEnable()
         {
@@ -48,16 +64,16 @@ namespace Holo.Cards
             cardPositions.Clear();
 
             Vector3 distanceBetweenPoints = Vector3.zero;
-            if (heldCards.Count > 1)
+            if (HeldCards.Count > 1)
             {
-                distanceBetweenPoints = (maxPosition.position - minPosition.position) / (heldCards.Count - 1);
+                distanceBetweenPoints = (maxPosition.position - minPosition.position) / (HeldCards.Count - 1);
             }
 
-            for (int i = 0; i < heldCards.Count; i++)
+            for (int i = 0; i < HeldCards.Count; i++)
             {
                 cardPositions.Add(minPosition.position + (distanceBetweenPoints * i));
-                heldCards[i].MoveToPoint(cardPositions[i], minPosition.transform.rotation);
-                heldCards[i].Position = i;
+                HeldCards[i].MoveToPoint(cardPositions[i], minPosition.transform.rotation);
+                HeldCards[i].Position = i;
             }
         }
 
@@ -74,7 +90,7 @@ namespace Holo.Cards
             }
             if (HighlightedCard == null) return;
             if (SelectedCard != null) return;
-            HighlightedCard.MoveToPoint(cardPositions[HighlightedCard.Position] + new Vector3(0f, 2f, 0.3f), Quaternion.identity);
+            HighlightedCard.MoveToPoint(cardPositions[HighlightedCard.Position] + new Vector3(0f, 1f, 0.3f), Quaternion.identity);
         }
 
         public override void SetSelectedCard(Card card)
@@ -111,14 +127,8 @@ namespace Holo.Cards
 
         public override void AddCardToLocation(Card card)
         {
-            if (heldCards.Contains(card)) return;
-            heldCards.Add(card);
+            base.AddCardToLocation(card);
             SetCardPositionsInHand();
-        }
-
-        public override void RemoveCardFromLocation(Card card)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

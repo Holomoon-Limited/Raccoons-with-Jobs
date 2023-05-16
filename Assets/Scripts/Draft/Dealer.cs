@@ -6,30 +6,57 @@ using Holo.Input;
 
 namespace Holo.Racc.Draft
 {
+    /// <summary>
+    /// Singleton responsible for displaying dealt cards during Draft selection
+    /// </summary>
     public class Dealer : CardLocation
     {
+        public static Dealer Instance;
+
+        private void Awake()
+        {
+            if (Instance != null && Instance != this)
+            {
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                Instance = this;
+            }
+        }
+
+        [Header("Asset References")]
         [SerializeField] InputManager input;
         [SerializeField] DraftHandler draftHandler;
-        [SerializeField] private List<CardZone> cardZones = new List<CardZone>();
         [SerializeField] private Card cardPrefab;
-        [SerializeField] private Transform deckLocation;
+
+        [Header("Prefab References")]
+        [SerializeField][Tooltip("The locations the cards will be spawned to")] private List<CardZone> cardZones = new List<CardZone>();
+        [SerializeField] private Transform cardSpawnLocation;
+
+        [Header("Tuning Variables")]
         [SerializeField][Min(0f)] private float timeBetweenCards = 0.2f;
 
         private List<Vector3> cardPositions = new List<Vector3>();
 
+        //Tracks how many picks the player has made 
+        private int playerPicks = 0;
+
         private void OnEnable()
         {
             input.OnSubmitPressed += MoveCardToHand;
+            draftHandler.OnStartDraft += DealCards;
         }
 
         private void OnDisable()
         {
-            input.OnSubmitPressed += MoveCardToHand;
+            input.OnSubmitPressed -= MoveCardToHand;
+            draftHandler.OnStartDraft -= DealCards;
         }
 
         private void Start()
         {
-            DealCards();
+            draftHandler.StartDraft();
         }
 
         public void DealCards()
@@ -41,7 +68,7 @@ namespace Holo.Racc.Draft
         {
             for (int i = 0; i < cardZones.Count; i++)
             {
-                Card card = Instantiate(cardPrefab, deckLocation.position, Quaternion.Euler(0, 0, 180f));
+                Card card = Instantiate(cardPrefab, cardSpawnLocation.position, Quaternion.Euler(0, 0, 180f));
                 cardZones[i].AddCardToZone(card);
                 card.Position = i;
                 cardPositions.Add(cardZones[i].transform.position);
@@ -52,17 +79,17 @@ namespace Holo.Racc.Draft
 
         public override void AddCardToLocation(Card card)
         {
-            if (heldCards.Contains(card)) return;
-            heldCards.Add(card);
+            if (HeldCards.Contains(card)) return;
+            HeldCards.Add(card);
 
             card.SetActiveLocation(this);
         }
 
         public override void RemoveCardFromLocation(Card card)
         {
-            if (heldCards.Contains(card))
+            if (HeldCards.Contains(card))
             {
-                heldCards.Remove(card);
+                HeldCards.Remove(card);
             }
         }
 
@@ -82,20 +109,24 @@ namespace Holo.Racc.Draft
             HighlightedCard.MoveToPoint(cardPositions[HighlightedCard.Position] + new Vector3(0f, 1f, 0f), Quaternion.identity);
         }
 
+        public override void SetSelectedCard(Card card)
+        {
+            PlayerHand.Instance.AddCardToHand(card);
+            card.SetActiveLocation(PlayerHand.Instance);
+        }
+
         private void MoveCardToHand()
         {
             if (HighlightedCard == null) return;
             SetSelectedCard(HighlightedCard);
             RemoveCardFromLocation(HighlightedCard);
             HighlightedCard = null;
-        }
-
-        public override void SetSelectedCard(Card card)
-        {
-            PlayerHand hand = GameObject.FindObjectOfType<PlayerHand>();
-            if (hand == null) return;
-            hand.AddCardToHand(card);
-            card.SetActiveLocation(hand);
+            playerPicks++;
+            if (playerPicks >= draftHandler.Picks)
+            {
+                draftHandler.ProgressPhase();
+                playerPicks = 0;
+            }
         }
     }
 }

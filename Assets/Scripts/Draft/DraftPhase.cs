@@ -5,6 +5,7 @@ namespace Holo.Racc.Draft
         FirstPick,
         SecondPick,
         ThirdPick,
-        FourthPick
+        FourthPick,
+        PicksCompleted
     }
 }
