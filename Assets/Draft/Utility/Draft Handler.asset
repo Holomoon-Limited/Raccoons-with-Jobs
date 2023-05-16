@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3ade46e01b46f042a5a7e96c2232d4d, type: 3}
   m_Name: Draft Handler
   m_EditorClassIdentifier: 
+  input: {fileID: 11400000, guid: ac751458ea8ac0447bfd06189dc39bfe, type: 2}

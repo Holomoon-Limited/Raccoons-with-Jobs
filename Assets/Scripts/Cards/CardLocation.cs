@@ -11,22 +11,27 @@ namespace Holo.Cards
         public Card HighlightedCard { get; set; }
         public Card SelectedCard { get; set; }
 
-        protected List<Card> heldCards = new List<Card>();
-
-        private void OnEnable()
-        {
-            hideFlags = HideFlags.DontUnloadUnusedAsset;
-        }
+        public List<Card> HeldCards { get; private set; } = new List<Card>();
 
         public abstract void SetHighlightedCard(Card card);
         public abstract void SetSelectedCard(Card card);
-        public abstract void AddCardToLocation(Card card);
-        public abstract void RemoveCardFromLocation(Card card);
 
-        public void ResetData()
+        public virtual void AddCardToLocation(Card card)
         {
-            SelectedCard = null;
-            HighlightedCard = null;
+            if (HeldCards.Contains(card)) return;
+            HeldCards.Add(card);
+        }
+        public virtual void RemoveCardFromLocation(Card card)
+        {
+            if (this.HeldCards.Contains(card))
+            {
+                HeldCards.Remove(card);
+            }
+
+            if (HighlightedCard == card)
+            {
+                HighlightedCard = null;
+            }
         }
     }
 }
