@@ -11,7 +11,7 @@ namespace Holo.Cards
     public class Card : MonoBehaviour, IRaycastable
     {
         // required ScriptableObject
-        public CardData CardData { get; private set; }
+        public CardData CardData;
 
         // components to update with data
         [SerializeField] private TextMeshProUGUI cardNameTMP;

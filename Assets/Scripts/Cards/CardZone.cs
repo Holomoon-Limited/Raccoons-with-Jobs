@@ -8,7 +8,7 @@ namespace Holo.Cards
     /// <summary>
     /// Monobehaviour used to instantiate cards to a zone
     /// </summary>
-    public class CardZone : MonoBehaviour, IRaycastable
+    public class CardZone : MonoBehaviour
     {
         public Card HeldCard { get; private set; }
         public bool HasCard => (HeldCard != null);
@@ -18,16 +18,6 @@ namespace Holo.Cards
             this.HeldCard = card;
             card.transform.parent = this.transform;
             card.MoveToPoint(this.transform.position, Quaternion.identity);
-        }
-
-        public void OnEndHover()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void OnHover()
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Holo.Cards
         public Card HighlightedCard { get; set; }
         public Card SelectedCard { get; set; }
 
-        public List<Card> HeldCards { get; private set; } = new List<Card>();
+        public List<Card> HeldCards { get; private protected set; } = new List<Card>();
 
         public abstract void SetHighlightedCard(Card card);
         public abstract void SetSelectedCard(Card card);

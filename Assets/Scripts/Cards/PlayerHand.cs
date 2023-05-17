@@ -22,7 +22,11 @@ namespace Holo.Cards
             }
         }
 
+        [Header("Temp Player Hand Card Data")] 
+        [SerializeField] private List<CardData> tempPlayerCardData;
+
         [SerializeField] InputManager input;
+        [SerializeField] private Card baseCard;
 
         [SerializeField] private Transform minPosition;
         [SerializeField] private Transform maxPosition;
@@ -30,9 +34,7 @@ namespace Holo.Cards
         [SerializeField] LayerMask boardMask = -1;
 
         private List<Vector3> cardPositions = new List<Vector3>();
-
-
-
+        
         private void OnEnable()
         {
             input.OnSubmitPressed += SelectCard;
@@ -48,6 +50,8 @@ namespace Holo.Cards
         private void Start()
         {
             SetCardPositionsInHand();
+            
+            InstantiatePlayerCards(tempPlayerCardData);
         }
 
         private void Update()
@@ -57,6 +61,19 @@ namespace Holo.Cards
             if (Physics.Raycast(ray, out RaycastHit hit, 100f, boardMask))
             {
                 SelectedCard.MoveToPoint(hit.point + new Vector3(0f, 2.75f, 0f), Quaternion.identity);
+            }
+        }
+        
+        public void InstantiatePlayerCards(List<CardData> cardData)
+        {
+            // do stuff to load player's cards from somewhere 
+            
+            for (int i = 0; i < cardData.Count; i++)
+            {
+                Card newCard = Instantiate(baseCard, new Vector3(0, 0, 0), Quaternion.identity);
+                newCard.name = cardData[i].CardName;
+                newCard.SetActiveLocation(this);
+                newCard.DisplayCard(cardData[i]);
             }
         }
 
