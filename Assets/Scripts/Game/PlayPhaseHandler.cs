@@ -10,12 +10,12 @@ namespace Holo.Racc.Game
     {
         [Header("Lists of Data")] [SerializeField]
         private List<CardData> cardsInPlay = new List<CardData>();
+        
+        
 
         private void OnEnable()
         {
             this.hideFlags = HideFlags.DontUnloadUnusedAsset;
-
-            ClearCardsInPlay();
         }
         
         private void OnDisable()
@@ -27,11 +27,6 @@ namespace Holo.Racc.Game
         {
             Debug.Log("Play Phase over");
             // add stuff to return unused cards to deck
-        }
-        
-        public void ClearCardsInPlay()
-        {
-            cardsInPlay.Clear();
         }
     }
 }
