@@ -39,6 +39,7 @@ namespace Holo.Racc.Battle
             {
                 Card playerCard = battleSpawner.PlayerCardZones[i].HeldCard;
                 Card enemyCard = battleSpawner.EnemyCardZones[i].HeldCard;
+                if (playerCard == null || enemyCard == null) continue;
                 playerCard.Attack();
                 enemyCard.Attack();
                 if (playerCard.Power > enemyCard.Power)
@@ -56,6 +57,7 @@ namespace Holo.Racc.Battle
                 }
                 yield return new WaitForSeconds(timeBetweenAttacks);
             }
+            battleHandler.ShuffleDown();
         }
     }
 }
