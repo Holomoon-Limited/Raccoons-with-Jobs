@@ -209,7 +209,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6791326909794969255}
-  m_Father: {fileID: 2303996612501114493}
+  m_Father: {fileID: 6464102161729244565}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6791326910046018565
@@ -436,6 +436,7 @@ GameObject:
   - component: {fileID: 6791326910361522038}
   - component: {fileID: 6791326910361522039}
   - component: {fileID: 6791326910361522025}
+  - component: {fileID: 6125079663439127804}
   m_Layer: 0
   m_Name: BaseCard
   m_TagString: Untagged
@@ -455,7 +456,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6791326909956462823}
   - {fileID: 6464102161729244565}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -485,7 +485,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9a1f4f5015d1294d8bc99bf9554cb40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CardData: {fileID: 11400000, guid: fbc6cb4a727b7f140840c5376488dde5, type: 2}
   cardNameTMP: {fileID: 6791326910325054729}
   powerTMP: {fileID: 6791326910664537126}
   cardDescriptionTMP: {fileID: 6791326910737324283}
@@ -534,6 +533,26 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!95 &6125079663439127804
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6791326910361522036}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ae9cc35ea870bec4a91e6edfc395a412, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &6791326910664537124
 GameObject:
   m_ObjectHideFlags: 0
@@ -814,7 +833,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 711ebcf0cfdd37145a09fe8cf43f293c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 711ebcf0cfdd37145a09fe8cf43f293c,
         type: 3}
@@ -839,17 +858,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 711ebcf0cfdd37145a09fe8cf43f293c,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 711ebcf0cfdd37145a09fe8cf43f293c,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 711ebcf0cfdd37145a09fe8cf43f293c,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 711ebcf0cfdd37145a09fe8cf43f293c,
         type: 3}

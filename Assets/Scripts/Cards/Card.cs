@@ -28,9 +28,13 @@ namespace Holo.Cards
         private Quaternion targetRotation;
 
         public int Position { get; set; }
+        public int Power { get; private set; }
+
+        private Animator anim;
 
         private void Awake()
         {
+            anim = this.GetComponent<Animator>();
             DisplayCard(CardData);
 
             targetPosition = this.transform.position;
@@ -39,6 +43,7 @@ namespace Holo.Cards
 
         public void DisplayCard(CardData newCardData)
         {
+            if (newCardData == null) return;
             // overwrites default with new value
             CardData = newCardData;
 
@@ -47,6 +52,7 @@ namespace Holo.Cards
             powerTMP.text = CardData.Power.ToString();
             cardDescriptionTMP.text = CardData.CardDescription;
             imageImage.sprite = CardData.Image;
+            this.Power = CardData.Power;
         }
 
         public void SetActiveLocation(CardLocation activeLocation)
@@ -75,6 +81,11 @@ namespace Holo.Cards
         {
             this.targetPosition = position;
             this.targetRotation = rotation;
+        }
+
+        public void Attack()
+        {
+            anim.SetTrigger("attack");
         }
     }
 }

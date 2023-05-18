@@ -20,6 +20,13 @@ namespace Holo.Cards
             card.MoveToPoint(this.transform.position, Quaternion.identity);
         }
 
+        public void DespawnCard()
+        {
+            if (HeldCard == null) return;
+            Destroy(HeldCard.gameObject, 1f);
+            HeldCard = null;
+        }
+
         public void OnEndHover()
         {
             throw new System.NotImplementedException();

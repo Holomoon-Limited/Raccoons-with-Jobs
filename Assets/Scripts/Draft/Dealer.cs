@@ -26,8 +26,9 @@ namespace Holo.Racc.Draft
         }
 
         [Header("Asset References")]
-        [SerializeField] InputManager input;
-        [SerializeField] DraftHandler draftHandler;
+        [SerializeField] private DeckManager deck;
+        [SerializeField] private InputManager input;
+        [SerializeField] private DraftHandler draftHandler;
         [SerializeField] private Card cardPrefab;
 
         [Header("Prefab References")]
@@ -56,11 +57,13 @@ namespace Holo.Racc.Draft
 
         private void Start()
         {
+            deck.ResetPoolOfCurrentCards();
             draftHandler.StartDraft();
         }
 
         public void DealCards()
         {
+            deck.ShufflePoolOfCurrentCards();
             StartCoroutine(Co_DealCards());
         }
 
@@ -69,6 +72,7 @@ namespace Holo.Racc.Draft
             for (int i = 0; i < cardZones.Count; i++)
             {
                 Card card = Instantiate(cardPrefab, cardSpawnLocation.position, Quaternion.Euler(0, 0, 180f));
+                card.DisplayCard(deck.DrawCard());
                 cardZones[i].AddCardToZone(card);
                 card.Position = i;
                 cardPositions.Add(cardZones[i].transform.position);
