@@ -1,8 +1,9 @@
 using System;
 using Holo.Input;
+using Holo.Racc.Draft;
 using UnityEngine;
 
-namespace Holo.Racc.Draft
+namespace Holo.Racc.Game
 {
     [CreateAssetMenu(fileName = "Draft Handler", menuName = "Draft/New Draft Handler", order = 0)]
     public class DraftHandler : ScriptableObject

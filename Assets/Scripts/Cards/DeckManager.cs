@@ -45,7 +45,6 @@ namespace Holo.Cards
         public void RemoveCardFromPool(CardData cardToRemove)
         {
             PoolOfCurrentCards.Remove(cardToRemove);
-            Debug.Log($"Card to remove {cardToRemove}");
         }
 
         public void AddCardToPool(CardData cardToAdd)
@@ -74,7 +73,6 @@ namespace Holo.Cards
             if (cardToAddCurrent < cardToAddMax)
             {
                 PoolOfCurrentCards.Add(cardToAdd);
-                Debug.Log($"Card to add {cardToAdd}");
             }
 
             else

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Holo.Cards;
 using UnityEngine;
 using Holo.Input;
+using Holo.Racc.Game;
 
 namespace Holo.Racc.Draft
 {

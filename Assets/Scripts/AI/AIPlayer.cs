@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Holo.Cards;
 using Holo.Racc.Draft;
+using Holo.Racc.Game;
 using UnityEngine;
 
 namespace Holo.Racc.AI
