@@ -13,7 +13,7 @@ namespace Holo.Racc.Play
 
         [SerializeField] private PlayCardZone playCardZonePrefab;
 
-        public bool CanProgress
+        public bool CanEndPlayPhase
         {
             get
             {
