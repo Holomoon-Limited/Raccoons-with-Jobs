@@ -485,6 +485,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9a1f4f5015d1294d8bc99bf9554cb40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CardData: {fileID: 0}
   cardNameTMP: {fileID: 6791326910325054729}
   powerTMP: {fileID: 6791326910664537126}
   cardDescriptionTMP: {fileID: 6791326910737324283}
