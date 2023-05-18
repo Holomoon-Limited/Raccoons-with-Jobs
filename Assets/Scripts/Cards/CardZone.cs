@@ -10,7 +10,7 @@ namespace Holo.Cards
     /// </summary>
     public class CardZone : MonoBehaviour
     {
-        public Card HeldCard { get; private set; }
+        public Card HeldCard { get; protected set; }
         public bool HasCard => (HeldCard != null);
 
         public void AddCardToZone(Card card)
@@ -18,6 +18,12 @@ namespace Holo.Cards
             this.HeldCard = card;
             card.transform.parent = this.transform;
             card.MoveToPoint(this.transform.position, Quaternion.identity);
+        }
+
+        public void RemoveCardFromZone()
+        {
+            if (HeldCard == null) return;
+            HeldCard = null;
         }
 
         public void DespawnCard()

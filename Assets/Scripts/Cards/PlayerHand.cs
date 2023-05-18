@@ -22,7 +22,7 @@ namespace Holo.Cards
             }
         }
 
-        [Header("Temp Player Hand Card Data")] 
+        [Header("Temp Player Hand Card Data")]
         [SerializeField] private List<CardData> tempPlayerCardData;
 
         [SerializeField] InputManager input;
@@ -30,11 +30,12 @@ namespace Holo.Cards
 
         [SerializeField] private Transform minPosition;
         [SerializeField] private Transform maxPosition;
+        [SerializeField] private Transform handParent;
 
         [SerializeField] LayerMask boardMask = -1;
-        
+
         private List<Vector3> cardPositions = new List<Vector3>();
-        
+
         private void OnEnable()
         {
             input.OnSubmitPressed += SelectCard;
@@ -50,7 +51,7 @@ namespace Holo.Cards
         private void Start()
         {
             SetCardPositionsInHand();
-            
+
             InstantiatePlayerCards(tempPlayerCardData);
         }
 
@@ -63,7 +64,7 @@ namespace Holo.Cards
                 SelectedCard.MoveToPoint(hit.point + new Vector3(0f, 2.75f, 0f), Quaternion.identity);
             }
         }
-        
+
         public void InstantiatePlayerCards(List<CardData> cardData)
         {
             for (int i = 0; i < cardData.Count; i++)
@@ -83,7 +84,7 @@ namespace Holo.Cards
             {
                 distanceBetweenPoints = (maxPosition.position - minPosition.position) / (HeldCards.Count - 1);
             }
-            
+
             for (int i = 0; i < HeldCards.Count; i++)
             {
                 cardPositions.Add(minPosition.position + (distanceBetweenPoints * i));
@@ -138,11 +139,20 @@ namespace Holo.Cards
         public void AddCardToHand(Card card)
         {
             AddCardToLocation(card);
+            card.GetComponent<Collider>().enabled = true;
+            card.transform.parent = handParent;
         }
 
         public override void AddCardToLocation(Card card)
         {
             base.AddCardToLocation(card);
+            SetCardPositionsInHand();
+
+        }
+
+        public override void RemoveCardFromLocation(Card card)
+        {
+            base.RemoveCardFromLocation(card);
             SetCardPositionsInHand();
         }
     }

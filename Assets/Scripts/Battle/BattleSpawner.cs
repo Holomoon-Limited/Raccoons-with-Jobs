@@ -28,11 +28,6 @@ namespace Holo.Racc.Battle
             battleHandler.OnBattleStart -= SetupZones;
         }
 
-        private void Awake()
-        {
-
-        }
-
         private void Start()
         {
             battleHandler.StartBattle();

@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using Holo.Cards;
 using Holo.Input;
 using UnityEngine;
@@ -10,8 +7,6 @@ namespace Holo.Racc.Play
 {
     public class PlayCardZone : CardZone, IRaycastable
     {
-        [SerializeField] private Card assignedCard;
-
         [Header("Prefab References")]
         [SerializeField] private InputManager input;
 
@@ -19,66 +14,87 @@ namespace Holo.Racc.Play
         private bool isHoveredOver;
         public bool wasClicked;
 
+        PlayerBoard board;
+
         // PlayPhase subbed to manage assigned cards
         public static event Action<CardData, int> OnCardAssigned = (cardData, position) => { };
 
         private void OnEnable()
         {
-            input.OnSubmitPressed += AssignCardCheck;
+            input.OnSubmitPressed += AddCardToZone;
         }
 
         private void OnDisable()
         {
-            input.OnSubmitPressed -= AssignCardCheck;
+            input.OnSubmitPressed -= AddCardToZone;
+        }
+
+        public void SetPlayerBoard(PlayerBoard board)
+        {
+            this.board = board;
         }
 
         public void OnHover()
         {
-            isHoveredOver = true;
+            if (board == null) return;
+            board.SetHighlightedZone(this);
         }
 
         public void OnEndHover()
         {
-            isHoveredOver = false;
-            wasClicked = false;
+            if (board) board.SetHighlightedZone(null);
+            // isHoveredOver = false;
+            // wasClicked = false;
         }
 
-        private void AssignCardCheck()
+        private void AddCardToZone()
         {
-            if (isHoveredOver)
+            if (board.HighlightedZone != this) return;
+            if (this.HeldCard != null)
             {
-                // return if no selected card 
-                if (PlayerHand.Instance.SelectedCard == null) return;
-
-                if (assignedCard == null && !wasClicked)
-                {
-                    AssignCardToEmptyZone();
-                }
-
-                if (assignedCard != null && !wasClicked)
-                {
-                    SwapCards();
-                }
+                PlayerHand.Instance.AddCardToHand(this.HeldCard);
+                this.RemoveCardFromZone();
             }
+            if (PlayerHand.Instance.SelectedCard != null)
+            {
+                AddCardToZone(PlayerHand.Instance.SelectedCard);
+                PlayerHand.Instance.RemoveCardFromLocation(HeldCard);
+            }
+
+            // if (isHoveredOver)
+            // {
+            //     // return if no selected card 
+            //     if (PlayerHand.Instance.SelectedCard == null) return;
+
+            //     if (HeldCard == null && !wasClicked)
+            //     {
+            //         AssignCardToEmptyZone();
+            //     }
+
+            //     if (HeldCard != null && !wasClicked)
+            //     {
+            //         SwapCards();
+            //     }
+            // }
         }
 
         private void AssignCardToEmptyZone()
         {
-            assignedCard = PlayerHand.Instance.SelectedCard;
+            HeldCard = PlayerHand.Instance.SelectedCard;
 
             PlayerHand.Instance.SelectedCard = null;
             PlayerHand.Instance.HighlightedCard = null;
-            PlayerHand.Instance.RemoveCardFromLocation(assignedCard);
-            AddCardToZone(assignedCard);
+            PlayerHand.Instance.RemoveCardFromLocation(HeldCard);
+            AddCardToZone(HeldCard);
 
-            OnCardAssigned?.Invoke(assignedCard.CardData, thisCardZoneSI);
+            OnCardAssigned?.Invoke(HeldCard.CardData, thisCardZoneSI);
             wasClicked = true;
         }
 
         private void SwapCards()
         {
             // mark new and old cards
-            Card oldCard = assignedCard;
+            Card oldCard = HeldCard;
             Card newCard = PlayerHand.Instance.SelectedCard;
 
             // remove newCard from PlayerHand and assign it to the zone
@@ -96,8 +112,8 @@ namespace Holo.Racc.Play
             PlayerHand.Instance.SetCardPositionsInHand();
 
             // mark the newCard as my assigned one and Invoke list update 
-            assignedCard = newCard;
-            OnCardAssigned?.Invoke(assignedCard.CardData, thisCardZoneSI);
+            HeldCard = newCard;
+            OnCardAssigned?.Invoke(HeldCard.CardData, thisCardZoneSI);
             wasClicked = true;
         }
     }

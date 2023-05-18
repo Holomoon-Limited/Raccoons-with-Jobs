@@ -32,6 +32,11 @@ namespace Holo.Cards
             {
                 HighlightedCard = null;
             }
+
+            if (SelectedCard == card)
+            {
+                SelectedCard = null;
+            }
         }
     }
 }
