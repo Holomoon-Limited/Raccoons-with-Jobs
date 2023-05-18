@@ -1,5 +1,6 @@
 using System.Collections;
 using Holo.Cards;
+using Holo.Racc.Game;
 using UnityEngine;
 
 namespace Holo.Racc.Battle

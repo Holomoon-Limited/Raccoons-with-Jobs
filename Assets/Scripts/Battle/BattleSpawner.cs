@@ -2,6 +2,7 @@ using Holo.Cards;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using Holo.Racc.Game;
 
 namespace Holo.Racc.Battle
 {

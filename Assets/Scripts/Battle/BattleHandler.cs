@@ -3,7 +3,7 @@ using Holo.Cards;
 using UnityEngine;
 using System;
 
-namespace Holo.Racc.Battle
+namespace Holo.Racc.Game
 {
     [CreateAssetMenu(fileName = "Battle Handler", menuName = "Battle/New Battle Handler", order = 0)]
     public class BattleHandler : ScriptableObject
