@@ -3,7 +3,7 @@ using Holo.Cards;
 using Unity.VisualScripting;
 using UnityEngine;
 
-namespace Holo.Racc.Play
+namespace Holo.Racc.Game
 {
     [CreateAssetMenu(fileName = "Play Phase Handler", menuName = "Play/New Play Phase Handler", order = 0)]
     public class PlayPhaseHandler : ScriptableObject

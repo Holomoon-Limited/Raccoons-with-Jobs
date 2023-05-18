@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine;
+using Holo.Racc.Game;
 
 namespace Holo.Racc.Play
 {
