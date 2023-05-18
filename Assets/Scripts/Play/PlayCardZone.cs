@@ -12,16 +12,16 @@ namespace Holo.Racc.Play
     {
         [SerializeField] private Card assignedCard;
 
-        [Header("Prefab References")] 
+        [Header("Prefab References")]
         [SerializeField] private InputManager input;
 
         private int thisCardZoneSI => this.gameObject.transform.GetSiblingIndex();
         private bool isHoveredOver;
         public bool wasClicked;
-        
+
         // PlayPhase subbed to manage assigned cards
-        public static event Action<CardData, int> OnCardAssigned  = (cardData, position) => { };
-        
+        public static event Action<CardData, int> OnCardAssigned = (cardData, position) => { };
+
         private void OnEnable()
         {
             input.OnSubmitPressed += AssignCardCheck;
@@ -80,15 +80,15 @@ namespace Holo.Racc.Play
             // mark new and old cards
             Card oldCard = assignedCard;
             Card newCard = PlayerHand.Instance.SelectedCard;
-                    
+
             // remove newCard from PlayerHand and assign it to the zone
             PlayerHand.Instance.SelectedCard = null;
             PlayerHand.Instance.HighlightedCard = null;
             PlayerHand.Instance.RemoveCardFromLocation(newCard);
             AddCardToZone(newCard);
-                    
+
             // remove oldCard from the CardZone
-            RemoveCardFromZone(oldCard);
+            oldCard.transform.parent = null;
 
             // add oldCard back to PlayerHand
             PlayerHand.Instance.SetSelectedCard(oldCard);
