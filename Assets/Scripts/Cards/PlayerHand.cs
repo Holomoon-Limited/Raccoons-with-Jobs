@@ -32,7 +32,7 @@ namespace Holo.Cards
         [SerializeField] private Transform maxPosition;
 
         [SerializeField] LayerMask boardMask = -1;
-
+        
         private List<Vector3> cardPositions = new List<Vector3>();
         
         private void OnEnable()
@@ -66,27 +66,24 @@ namespace Holo.Cards
         
         public void InstantiatePlayerCards(List<CardData> cardData)
         {
-            // do stuff to load player's cards from somewhere 
-            
             for (int i = 0; i < cardData.Count; i++)
             {
-                Card newCard = Instantiate(baseCard, new Vector3(0, 0, 0), Quaternion.identity);
+                Card newCard = Instantiate(baseCard, new Vector3(0, 0, 0), Quaternion.identity, this.gameObject.transform);
                 newCard.name = cardData[i].CardName;
                 newCard.SetActiveLocation(this);
                 newCard.DisplayCard(cardData[i]);
             }
         }
 
-        private void SetCardPositionsInHand()
+        public void SetCardPositionsInHand()
         {
             cardPositions.Clear();
-
             Vector3 distanceBetweenPoints = Vector3.zero;
             if (HeldCards.Count > 1)
             {
                 distanceBetweenPoints = (maxPosition.position - minPosition.position) / (HeldCards.Count - 1);
             }
-
+            
             for (int i = 0; i < HeldCards.Count; i++)
             {
                 cardPositions.Add(minPosition.position + (distanceBetweenPoints * i));

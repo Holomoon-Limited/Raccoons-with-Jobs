@@ -19,5 +19,11 @@ namespace Holo.Cards
             card.transform.parent = this.transform;
             card.MoveToPoint(this.transform.position, Quaternion.identity);
         }
+
+        public void RemoveCardFromZone(Card card)
+        {
+            this.HeldCard = card;
+            card.transform.parent = null;
+        }
     }
 }

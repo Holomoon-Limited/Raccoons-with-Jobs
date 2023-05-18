@@ -10,32 +10,26 @@ namespace Holo.Racc.Play
 {
     public class PlayCardZone : CardZone, IRaycastable
     {
-        private PlayCardZone thisZone;
-        
         [SerializeField] private Card assignedCard;
-        private bool hasCard => (HeldCard != null);
 
         [Header("Prefab References")] 
         [SerializeField] private InputManager input;
 
+        private int thisCardZoneSI => this.gameObject.transform.GetSiblingIndex();
         private bool isHoveredOver;
+        public bool wasClicked;
         
         // PlayPhase subbed to manage assigned cards
-        public static event Action<CardData> OnCardAssigned  = (cardData) => { };
-        
-        void Start()
-        {
-            thisZone = this;
-        }
+        public static event Action<CardData, int> OnCardAssigned  = (cardData, position) => { };
         
         private void OnEnable()
         {
-            input.OnSubmitPressed += AssignCard;
+            input.OnSubmitPressed += AssignCardCheck;
         }
 
         private void OnDisable()
         {
-            input.OnSubmitPressed -= AssignCard;
+            input.OnSubmitPressed -= AssignCardCheck;
         }
 
         public void OnHover()
@@ -46,17 +40,65 @@ namespace Holo.Racc.Play
         public void OnEndHover()
         {
             isHoveredOver = false;
+            wasClicked = false;
         }
 
-        private void AssignCard()
+        private void AssignCardCheck()
         {
             if (isHoveredOver)
             {
-                Debug.Log($"{thisZone} has been clicked on!");
-                assignedCard = PlayerHand.Instance.SelectedCard;
-                
-                OnCardAssigned?.Invoke(assignedCard.CardData);
+                // return if no selected card 
+                if (PlayerHand.Instance.SelectedCard == null) return;
+
+                if (assignedCard == null && !wasClicked)
+                {
+                    AssignCardToEmptyZone();
+                }
+
+                if (assignedCard != null && !wasClicked)
+                {
+                    SwapCards();
+                }
             }
+        }
+
+        private void AssignCardToEmptyZone()
+        {
+            assignedCard = PlayerHand.Instance.SelectedCard;
+
+            PlayerHand.Instance.SelectedCard = null;
+            PlayerHand.Instance.HighlightedCard = null;
+            PlayerHand.Instance.RemoveCardFromLocation(assignedCard);
+            AddCardToZone(assignedCard);
+
+            OnCardAssigned?.Invoke(assignedCard.CardData, thisCardZoneSI);
+            wasClicked = true;
+        }
+
+        private void SwapCards()
+        {
+            // mark new and old cards
+            Card oldCard = assignedCard;
+            Card newCard = PlayerHand.Instance.SelectedCard;
+                    
+            // remove newCard from PlayerHand and assign it to the zone
+            PlayerHand.Instance.SelectedCard = null;
+            PlayerHand.Instance.HighlightedCard = null;
+            PlayerHand.Instance.RemoveCardFromLocation(newCard);
+            AddCardToZone(newCard);
+                    
+            // remove oldCard from the CardZone
+            RemoveCardFromZone(oldCard);
+
+            // add oldCard back to PlayerHand
+            PlayerHand.Instance.SetSelectedCard(oldCard);
+            PlayerHand.Instance.SetHighlightedCard(oldCard);
+            PlayerHand.Instance.SetCardPositionsInHand();
+
+            // mark the newCard as my assigned one and Invoke list update 
+            assignedCard = newCard;
+            OnCardAssigned?.Invoke(assignedCard.CardData, thisCardZoneSI);
+            wasClicked = true;
         }
     }
 }
