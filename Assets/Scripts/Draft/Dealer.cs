@@ -58,7 +58,8 @@ namespace Holo.Racc.Draft
 
         private void Start()
         {
-            deck.ResetPoolOfCurrentCards();
+            // Deck now reset itself when the game starts
+            // deck.ResetPoolOfCurrentCards();
             draftHandler.StartDraft();
         }
 

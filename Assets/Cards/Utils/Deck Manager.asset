@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ee2bef967f19d24c98a73f28a7d9692, type: 3}
   m_Name: Deck Manager
   m_EditorClassIdentifier: 
+  phaseHandler: {fileID: 11400000, guid: 1deeac03d61e05644a2ad459715836b5, type: 2}
   <DeckOfAllCards>k__BackingField:
   - {fileID: 11400000, guid: 46a6e1f2dd643474fa6f61b9b00f5a4f, type: 2}
   - {fileID: 11400000, guid: 46a6e1f2dd643474fa6f61b9b00f5a4f, type: 2}

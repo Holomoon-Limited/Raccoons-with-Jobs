@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0de4974b4926094095e53778cdc352b, type: 3}
   m_Name: CardsInPlay Container
   m_EditorClassIdentifier: 
-  playerCardsInPlay: []
+  phaseHandler: {fileID: 11400000, guid: 1deeac03d61e05644a2ad459715836b5, type: 2}
+  <playerCardsInPlay>k__BackingField: []
+  <enemyCardsInPlay>k__BackingField: []

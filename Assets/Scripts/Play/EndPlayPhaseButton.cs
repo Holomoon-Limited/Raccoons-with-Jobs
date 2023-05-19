@@ -7,9 +7,6 @@ namespace Holo.Racc.Play
 {
     public class EndPlayPhaseButton : MonoBehaviour
     {
-        [Header("Asset References")] 
-        [SerializeField] private PlayPhaseHandler playPhaseHandler;
-
         [Header("Scene References")] 
         [SerializeField] private PlayerBoard playerBoard;
 

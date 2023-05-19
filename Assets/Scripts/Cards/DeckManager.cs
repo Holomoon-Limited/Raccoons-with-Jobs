@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Holo.Racc.Game;
 using UnityEngine;
 
 namespace Holo.Cards
@@ -7,6 +8,9 @@ namespace Holo.Cards
     [CreateAssetMenu(fileName = "Deck Manager", menuName = "Cards/New Deck Manager", order = 1)]
     public class DeckManager : ScriptableObject
     {
+        [Header("Asset References")]
+        [SerializeField] private PhaseHandler phaseHandler;
+        
         [field: SerializeField]
         public List<CardData> DeckOfAllCards { get; private set; } = new List<CardData>();
 
@@ -16,6 +20,12 @@ namespace Holo.Cards
         private void OnEnable()
         {
             this.hideFlags = HideFlags.DontUnloadUnusedAsset;
+            phaseHandler.OnGameStart += ResetPoolOfCurrentCards;
+        }
+
+        private void OnDisable()
+        {
+            phaseHandler.OnGameStart -= ResetPoolOfCurrentCards;
         }
 
         public void ResetPoolOfCurrentCards()

@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c5ada6effe2a3164193a2136220c52bd, type: 3}
-  m_Name: Play Phase Handler
+  m_Name: Play Handler
   m_EditorClassIdentifier: 
-  cardsInPlay: []
+  phaseHandler: {fileID: 11400000, guid: 1deeac03d61e05644a2ad459715836b5, type: 2}

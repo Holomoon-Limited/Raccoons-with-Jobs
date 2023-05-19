@@ -1,17 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using Holo.Cards;
+using Holo.Racc.Game;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 namespace Holo.Racc.Play
 {
     public class PlayerBoard : MonoBehaviour
     {
+        [Header("Asset References")]
+        [SerializeField] private PhaseHandler phaseHandler;
+        [SerializeField] private CardsInPlayContainer cardsInPlayContainer;
+        
+        [Header("Prefab References")]
+        [SerializeField] private PlayCardZone playCardZonePrefab;
+
         //Reference to game
         private List<CardZone> cardZones = new List<CardZone>();
+        private int cardZoneCount = 3;
+        
         public CardZone HighlightedZone { get; private set; }
-
-        [SerializeField] private PlayCardZone playCardZonePrefab;
 
         public bool CanEndPlayPhase
         {
@@ -30,17 +39,18 @@ namespace Holo.Racc.Play
 
         private void OnEnable()
         {
-            //Register to play phase start
+            phaseHandler.OnPlayEnd += UpdatePlayerCards;
         }
 
         private void OnDisable()
         {
-            //Unregister to play phase 
+            phaseHandler.OnPlayEnd -= UpdatePlayerCards;
         }
 
         private void Start()
         {
-            SpawnPlayCardZones(3);
+            cardZoneCount = phaseHandler.PlayCardZoneCount;
+            SpawnPlayCardZones(cardZoneCount);
         }
 
         /// <summary>
@@ -78,16 +88,18 @@ namespace Holo.Racc.Play
             if (zone == null) return;
             this.HighlightedZone = zone;
         }
-
-        public IEnumerator<CardData> CardsInPlay()
+        
+        private void UpdatePlayerCards()
         {
+            List<CardData> playerCards = new List<CardData>();
+            
             foreach (CardZone zone in cardZones)
             {
-                yield return zone.HeldCard.CardData;
+                playerCards.Add(zone.HeldCard.CardData);
             }
+            
+            cardsInPlayContainer.UpdateCardsInPlay(true, playerCards);
         }
-
-        //Update game with cards in play 
     }
 
 }

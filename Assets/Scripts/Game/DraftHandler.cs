@@ -8,6 +8,8 @@ namespace Holo.Racc.Game
     [CreateAssetMenu(fileName = "Draft Handler", menuName = "Draft/New Draft Handler", order = 0)]
     public class DraftHandler : ScriptableObject
     {
+        [Header("Asset References")]
+        [SerializeField] private PhaseHandler phaseHandler;
         [SerializeField] private InputManager input;
         public int Picks { get; private set; }
 
@@ -48,7 +50,7 @@ namespace Holo.Racc.Game
                     break;
                 case DraftPhase.PicksCompleted:
                     input.EnableInput();
-                    //Start Play Phase
+                    phaseHandler.EndDraftPhase();
                     break;
                 default:
                     break;

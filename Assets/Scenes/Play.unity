@@ -728,7 +728,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33ca8ddd739c86e4eb76a83f58ff691f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playPhaseHandler: {fileID: 11400000, guid: 24761c1ffd47f67499765a366e9d4cdb, type: 2}
   playerBoard: {fileID: 2428618984587601744}
 --- !u!1 &832575517
 GameObject:
@@ -1512,6 +1511,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71b9bcbf9d6225a43a1ee81447ceea05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  phaseHandler: {fileID: 11400000, guid: 1deeac03d61e05644a2ad459715836b5, type: 2}
+  cardsInPlayContainer: {fileID: 11400000, guid: 32e6e6ed244026c46b54fb1bc5fa426b,
+    type: 2}
   playCardZonePrefab: {fileID: 1014615383864082534, guid: 0bcd2fff67ed4c84bb36e57387dd38d7,
     type: 3}
 --- !u!1 &2428618984742457817
