@@ -12,6 +12,7 @@ namespace Holo.Racc.Battle
     public class BattleSpawner : MonoBehaviour
     {
         [Header("Project References")]
+        [SerializeField] CardsInPlayContainer cardsInPlay;
         [SerializeField] BattleHandler battleHandler;
         [SerializeField] private CardZone cardZonePrefab;
         [SerializeField] private Card playerCardPrefab;
@@ -50,8 +51,8 @@ namespace Holo.Racc.Battle
         private void SetupZones()
         {
             DestroyZones();
-            PlayerCardZones = SpawnCardList(battleHandler.PlayerCards, playerZoneParent, playerCardPrefab);
-            EnemyCardZones = SpawnCardList(battleHandler.EnemyCards, enemyZoneParent, enemyCardPrefab);
+            PlayerCardZones = SpawnCardList(cardsInPlay.playerCardsInPlay, playerZoneParent, playerCardPrefab);
+            EnemyCardZones = SpawnCardList(cardsInPlay.enemyCardsInPlay, enemyZoneParent, enemyCardPrefab);
             Zones = PlayerCardZones.Count;
             battleHandler.StartAttacks();
         }

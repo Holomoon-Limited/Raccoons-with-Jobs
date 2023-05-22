@@ -203,7 +203,6 @@ GameObject:
   - component: {fileID: 954289027}
   - component: {fileID: 954289026}
   - component: {fileID: 954289025}
-  - component: {fileID: 954289028}
   m_Layer: 5
   m_Name: Start
   m_TagString: Untagged
@@ -338,20 +337,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 954289023}
   m_CullTransparentMesh: 1
---- !u!114 &954289028
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 954289023}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dfc42a4cd2448a4db714f7ebfffec7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  phaseHandler: {fileID: 11400000, guid: 1deeac03d61e05644a2ad459715836b5, type: 2}
-  deckManager: {fileID: 0}
 --- !u!1 &1004148916
 GameObject:
   m_ObjectHideFlags: 0
