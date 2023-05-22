@@ -27,10 +27,16 @@ namespace Holo.Cards
             HeldCard = null;
         }
 
+        public void MoveCardToHand()
+        {
+            PlayerHand.Instance.AddCardToHand(HeldCard);
+            RemoveCardFromZone();
+        }
+
         public void DespawnCard()
         {
             if (HeldCard == null) return;
-            Destroy(HeldCard.gameObject, 1f);
+            Destroy(HeldCard.gameObject);
             HeldCard = null;
         }
     }
