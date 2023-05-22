@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Holo.Racc.Game;
 using UnityEngine;
 
 namespace Holo.Racc.UI

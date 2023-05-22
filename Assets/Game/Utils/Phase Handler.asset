@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92d8a3d69f0e19b46a894ea9bbbd7596, type: 3}
   m_Name: Phase Handler
   m_EditorClassIdentifier: 
+  scoreManager: {fileID: 11400000, guid: a679469c45ab2794b863987b14ff1ba5, type: 2}

@@ -1,6 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,9 +8,10 @@ namespace Holo.Racc.Game
     [CreateAssetMenu(fileName = "Phase Handler", menuName = "Game/New Phase Handler", order = 0)]
     public class PhaseHandler : ScriptableObject
     {
+        [Header("Asset References")] 
+        [SerializeField] private ScoreManager scoreManager;
+        
         public int PlayCardZoneCount { get; private set; }
-        public int PlayerScore { get; private set; }
-        public int OpponentScore { get; private set; }
 
         // Actions
         public event Action OnGameStart;
@@ -34,10 +34,8 @@ namespace Holo.Racc.Game
         {
             // all data resets 
             PlayCardZoneCount = 3;
-            PlayerScore = 0;
-            OpponentScore = 0;
 
-            // DeckManager and PlayerHand reset their data in response to this 
+            // DeckManager resets in response to this 
             OnGameStart?.Invoke();
 
             StartDraftPhase();
@@ -81,9 +79,9 @@ namespace Holo.Racc.Game
         {
             OnBattleEnd?.Invoke();
 
-            if (PlayerScore == 3 || OpponentScore == 3)
+            if (scoreManager.GameOver)
             {
-                SceneManager.LoadScene("MainMenu");
+                SceneManager.LoadScene("GameEnd");
             }
 
             else
@@ -92,6 +90,7 @@ namespace Holo.Racc.Game
             }
         }
 
+        // called on the Replay button in the GameEnd Scene 
         public void LoadMainMenu()
         {
             SceneManager.LoadScene("MainMenu");
