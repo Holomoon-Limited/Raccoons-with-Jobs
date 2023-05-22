@@ -12,16 +12,16 @@ namespace Holo.Racc.Game
         public int PlayCardZoneCount { get; private set; }
         public int PlayerScore { get; private set; }
         public int OpponentScore { get; private set; }
-        
+
         // Actions
         public event Action OnGameStart;
 
         // Draft
         public event Action OnDraftEnd;
-        
+
         // Play
         public event Action OnPlayEnd;
-        
+
         // Battle
         public event Action OnBattleEnd;
 
@@ -36,10 +36,10 @@ namespace Holo.Racc.Game
             PlayCardZoneCount = 3;
             PlayerScore = 0;
             OpponentScore = 0;
-            
+
             // DeckManager and PlayerHand reset their data in response to this 
             OnGameStart?.Invoke();
-            
+
             StartDraftPhase();
         }
 
@@ -53,7 +53,7 @@ namespace Holo.Racc.Game
             OnDraftEnd?.Invoke();
             StartPlayPhase();
         }
-        
+
         // Play
         private void StartPlayPhase()
         {
@@ -62,12 +62,12 @@ namespace Holo.Racc.Game
         public void EndPlayPhase()
         {
             OnPlayEnd?.Invoke();
-            
+
             if (PlayCardZoneCount < 5)
             {
                 PlayCardZoneCount++;
             }
-            
+
             StartBattlePhase();
         }
 
@@ -76,6 +76,7 @@ namespace Holo.Racc.Game
         {
             SceneManager.LoadScene("Battle");
         }
+
         public void EndBattlePhase()
         {
             OnBattleEnd?.Invoke();

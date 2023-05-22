@@ -15,6 +15,7 @@ namespace Holo.Cards
 
         public void AddCardToZone(Card card)
         {
+            if (card == null) return;
             this.HeldCard = card;
             card.transform.parent = this.transform;
             card.MoveToPoint(this.transform.position, Quaternion.identity);

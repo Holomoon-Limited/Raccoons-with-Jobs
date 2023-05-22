@@ -12,6 +12,7 @@ namespace Holo.Racc.Battle
     public class BattleSpawner : MonoBehaviour
     {
         [Header("Project References")]
+        [SerializeField] private ScoreManager scoreManager;
         [SerializeField] CardsInPlayContainer cardsInPlay;
         [SerializeField] BattleHandler battleHandler;
         [SerializeField] private CardZone cardZonePrefab;
@@ -90,21 +91,21 @@ namespace Holo.Racc.Battle
 
         private IEnumerator Co_ShuffleDownZones(List<CardZone> zones)
         {
-            CardZone lastEmptyZone = null;
+            List<CardZone> emptyZones = new List<CardZone>();
             for (int i = 0; i < Zones; i++)
             {
                 if (zones[i].HeldCard == null)
                 {
-                    lastEmptyZone = zones[i];
+                    emptyZones.Add(zones[i]);
                     continue;
                 }
                 else
                 {
-                    if (lastEmptyZone != null)
+                    if (emptyZones.Count > 0)
                     {
-                        lastEmptyZone.AddCardToZone(zones[i].HeldCard);
+                        emptyZones[0].AddCardToZone(zones[i].HeldCard);
                         zones[i].RemoveCardFromZone();
-                        lastEmptyZone = zones[i];
+                        emptyZones.RemoveAt(0);
                     }
                 }
                 yield return new WaitForSeconds(timeBetweenShuffles);
