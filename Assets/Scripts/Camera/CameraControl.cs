@@ -1,7 +1,7 @@
 using UnityEngine;
 using Cinemachine;
 
-namespace Holo.Input
+namespace Holo.Cam
 {
     public class CameraControl : MonoBehaviour
     {
