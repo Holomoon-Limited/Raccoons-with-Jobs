@@ -52,7 +52,7 @@ namespace Holo.Cards
         {
             input.OnSubmitPressed -= SelectCard;
             input.OnCancelPressed -= CancelSelection;
-            
+
             phaseHandler.OnPlayEnd -= ReturnCards;
         }
 
@@ -150,6 +150,7 @@ namespace Holo.Cards
             card.GetComponent<Collider>().enabled = true;
             card.transform.parent = handParent;
             card.name = card.CardData.CardName;
+            card.SetActiveLocation(this);
         }
 
         public override void AddCardToLocation(Card card)
@@ -166,17 +167,13 @@ namespace Holo.Cards
 
         private void ReturnCards()
         {
-            List<CardData> excessCardData = new List<CardData>();
-
-            for (int i = 0; i < handParent.transform.childCount; ++i)
+            foreach (Card card in HeldCards)
             {
-                
-                handParent.transform.GetChild(i);
-                //excessCardData.Add();
-                Destroy(handParent.transform.GetChild(i));
+                deckManager.AddCardToPool(card.CardData);
+                Destroy(card.gameObject);
             }
 
-            // make reference to deckManager.AddCards();
+            HeldCards.Clear();
         }
     }
 }

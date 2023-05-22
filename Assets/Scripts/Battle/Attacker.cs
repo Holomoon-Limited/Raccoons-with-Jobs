@@ -36,7 +36,6 @@ namespace Holo.Racc.Battle
 
         private void RunAttackPhase()
         {
-            StopAllCoroutines();
             StartCoroutine(Co_RunAttackPhase());
         }
 
@@ -55,19 +54,20 @@ namespace Holo.Racc.Battle
                     if (playerCard == null || enemyCard == null) continue;
                     playerCard.Attack();
                     enemyCard.Attack();
+
+                    //Let the attack play 
+                    yield return new WaitForSeconds(1f);
                     if (playerCard.Power > enemyCard.Power)
                     {
                         battleSpawner.EnemyCardZones[i].DespawnCard();
                     }
                     else if (playerCard.Power < enemyCard.Power)
                     {
-                        PlayerHand.Instance.AddCardToHand(battleSpawner.PlayerCardZones[i].HeldCard);
-                        battleSpawner.PlayerCardZones[i].DespawnCard();
+                        battleSpawner.PlayerCardZones[i].MoveCardToHand();
                     }
                     else
                     {
-                        PlayerHand.Instance.AddCardToHand(battleSpawner.PlayerCardZones[i].HeldCard);
-                        battleSpawner.PlayerCardZones[i].DespawnCard();
+                        battleSpawner.PlayerCardZones[i].MoveCardToHand();
                         battleSpawner.EnemyCardZones[i].DespawnCard();
                     }
                     yield return new WaitForSeconds(timeBetweenAttacks);

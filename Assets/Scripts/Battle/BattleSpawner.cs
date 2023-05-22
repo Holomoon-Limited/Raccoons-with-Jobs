@@ -85,27 +85,49 @@ namespace Holo.Racc.Battle
 
         private void ShuffleDown()
         {
-            StartCoroutine(Co_ShuffleDownZones(PlayerCardZones));
-            StartCoroutine(Co_ShuffleDownZones(EnemyCardZones));
+            StartCoroutine(Co_ShuffleDownZones());
         }
 
-        private IEnumerator Co_ShuffleDownZones(List<CardZone> zones)
+        private IEnumerator Co_ShuffleDownZones()
         {
-            List<CardZone> emptyZones = new List<CardZone>();
+            List<CardZone> emptyPlayerZones = new List<CardZone>();
+            List<CardZone> emptyEnemyZones = new List<CardZone>();
+
             for (int i = 0; i < Zones; i++)
             {
-                if (zones[i].HeldCard == null)
+                if (PlayerCardZones[i].HeldCard == null)
                 {
-                    emptyZones.Add(zones[i]);
+                    emptyPlayerZones.Add(PlayerCardZones[i]);
                     continue;
                 }
                 else
                 {
-                    if (emptyZones.Count > 0)
+                    if (emptyPlayerZones.Count > 0)
                     {
-                        emptyZones[0].AddCardToZone(zones[i].HeldCard);
-                        zones[i].RemoveCardFromZone();
-                        emptyZones.RemoveAt(0);
+                        emptyPlayerZones[0].AddCardToZone(PlayerCardZones[i].HeldCard);
+                        PlayerCardZones[i].RemoveCardFromZone();
+                        emptyPlayerZones.RemoveAt(0);
+                        emptyPlayerZones.Add(PlayerCardZones[i]);
+                    }
+                }
+                yield return new WaitForSeconds(timeBetweenShuffles);
+            }
+
+            for (int i = 0; i < Zones; i++)
+            {
+                if (EnemyCardZones[i].HeldCard == null)
+                {
+                    emptyEnemyZones.Add(EnemyCardZones[i]);
+                    continue;
+                }
+                else
+                {
+                    if (emptyEnemyZones.Count > 0)
+                    {
+                        emptyEnemyZones[0].AddCardToZone(EnemyCardZones[i].HeldCard);
+                        EnemyCardZones[i].RemoveCardFromZone();
+                        emptyEnemyZones.RemoveAt(0);
+                        emptyEnemyZones.Add(EnemyCardZones[i]);
                     }
                 }
                 yield return new WaitForSeconds(timeBetweenShuffles);

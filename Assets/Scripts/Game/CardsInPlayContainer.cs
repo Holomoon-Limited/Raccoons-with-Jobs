@@ -35,7 +35,6 @@ namespace Holo.Racc.Game
         private void ClearCardsInPlay()
         {
             playerCardsInPlay.Clear();
-            //enemyCardsInPlay.Clear();
         }
 
         public void UpdateCardsInPlay(bool playersCards, List<CardData> cardData)

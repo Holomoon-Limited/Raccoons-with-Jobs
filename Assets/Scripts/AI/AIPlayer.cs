@@ -9,6 +9,21 @@ namespace Holo.Racc.AI
 {
     public class AIPlayer : MonoBehaviour
     {
+        public static AIPlayer Instance;
+
+        private void Awake()
+        {
+            if (Instance != null && Instance != this)
+            {
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                DontDestroyOnLoad(this.gameObject);
+                Instance = this;
+            }
+        }
+
         [SerializeField] private DraftHandler draftHandler;
         [SerializeField] private PhaseHandler phaseHandler;
         [SerializeField] private CardsInPlayContainer cardsInPlay;
@@ -46,7 +61,6 @@ namespace Holo.Racc.AI
                 heldCards.Add(card.CardData);
                 UpdateEnemyCards();
                 Dealer.Instance.RemoveCardFromLocation(Dealer.Instance.HeldCards[index]);
-                //Add card data to this card data 
                 Destroy(card.gameObject, 1f);
                 yield return new WaitForSeconds(timeBetweenSelection);
             }
@@ -55,6 +69,10 @@ namespace Holo.Racc.AI
 
         private void UpdateEnemyCards()
         {
+            while (heldCards.Count > phaseHandler.PlayCardZoneCount)
+            {
+                heldCards.RemoveAt(heldCards.Count - 1);
+            }
             cardsInPlay.UpdateCardsInPlay(false, heldCards);
         }
     }
