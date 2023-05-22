@@ -301,7 +301,7 @@ MonoBehaviour:
   allCamTransforms:
   - {fileID: 6964141638254764057}
   - {fileID: 6964141638456295730}
-  shakeDuration: 0
+  shakeTime: 1
   shakeAmount: 0.3
   decreaseFactor: 6
 --- !u!1 &6964141639728418814

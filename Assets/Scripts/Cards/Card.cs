@@ -1,3 +1,4 @@
+using Holo.Cam;
 using Holo.Input;
 using TMPro;
 using UnityEngine;
@@ -86,6 +87,11 @@ namespace Holo.Cards
         public void Attack()
         {
             anim.SetTrigger("attack");
+        }
+
+        public void CamShake()
+        {
+            CameraShake.instance.StandardCameraShake();
         }
     }
 }
