@@ -90,5 +90,10 @@ namespace Holo.Racc.Game
                 StartDraftPhase();
             }
         }
+
+        public void LoadMainMenu()
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
     }
 }
