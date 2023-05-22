@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Holo.Input;
+using Holo.Racc.Game;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -25,7 +26,10 @@ namespace Holo.Cards
         [Header("Temp Player Hand Card Data")]
         [SerializeField] private List<CardData> tempPlayerCardData;
 
+        [Header("Asset References")]
         [SerializeField] InputManager input;
+        [SerializeField] private PhaseHandler phaseHandler;
+        [SerializeField] private DeckManager deckManager;
         [SerializeField] private Card baseCard;
 
         [SerializeField] private Transform minPosition;
@@ -40,12 +44,16 @@ namespace Holo.Cards
         {
             input.OnSubmitPressed += SelectCard;
             input.OnCancelPressed += CancelSelection;
+
+            phaseHandler.OnPlayEnd += ReturnCards;
         }
 
         private void OnDisable()
         {
             input.OnSubmitPressed -= SelectCard;
             input.OnCancelPressed -= CancelSelection;
+            
+            phaseHandler.OnPlayEnd -= ReturnCards;
         }
 
         private void Start()
@@ -69,7 +77,7 @@ namespace Holo.Cards
         {
             for (int i = 0; i < cardData.Count; i++)
             {
-                Card newCard = Instantiate(baseCard, new Vector3(0, 0, 0), Quaternion.identity, this.gameObject.transform);
+                Card newCard = Instantiate(baseCard, new Vector3(0, 0, 0), Quaternion.identity, handParent.transform);
                 newCard.name = cardData[i].CardName;
                 newCard.SetActiveLocation(this);
                 newCard.DisplayCard(cardData[i]);
@@ -154,6 +162,21 @@ namespace Holo.Cards
         {
             base.RemoveCardFromLocation(card);
             SetCardPositionsInHand();
+        }
+
+        private void ReturnCards()
+        {
+            List<CardData> excessCardData = new List<CardData>();
+
+            for (int i = 0; i < handParent.transform.childCount; ++i)
+            {
+                
+                handParent.transform.GetChild(i);
+                //excessCardData.Add();
+                Destroy(handParent.transform.GetChild(i));
+            }
+
+            // make reference to deckManager.AddCards();
         }
     }
 }

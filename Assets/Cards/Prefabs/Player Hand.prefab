@@ -142,6 +142,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tempPlayerCardData: []
   input: {fileID: 11400000, guid: ac751458ea8ac0447bfd06189dc39bfe, type: 2}
+  phaseHandler: {fileID: 11400000, guid: 1deeac03d61e05644a2ad459715836b5, type: 2}
+  deckManager: {fileID: 11400000, guid: c2c247b58f6b55b4db83a6e557494258, type: 2}
   baseCard: {fileID: 6791326910361522039, guid: 93c8a6396d6e84447bebc50d5ec91bae,
     type: 3}
   minPosition: {fileID: 6475505998734864777}

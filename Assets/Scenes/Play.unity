@@ -1503,6 +1503,35 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Hand
       objectReference: {fileID: 0}
+    - target: {fileID: 6475505999750600931, guid: 75e97d82ebc154b49b9230ad9c144e08,
+        type: 3}
+      propertyPath: tempPlayerCardData.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6475505999750600931, guid: 75e97d82ebc154b49b9230ad9c144e08,
+        type: 3}
+      propertyPath: tempPlayerCardData.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 02939bfaf6f1c3c43bbf61d81b0455e0,
+        type: 2}
+    - target: {fileID: 6475505999750600931, guid: 75e97d82ebc154b49b9230ad9c144e08,
+        type: 3}
+      propertyPath: tempPlayerCardData.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1ae654d4532e20d4d8459ca6c45109fb,
+        type: 2}
+    - target: {fileID: 6475505999750600931, guid: 75e97d82ebc154b49b9230ad9c144e08,
+        type: 3}
+      propertyPath: tempPlayerCardData.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 93a8b6e54e739b045b8f1417fdf0c7b1,
+        type: 2}
+    - target: {fileID: 6475505999750600931, guid: 75e97d82ebc154b49b9230ad9c144e08,
+        type: 3}
+      propertyPath: tempPlayerCardData.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 832dc0206aad407428406bce26ba76ee,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75e97d82ebc154b49b9230ad9c144e08, type: 3}
 --- !u!4 &2428618984587601728

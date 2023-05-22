@@ -288,6 +288,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: c2c247b58f6b55b4db83a6e557494258, type: 2}
+        m_TargetAssemblyTypeName: Holo.Cards.DeckManager, Assembly-CSharp
+        m_MethodName: ResetPoolOfCurrentCards
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &954289026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -338,7 +350,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dfc42a4cd2448a4db714f7ebfffec7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  phaseHandler: {fileID: 0}
+  phaseHandler: {fileID: 11400000, guid: 1deeac03d61e05644a2ad459715836b5, type: 2}
+  deckManager: {fileID: 0}
 --- !u!1 &1004148916
 GameObject:
   m_ObjectHideFlags: 0

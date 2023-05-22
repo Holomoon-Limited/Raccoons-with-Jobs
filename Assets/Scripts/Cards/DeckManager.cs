@@ -46,6 +46,11 @@ namespace Holo.Cards
 
         public CardData DrawCard()
         {
+            if (PoolOfCurrentCards.Count <= 0)
+            {
+                ResetPoolOfCurrentCards();
+            }
+            
             CardData drawnCard = PoolOfCurrentCards[0];
             RemoveCardFromPool(PoolOfCurrentCards[0]);
 
