@@ -1506,7 +1506,7 @@ PrefabInstance:
     - target: {fileID: 6475505999750600931, guid: 75e97d82ebc154b49b9230ad9c144e08,
         type: 3}
       propertyPath: tempPlayerCardData.Array.size
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6475505999750600931, guid: 75e97d82ebc154b49b9230ad9c144e08,
         type: 3}
@@ -1531,6 +1531,18 @@ PrefabInstance:
       propertyPath: tempPlayerCardData.Array.data[3]
       value: 
       objectReference: {fileID: 11400000, guid: 832dc0206aad407428406bce26ba76ee,
+        type: 2}
+    - target: {fileID: 6475505999750600931, guid: 75e97d82ebc154b49b9230ad9c144e08,
+        type: 3}
+      propertyPath: tempPlayerCardData.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 5e2c0b0004698df49a742a9a0348a85d,
+        type: 2}
+    - target: {fileID: 6475505999750600931, guid: 75e97d82ebc154b49b9230ad9c144e08,
+        type: 3}
+      propertyPath: tempPlayerCardData.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: 46a6e1f2dd643474fa6f61b9b00f5a4f,
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75e97d82ebc154b49b9230ad9c144e08, type: 3}

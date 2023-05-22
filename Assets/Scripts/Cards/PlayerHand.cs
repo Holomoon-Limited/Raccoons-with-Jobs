@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Holo.Input;
 using Holo.Racc.Game;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -164,19 +165,23 @@ namespace Holo.Cards
             SetCardPositionsInHand();
         }
 
+        // returns excess cards to the DeckManager at end of PlayPhase
         private void ReturnCards()
         {
             List<CardData> excessCardData = new List<CardData>();
 
             for (int i = 0; i < handParent.transform.childCount; ++i)
             {
-                
-                handParent.transform.GetChild(i);
-                //excessCardData.Add();
-                Destroy(handParent.transform.GetChild(i));
+                GameObject child = handParent.transform.GetChild(i).gameObject;
+                Card childCard = child.GetComponent<Card>();
+                excessCardData.Add(childCard.CardData);
+                Destroy(child);
             }
 
-            // make reference to deckManager.AddCards();
+            for (int i = 0; i < excessCardData.Count; i++)
+            {
+                deckManager.AddCardToPool(excessCardData[i]);
+            }
         }
     }
 }
