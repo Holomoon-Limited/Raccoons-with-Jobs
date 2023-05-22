@@ -84,20 +84,13 @@ namespace Holo.Cards
             this.targetRotation = rotation;
         }
 
-        private void Start()
-        {
-        //    Attack();
-        }
-
         public void Attack()
         {
-            Debug.Log("Attack called");
             anim.SetTrigger("attack");
         }
 
         public void CamShake()
         {
-            Debug.Log("Cam shake called");
             CameraShake.instance.StandardCameraShake();
         }
     }
