@@ -53,7 +53,7 @@ namespace Holo.Cards
         {
             input.OnSubmitPressed -= SelectCard;
             input.OnCancelPressed -= CancelSelection;
-            
+
             phaseHandler.OnPlayEnd -= ReturnCards;
         }
 
@@ -151,6 +151,7 @@ namespace Holo.Cards
             card.GetComponent<Collider>().enabled = true;
             card.transform.parent = handParent;
             card.name = card.CardData.CardName;
+            card.SetActiveLocation(this);
         }
 
         public override void AddCardToLocation(Card card)
@@ -168,20 +169,31 @@ namespace Holo.Cards
         // returns excess cards to the DeckManager at end of PlayPhase
         private void ReturnCards()
         {
-            List<CardData> excessCardData = new List<CardData>();
-
-            for (int i = 0; i < handParent.transform.childCount; ++i)
+            foreach (Card card in HeldCards)
             {
-                GameObject child = handParent.transform.GetChild(i).gameObject;
-                Card childCard = child.GetComponent<Card>();
-                excessCardData.Add(childCard.CardData);
-                Destroy(child);
+                deckManager.AddCardToPool(card.CardData);
+                Destroy(card.gameObject);
             }
 
-            for (int i = 0; i < excessCardData.Count; i++)
-            {
-                deckManager.AddCardToPool(excessCardData[i]);
-            }
+            HeldCards.Clear();
+
+            // List<CardData> excessCardData = new List<CardData>();
+
+            // for (int i = 0; i < handParent.transform.childCount; ++i)
+            // {
+            //     GameObject child = handParent.transform.GetChild(i).gameObject;
+            //     Card childCard = child.GetComponent<Card>();
+            //     excessCardData.Add(childCard.CardData);
+            //     Destroy(child);
+            // }
+
+            // for (int i = 0; i < excessCardData.Count; i++)
+            // {
+            //     deckManager.AddCardToPool(excessCardData[i]);
+            // }
+
+            // HeldCards.Clear();
+            // cardPositions.Clear();
         }
     }
 }
