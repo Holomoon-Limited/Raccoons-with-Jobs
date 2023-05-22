@@ -11,6 +11,8 @@ namespace Holo.Racc.Battle
     public class Attacker : MonoBehaviour
     {
         [SerializeField] BattleHandler battleHandler;
+        [SerializeField] PhaseHandler phaseHandler;
+        [SerializeField] ScoreManager scoreManager;
 
         [SerializeField][Min(0f)] private float timeBetweenAttacks = 0.5f;
 
@@ -34,6 +36,7 @@ namespace Holo.Racc.Battle
 
         private void RunAttackPhase()
         {
+            StopAllCoroutines();
             StartCoroutine(Co_RunAttackPhase());
         }
 
@@ -58,10 +61,12 @@ namespace Holo.Racc.Battle
                     }
                     else if (playerCard.Power < enemyCard.Power)
                     {
+                        PlayerHand.Instance.AddCardToHand(battleSpawner.PlayerCardZones[i].HeldCard);
                         battleSpawner.PlayerCardZones[i].DespawnCard();
                     }
                     else
                     {
+                        PlayerHand.Instance.AddCardToHand(battleSpawner.PlayerCardZones[i].HeldCard);
                         battleSpawner.PlayerCardZones[i].DespawnCard();
                         battleSpawner.EnemyCardZones[i].DespawnCard();
                     }
@@ -72,19 +77,27 @@ namespace Holo.Racc.Battle
             else
             {
                 //Then some gross looking win/loss logic 
+                //Draw 
                 if (!PlayerHasCards() && !EnemyHasCards())
                 {
                     Debug.Log("Draw");
                 }
+                //Player wins
                 else if (PlayerHasCards() && !EnemyHasCards())
                 {
-                    Debug.Log("Player wins");
+                    scoreManager.IncreasePlayerScore();
                 }
+                //Enemy Wins
                 else if (!PlayerHasCards() && EnemyHasCards())
                 {
-                    Debug.Log("Enemy wins");
+                    scoreManager.IncreaseEnemyScore();
                 }
-                //Start next draft phase here
+                foreach (CardZone zone in battleSpawner.PlayerCardZones)
+                {
+                    if (zone.HasCard)
+                    { PlayerHand.Instance.AddCardToHand(zone.HeldCard); }
+                }
+                phaseHandler.EndBattlePhase();
             }
         }
 

@@ -10,6 +10,8 @@ namespace Holo.Racc.AI
     public class AIPlayer : MonoBehaviour
     {
         [SerializeField] private DraftHandler draftHandler;
+        [SerializeField] private PhaseHandler phaseHandler;
+        [SerializeField] private CardsInPlayContainer cardsInPlay;
 
         [SerializeField] private float timeBetweenSelection = 0.3f;
         [SerializeField] private Transform aiHandPoint;
@@ -41,12 +43,19 @@ namespace Holo.Racc.AI
                 Card card = Dealer.Instance.HeldCards[index];
                 card.GetComponent<Collider>().enabled = false;
                 card.MoveToPoint(aiHandPoint.position, aiHandPoint.rotation);
+                heldCards.Add(card.CardData);
+                UpdateEnemyCards();
                 Dealer.Instance.RemoveCardFromLocation(Dealer.Instance.HeldCards[index]);
                 //Add card data to this card data 
                 Destroy(card.gameObject, 1f);
                 yield return new WaitForSeconds(timeBetweenSelection);
             }
             draftHandler.ProgressPhase();
+        }
+
+        private void UpdateEnemyCards()
+        {
+            cardsInPlay.UpdateCardsInPlay(false, heldCards);
         }
     }
 }

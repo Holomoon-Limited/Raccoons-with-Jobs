@@ -10,15 +10,15 @@ namespace Holo.Racc.Game
     {
         [Header("Asset References")]
         [SerializeField] private PhaseHandler phaseHandler;
-        
-        [field: Header("Lists of Data")] 
+
+        [field: Header("Lists of Data")]
         [field: SerializeField] public List<CardData> playerCardsInPlay { get; private set; }
         [field: SerializeField] public List<CardData> enemyCardsInPlay { get; private set; }
 
         private void OnEnable()
         {
             this.hideFlags = HideFlags.DontUnloadUnusedAsset;
-            
+
             // clear CardsInPlay when game ends and when Play Phase begins
             phaseHandler.OnGameStart += ClearCardsInPlay;
             phaseHandler.OnDraftEnd += ClearCardsInPlay;
@@ -35,7 +35,7 @@ namespace Holo.Racc.Game
         private void ClearCardsInPlay()
         {
             playerCardsInPlay.Clear();
-            enemyCardsInPlay.Clear();
+            //enemyCardsInPlay.Clear();
         }
 
         public void UpdateCardsInPlay(bool playersCards, List<CardData> cardData)
@@ -54,7 +54,7 @@ namespace Holo.Racc.Game
                 enemyCardsInPlay.Clear();
                 for (int i = 0; i < cardData.Count; i++)
                 {
-                    playerCardsInPlay.Add(cardData[i]);
+                    enemyCardsInPlay.Add(cardData[i]);
                 }
             }
         }
