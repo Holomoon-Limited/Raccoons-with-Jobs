@@ -771,6 +771,7 @@ MonoBehaviour:
     type: 3}
   playerZoneParent: {fileID: 326692476}
   enemyZoneParent: {fileID: 2099341859}
+  timeBetweenShuffles: 0.5
 --- !u!114 &715719908
 MonoBehaviour:
   m_ObjectHideFlags: 0

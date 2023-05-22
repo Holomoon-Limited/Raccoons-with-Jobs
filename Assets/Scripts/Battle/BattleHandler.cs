@@ -5,6 +5,9 @@ using System;
 
 namespace Holo.Racc.Game
 {
+    /// <summary>
+    /// Battle phase event bus
+    /// </summary>
     [CreateAssetMenu(fileName = "Battle Handler", menuName = "Battle/New Battle Handler", order = 0)]
     public class BattleHandler : ScriptableObject
     {
@@ -30,7 +33,7 @@ namespace Holo.Racc.Game
         public void ShuffleDown()
         {
             OnShuffleDown?.Invoke();
-            
+
         }
     }
 
