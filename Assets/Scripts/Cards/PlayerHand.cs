@@ -141,13 +141,13 @@ namespace Holo.Cards
             AddCardToLocation(card);
             card.GetComponent<Collider>().enabled = true;
             card.transform.parent = handParent;
+            card.name = card.CardData.CardName;
         }
 
         public override void AddCardToLocation(Card card)
         {
             base.AddCardToLocation(card);
             SetCardPositionsInHand();
-
         }
 
         public override void RemoveCardFromLocation(Card card)

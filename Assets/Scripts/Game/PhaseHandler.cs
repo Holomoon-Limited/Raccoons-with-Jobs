@@ -82,12 +82,12 @@ namespace Holo.Racc.Game
 
             if (PlayerScore == 3 || OpponentScore == 3)
             {
-                StartDraftPhase();
+                SceneManager.LoadScene("MainMenu");
             }
 
             else
             {
-                SceneManager.LoadScene("MainMenu");
+                StartDraftPhase();
             }
         }
     }
