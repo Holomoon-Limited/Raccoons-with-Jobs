@@ -79,5 +79,6 @@ MonoBehaviour:
   draftHandler: {fileID: 11400000, guid: a895a5e1cd2eebf44a41925f9e271a83, type: 2}
   phaseHandler: {fileID: 11400000, guid: 1deeac03d61e05644a2ad459715836b5, type: 2}
   cardsInPlay: {fileID: 11400000, guid: 32e6e6ed244026c46b54fb1bc5fa426b, type: 2}
+  deckManager: {fileID: 11400000, guid: c2c247b58f6b55b4db83a6e557494258, type: 2}
   timeBetweenSelection: 0.75
   aiHandPoint: {fileID: 8853291868259815382}

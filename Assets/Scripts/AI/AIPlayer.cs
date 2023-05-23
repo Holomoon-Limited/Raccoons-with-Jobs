@@ -24,10 +24,12 @@ namespace Holo.Racc.AI
             }
         }
 
+        [Header("Asset References")]
         [SerializeField] private DraftHandler draftHandler;
         [SerializeField] private PhaseHandler phaseHandler;
         [SerializeField] private CardsInPlayContainer cardsInPlay;
 
+        [Header("Design Properties")]
         [SerializeField] private float timeBetweenSelection = 0.3f;
         [SerializeField] private Transform aiHandPoint;
 
@@ -74,6 +76,16 @@ namespace Holo.Racc.AI
                 heldCards.RemoveAt(heldCards.Count - 1);
             }
             cardsInPlay.UpdateCardsInPlay(false, heldCards);
+        }
+
+        private void ReturnCards()
+        {
+            // foreach (CardData card in heldCards)
+            // {
+            //     deckManager.AddCardToPool(card);
+            // }
+            //
+            // heldCards.Clear();
         }
     }
 }

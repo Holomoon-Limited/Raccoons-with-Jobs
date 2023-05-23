@@ -10,6 +10,7 @@ namespace Holo.Racc.Game
     {
         [Header("Asset References")]
         [SerializeField] private PhaseHandler phaseHandler;
+        [SerializeField] private DeckManager deckManager;
 
         [field: Header("Lists of Data")]
         [field: SerializeField] public List<CardData> playerCardsInPlay { get; private set; }
