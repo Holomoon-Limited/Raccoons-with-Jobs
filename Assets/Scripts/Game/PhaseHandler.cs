@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -15,27 +16,22 @@ namespace Holo.Racc.Game
 
         // Actions
         public event Action OnGameStart;
-
-        // Draft
         public event Action OnDraftEnd;
-
-        // Play
         public event Action OnPlayEnd;
-
-        // Battle
         public event Action OnBattleEnd;
+        public event Action OnGameEnd;
+        
 
         private void OnEnable()
         {
             this.hideFlags = HideFlags.DontUnloadUnusedAsset;
         }
 
+        // called by Start button in MainMenu 
         public void StartGame()
         {
-            // all data resets 
             PlayCardZoneCount = 3;
-
-            // DeckManager resets in response to this 
+            
             OnGameStart?.Invoke();
 
             StartDraftPhase();
@@ -75,12 +71,16 @@ namespace Holo.Racc.Game
             SceneManager.LoadScene("Battle");
         }
 
-        public void EndBattlePhase()
+        public IEnumerator Co_EndBattlePhase()
         {
             OnBattleEnd?.Invoke();
 
+            // time delay to allow score board to update 
+            yield return new WaitForSeconds(2);
+
             if (scoreManager.GameOver)
             {
+                OnGameEnd?.Invoke();
                 SceneManager.LoadScene("GameEnd");
             }
 

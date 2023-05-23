@@ -1,3 +1,5 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Holo.Racc.Game
@@ -7,6 +9,8 @@ namespace Holo.Racc.Game
     {
         public int PlayerScore { get; private set; }
         public int EnemyScore { get; private set; }
+
+        public event Action OnScoreUpdated;
 
         public bool GameOver => (PlayerScore >= 3) || (EnemyScore >= 3);
         
@@ -22,6 +26,7 @@ namespace Holo.Racc.Game
             {
                 Debug.Log("Player wins!");
             }
+            OnScoreUpdated?.Invoke();
         }
 
         public void IncreaseEnemyScore()
@@ -31,12 +36,16 @@ namespace Holo.Racc.Game
             {
                 Debug.Log("Enemy wins!");
             }
+            
+            OnScoreUpdated?.Invoke();
         }
 
         public void ResetScores()
         {
             PlayerScore = 0;
             EnemyScore = 0;
+            
+            OnScoreUpdated?.Invoke();
         }
     }
 }
