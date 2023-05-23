@@ -97,7 +97,8 @@ namespace Holo.Racc.Battle
                     if (zone.HasCard)
                     { PlayerHand.Instance.AddCardToHand(zone.HeldCard); }
                 }
-                phaseHandler.EndBattlePhase();
+
+                StartCoroutine(phaseHandler.Co_EndBattlePhase());
             }
         }
 
