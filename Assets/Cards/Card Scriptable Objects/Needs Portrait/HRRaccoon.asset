@@ -15,5 +15,5 @@ MonoBehaviour:
   CardName: HR Raccoon
   Power: 3
   CardDescription: At the start of combat, give adjacent raccoons +2 power
-  Image: {fileID: 21300000, guid: de855e6b5e6f6fa4b957ec6323e2173d, type: 3}
-  ID: 0
+  Image: {fileID: 21300000, guid: 1d45a17518bb12d46bb25b3bc8aa3388, type: 3}
+  LineImage: {fileID: 21300000, guid: c52cf9e7d7cd5384b851a441e5ec08ac, type: 3}
