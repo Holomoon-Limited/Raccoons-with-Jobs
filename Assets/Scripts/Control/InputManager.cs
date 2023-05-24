@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Holo.Input
 {
@@ -10,7 +11,9 @@ namespace Holo.Input
 
         public event Action OnSubmitPressed;
         public event Action OnCancelPressed;
-
+        public event Action OnMouseScrolledUp;
+        public event Action OnMouseScrolledDown;
+        
         private void OnEnable()
         {
             this.hideFlags = HideFlags.DontUnloadUnusedAsset;
@@ -20,6 +23,9 @@ namespace Holo.Input
 
             Controls.Player.Submit.performed += ctx => SubmitPressed();
             Controls.Player.Cancel.performed += ctx => CancelPressed();
+            
+            Controls.Player.MouseScroll.performed += ctx => MouseScrolled();
+
         }
 
         public void EnableInput()
@@ -40,6 +46,22 @@ namespace Holo.Input
         public void CancelPressed()
         {
             OnCancelPressed?.Invoke();
+        }
+
+        public void MouseScrolled()
+        {
+            object objAxisAmount = Controls.Player.MouseScroll.ReadValueAsObject();
+            int axisAmount = Convert.ToInt32(objAxisAmount);
+
+            if (axisAmount > 0)
+            {
+                OnMouseScrolledUp?.Invoke();
+            }
+            
+            else if (axisAmount < 0)
+            {
+                OnMouseScrolledDown?.Invoke();
+            }
         }
     }
 }

@@ -284,6 +284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97f0453df76e6df4186c5b8e02f67cee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputManager: {fileID: 11400000, guid: ac751458ea8ac0447bfd06189dc39bfe, type: 2}
   playerHandCamera: {fileID: 6964141638254764056}
   boardCamera: {fileID: 6964141638456295729}
 --- !u!114 &6964141639031287535
