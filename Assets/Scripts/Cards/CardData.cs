@@ -10,7 +10,8 @@ namespace Holo.Cards
         public string CardDescription;
         public Sprite Image;
         public Sprite LineImage;
-        
-        // public Effect Effect;
+        [field: SerializeField] public Effect Effect { get; private set; }
+        public bool HasEffect => (Effect != null);
+
     }
 }
