@@ -25,6 +25,8 @@ namespace Holo.Racc.Game
             phaseHandler.OnGameStart += ClearPlayerCardsInPlay;
             phaseHandler.OnDraftEnd += ClearPlayerCardsInPlay;
 
+            // clear enemyCardsInPlay when game starts and ends
+            phaseHandler.OnGameStart += ClearEnemyCardsInPlay;
             phaseHandler.OnGameEnd += ClearEnemyCardsInPlay;
 
             ClearPlayerCardsInPlay();
@@ -35,6 +37,7 @@ namespace Holo.Racc.Game
             phaseHandler.OnGameStart -= ClearPlayerCardsInPlay;
             phaseHandler.OnDraftEnd -= ClearPlayerCardsInPlay;
             
+            phaseHandler.OnGameStart -= ClearEnemyCardsInPlay;
             phaseHandler.OnGameEnd -= ClearEnemyCardsInPlay;
         }
 
