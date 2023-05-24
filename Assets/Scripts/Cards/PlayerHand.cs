@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Holo.Input;
 using Holo.Racc.Game;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -47,7 +46,6 @@ namespace Holo.Cards
             input.OnCancelPressed += CancelSelection;
 
             phaseHandler.OnPlayEnd += ReturnCards;
-            phaseHandler.OnGameEnd += ReturnCards;
         }
 
         private void OnDisable()
@@ -56,7 +54,6 @@ namespace Holo.Cards
             input.OnCancelPressed -= CancelSelection;
 
             phaseHandler.OnPlayEnd -= ReturnCards;
-            phaseHandler.OnGameEnd -= ReturnCards;
         }
 
         private void Start()
@@ -72,7 +69,7 @@ namespace Holo.Cards
             Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
             if (Physics.Raycast(ray, out RaycastHit hit, 100f, boardMask))
             {
-                SelectedCard.MoveToPoint(hit.point + new Vector3(0f, 2.75f, 0f), Quaternion.identity);
+                SelectedCard.MoveToPoint(hit.point + new Vector3(0f, 3.5f, 0f), Quaternion.identity);
             }
         }
 
@@ -178,6 +175,24 @@ namespace Holo.Cards
             }
 
             HeldCards.Clear();
+
+            // List<CardData> excessCardData = new List<CardData>();
+
+            // for (int i = 0; i < handParent.transform.childCount; ++i)
+            // {
+            //     GameObject child = handParent.transform.GetChild(i).gameObject;
+            //     Card childCard = child.GetComponent<Card>();
+            //     excessCardData.Add(childCard.CardData);
+            //     Destroy(child);
+            // }
+
+            // for (int i = 0; i < excessCardData.Count; i++)
+            // {
+            //     deckManager.AddCardToPool(excessCardData[i]);
+            // }
+
+            // HeldCards.Clear();
+            // cardPositions.Clear();
         }
     }
 }

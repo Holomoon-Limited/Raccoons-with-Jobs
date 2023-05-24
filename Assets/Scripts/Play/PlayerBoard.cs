@@ -1,9 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using Holo.Cards;
 using Holo.Racc.Game;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 namespace Holo.Racc.Play
 {
@@ -12,14 +10,14 @@ namespace Holo.Racc.Play
         [Header("Asset References")]
         [SerializeField] private PhaseHandler phaseHandler;
         [SerializeField] private CardsInPlayContainer cardsInPlayContainer;
-        
+
         [Header("Prefab References")]
         [SerializeField] private PlayCardZone playCardZonePrefab;
 
         //Reference to game
         private List<CardZone> cardZones = new List<CardZone>();
         private int cardZoneCount = 3;
-        
+
         public CardZone HighlightedZone { get; private set; }
 
         public bool CanEndPlayPhase
@@ -88,16 +86,21 @@ namespace Holo.Racc.Play
             if (zone == null) return;
             this.HighlightedZone = zone;
         }
-        
+
         private void UpdatePlayerCards()
         {
             List<CardData> playerCards = new List<CardData>();
-            
+
             foreach (CardZone zone in cardZones)
             {
-                playerCards.Add(zone.HeldCard.CardData);
+                CardData card = zone.HeldCard.CardData;
+                playerCards.Add(card);
+                if (card.HasEffect)
+                {
+                    EffectHandler.Instance.RegisterEffect(zone.HeldCard);
+                }
             }
-            
+
             cardsInPlayContainer.UpdateCardsInPlay(true, playerCards);
         }
     }

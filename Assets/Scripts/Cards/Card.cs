@@ -32,6 +32,9 @@ namespace Holo.Cards
         public int Position { get; set; }
         public int Power { get; private set; }
 
+        public Effect Effect => CardData.Effect;
+        public bool HasEffect => CardData.HasEffect;
+
         private Animator anim;
 
         private void Awake()
