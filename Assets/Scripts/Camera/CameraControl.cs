@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Cinemachine;
 using Holo.Input;
@@ -12,6 +13,9 @@ namespace Holo.Cam
         [Header("Component References")]
         [SerializeField] private CinemachineVirtualCamera playerHandCamera;
         [SerializeField] private CinemachineVirtualCamera boardCamera;
+
+        public event Action OnBoardView;
+        public event Action OnHandView;
 
         private void OnEnable()
         {
