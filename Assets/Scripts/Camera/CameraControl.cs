@@ -6,8 +6,10 @@ namespace Holo.Cam
 {
     public class CameraControl : MonoBehaviour
     {
+        [Header("Asset References")]
         [SerializeField] private InputManager inputManager;
         
+        [Header("Component References")]
         [SerializeField] private CinemachineVirtualCamera playerHandCamera;
         [SerializeField] private CinemachineVirtualCamera boardCamera;
 
@@ -39,21 +41,6 @@ namespace Holo.Cam
         {
             playerHandCamera.Priority = 11;
             boardCamera.Priority = 10;
-        }
-
-        private void OnGUI()
-        {
-            GUILayout.Space(25);
-
-            if (GUILayout.Button("Board View"))
-            {
-                DisplayBoardView();
-            }
-
-            if (GUILayout.Button("Player Hand View"))
-            {
-                DisplayHandView();
-            }
         }
     }
 }
