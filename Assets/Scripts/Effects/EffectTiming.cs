@@ -1,4 +1,4 @@
-namespace Holo.Cards.Effects
+namespace Holo.Cards
 {
     public enum EffectTiming
     {

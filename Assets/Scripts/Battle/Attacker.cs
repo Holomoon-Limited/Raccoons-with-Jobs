@@ -52,6 +52,8 @@ namespace Holo.Racc.Battle
                     Card playerCard = battleSpawner.PlayerCardZones[i].HeldCard;
                     Card enemyCard = battleSpawner.EnemyCardZones[i].HeldCard;
                     if (playerCard == null || enemyCard == null) continue;
+
+                    Debug.Log($"Run Attack effects for {playerCard.CardData.CardName} and {enemyCard.CardData.CardName}");
                     playerCard.Attack();
                     enemyCard.Attack();
 
@@ -60,15 +62,19 @@ namespace Holo.Racc.Battle
                     if (playerCard.Power > enemyCard.Power)
                     {
                         battleSpawner.EnemyCardZones[i].DespawnCard();
+                        Debug.Log($"Run destroy effect for {enemyCard.CardData.CardName}");
                     }
                     else if (playerCard.Power < enemyCard.Power)
                     {
                         battleSpawner.PlayerCardZones[i].MoveCardToHand();
+                        Debug.Log($"Run destroy effect for {playerCard.CardData.CardName}");
                     }
                     else
                     {
                         battleSpawner.PlayerCardZones[i].MoveCardToHand();
                         battleSpawner.EnemyCardZones[i].DespawnCard();
+                        Debug.Log($"Run destroy effect for {playerCard.CardData.CardName}");
+                        Debug.Log($"Run destroy effect for {enemyCard.CardData.CardName}");
                     }
                     yield return new WaitForSeconds(timeBetweenAttacks);
                 }

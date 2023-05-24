@@ -1,25 +1,15 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace Holo.Cards.Effects
+namespace Holo.Cards
 {
     /// <summary>
     /// Base Effect class, to be inherited from
     /// </summary>
-    public abstract class Effect : ScriptableObject
+    [System.Serializable]
+    public abstract class Effect
     {
-        [SerializeField] protected EffectTiming timing;
-
-        public virtual void Register()
-        {
-
-        }
-
-        public virtual void UnRegister()
-        {
-
-        }
-
-        public abstract void Use(List<Card> friendlyCards, List<Card> enemyCards);
+        [field: SerializeField] public EffectTiming Timing { get; private set; }
+        public abstract void Use(Card callingCard, List<Card> friendlyCards, List<Card> enemyCards);
     }
 }

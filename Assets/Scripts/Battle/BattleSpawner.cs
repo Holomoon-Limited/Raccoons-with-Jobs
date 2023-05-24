@@ -29,6 +29,9 @@ namespace Holo.Racc.Battle
         public List<CardZone> PlayerCardZones { get; private set; } = new List<CardZone>();
         public List<CardZone> EnemyCardZones { get; private set; } = new List<CardZone>();
 
+        List<Card> playerCards = new List<Card>();
+        List<Card> enemyCards = new List<Card>();
+
         //The number of zones to spawn 
         public int Zones { get; private set; } = 0;
 
@@ -51,14 +54,23 @@ namespace Holo.Racc.Battle
 
         private void SetupZones()
         {
+            StartCoroutine(Co_SetupZones());
+        }
+
+        private IEnumerator Co_SetupZones()
+        {
             DestroyZones();
-            PlayerCardZones = SpawnCardList(cardsInPlay.playerCardsInPlay, playerZoneParent, playerCardPrefab);
-            EnemyCardZones = SpawnCardList(cardsInPlay.enemyCardsInPlay, enemyZoneParent, enemyCardPrefab);
+            PlayerCardZones = SpawnCardList(cardsInPlay.playerCardsInPlay, playerZoneParent, playerCardPrefab, true);
+            EnemyCardZones = SpawnCardList(cardsInPlay.enemyCardsInPlay, enemyZoneParent, enemyCardPrefab, false);
             Zones = PlayerCardZones.Count;
+
+            EffectHandler.Instance.ApplyContinuousEffects(playerCards, enemyCards);
+            yield return EffectHandler.Instance.Co_RunBattleStartEffects(playerCards, enemyCards);
+
             battleHandler.StartAttacks();
         }
 
-        private List<CardZone> SpawnCardList(List<CardData> cardsToSpawn, Transform spawnParent, Card cardPrefab)
+        private List<CardZone> SpawnCardList(List<CardData> cardsToSpawn, Transform spawnParent, Card cardPrefab, bool arePlayers)
         {
             List<CardZone> cardZones = new List<CardZone>();
             Vector3 position = Vector3.zero;
@@ -76,6 +88,16 @@ namespace Holo.Racc.Battle
                 cardZones.Add(zone);
                 zone.transform.localPosition = position;
                 Card card = Instantiate(cardPrefab, spawnParent);
+
+                if (arePlayers)
+                {
+                    playerCards.Add(card);
+                }
+                else
+                {
+                    enemyCards.Add(card);
+                }
+
                 card.DisplayCard(cardData);
                 zone.AddCardToZone(card);
                 position.x += 1.5f;
@@ -140,13 +162,16 @@ namespace Holo.Racc.Battle
             foreach (CardZone zone in PlayerCardZones)
             {
                 Destroy(zone.gameObject);
-                PlayerCardZones.Remove(zone);
             }
             foreach (CardZone zone in EnemyCardZones)
             {
                 Destroy(zone.gameObject);
-                EnemyCardZones.Remove(zone);
             }
+
+            EnemyCardZones.Clear();
+            enemyCards.Clear();
+            PlayerCardZones.Clear();
+            playerCards.Clear();
         }
     }
 }
