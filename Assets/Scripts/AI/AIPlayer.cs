@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Holo.Cards;
 using Holo.Racc.Draft;
 using Holo.Racc.Game;
@@ -28,6 +29,7 @@ namespace Holo.Racc.AI
         [SerializeField] private DraftHandler draftHandler;
         [SerializeField] private PhaseHandler phaseHandler;
         [SerializeField] private CardsInPlayContainer cardsInPlay;
+        [SerializeField] private DeckManager deckManager;
 
         [Header("Design Properties")]
         [SerializeField] private float timeBetweenSelection = 0.3f;
@@ -38,11 +40,15 @@ namespace Holo.Racc.AI
         private void OnEnable()
         {
             draftHandler.OnAIPick += SelectDraftCards;
+
+            phaseHandler.OnGameEnd += ResetCards;
         }
 
         private void OnDisable()
         {
             draftHandler.OnAIPick -= SelectDraftCards;
+            
+            phaseHandler.OnGameEnd -= ResetCards;
         }
 
         public void SelectDraftCards(int picks)
@@ -73,19 +79,24 @@ namespace Holo.Racc.AI
         {
             while (heldCards.Count > phaseHandler.PlayCardZoneCount)
             {
+                deckManager.AddCardToPool(heldCards[heldCards.Count - 1]);
+
                 heldCards.RemoveAt(heldCards.Count - 1);
             }
+            // shuffles the cards
+            heldCards = heldCards.OrderBy(x => Random.value).ToList();
             cardsInPlay.UpdateCardsInPlay(false, heldCards);
         }
 
-        private void ReturnCards()
+        // clears AI hand and returns cards to deck 
+        private void ResetCards()
         {
-            // foreach (CardData card in heldCards)
-            // {
-            //     deckManager.AddCardToPool(card);
-            // }
-            //
-            // heldCards.Clear();
+            foreach (CardData card in heldCards)
+            {
+                deckManager.AddCardToPool(card);
+            }
+            
+            heldCards.Clear();
         }
     }
 }

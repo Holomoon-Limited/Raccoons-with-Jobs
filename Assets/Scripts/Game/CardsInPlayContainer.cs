@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Holo.Cards;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Holo.Racc.Game
 {
@@ -10,7 +12,6 @@ namespace Holo.Racc.Game
     {
         [Header("Asset References")]
         [SerializeField] private PhaseHandler phaseHandler;
-        [SerializeField] private DeckManager deckManager;
 
         [field: Header("Lists of Data")]
         [field: SerializeField] public List<CardData> playerCardsInPlay { get; private set; }
@@ -20,22 +21,32 @@ namespace Holo.Racc.Game
         {
             this.hideFlags = HideFlags.DontUnloadUnusedAsset;
 
-            // clear CardsInPlay when game ends and when Play Phase begins
-            phaseHandler.OnGameStart += ClearCardsInPlay;
-            phaseHandler.OnDraftEnd += ClearCardsInPlay;
+            // clear playerCardsInPlay when game ends and when Play Phase begins
+            phaseHandler.OnGameStart += ClearPlayerCardsInPlay;
+            phaseHandler.OnDraftEnd += ClearPlayerCardsInPlay;
 
-            ClearCardsInPlay();
+            phaseHandler.OnGameEnd += ClearEnemyCardsInPlay;
+
+            ClearPlayerCardsInPlay();
         }
 
         private void OnDisable()
         {
-            phaseHandler.OnGameStart -= ClearCardsInPlay;
-            phaseHandler.OnDraftEnd -= ClearCardsInPlay;
+            phaseHandler.OnGameStart -= ClearPlayerCardsInPlay;
+            phaseHandler.OnDraftEnd -= ClearPlayerCardsInPlay;
+            
+            phaseHandler.OnGameEnd -= ClearEnemyCardsInPlay;
         }
 
-        private void ClearCardsInPlay()
+        private void ClearPlayerCardsInPlay()
         {
             playerCardsInPlay.Clear();
+        }
+
+        // cards are returned to deck in AIPlayer.cs
+        private void ClearEnemyCardsInPlay()
+        {
+            enemyCardsInPlay.Clear();
         }
 
         public void UpdateCardsInPlay(bool playersCards, List<CardData> cardData)
