@@ -38,13 +38,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _ColorMask: 0
+    - _ColorMask: 15
     - _DoodleIntensity: 17.63
     - _DoodleSpeed: 4.23
     - _Stencil: 0
-    - _StencilComp: 0
+    - _StencilComp: 8
     - _StencilOp: 0
-    - _StencilReadMask: 0
-    - _StencilWriteMask: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
     m_Colors: []
   m_BuildTextureStacks: []
