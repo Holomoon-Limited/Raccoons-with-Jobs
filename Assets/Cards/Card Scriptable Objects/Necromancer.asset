@@ -16,5 +16,5 @@ MonoBehaviour:
   Power: 3
   CardDescription: When this card is destroyed, resurrect the last ally card that
     was killed.
-  Image: {fileID: 21300000, guid: 289668283cacf844e9f0f4f6b9adf0a1, type: 3}
-  ID: 0
+  Image: {fileID: 21300000, guid: 76755b0705c1e77479f952b9de2a31be, type: 3}
+  LineImage: {fileID: 21300000, guid: 6d5ef921378754645b2c375fbd1bafe4, type: 3}

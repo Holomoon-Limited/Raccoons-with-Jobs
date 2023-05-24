@@ -19,6 +19,7 @@ namespace Holo.Cards
         [SerializeField] private TextMeshProUGUI powerTMP;
         [SerializeField] private TextMeshProUGUI cardDescriptionTMP;
         [SerializeField] private Image imageImage;
+        [SerializeField] private Image lineImage;
 
         CardLocation activeLocation;
 
@@ -53,6 +54,7 @@ namespace Holo.Cards
             powerTMP.text = CardData.Power.ToString();
             cardDescriptionTMP.text = CardData.CardDescription;
             imageImage.sprite = CardData.Image;
+            lineImage.sprite = CardData.LineImage;
             this.Power = CardData.Power;
         }
 

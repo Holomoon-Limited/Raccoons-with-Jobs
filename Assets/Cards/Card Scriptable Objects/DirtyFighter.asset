@@ -15,5 +15,5 @@ MonoBehaviour:
   CardName: Dirty Fighter
   Power: 2
   CardDescription: Takes out any raccoon it fights with.
-  Image: {fileID: 21300000, guid: 33c60f883adb14741a2f78028bcdec82, type: 3}
-  ID: 0
+  Image: {fileID: 21300000, guid: c9f9aa71559774c49bc609b4c0bc759e, type: 3}
+  LineImage: {fileID: 21300000, guid: e4df48081ee4b694fa02e9d1c62b61a0, type: 3}

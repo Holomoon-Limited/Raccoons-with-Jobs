@@ -15,5 +15,5 @@ MonoBehaviour:
   CardName: MicrosoftTeamsSpirit
   Power: 2
   CardDescription: When destroyed, this gives its power to one adjacent raccoon
-  Image: {fileID: 21300000, guid: de855e6b5e6f6fa4b957ec6323e2173d, type: 3}
-  ID: 0
+  Image: {fileID: 21300000, guid: d4f0a08f43d389a4d8a61b4ecce40c1a, type: 3}
+  LineImage: {fileID: 21300000, guid: a38ca7cc202958c459aa1c1639874c93, type: 3}
