@@ -60,13 +60,5 @@ namespace Holo.Cam
 				allCamTransforms[1].localPosition = vCam1OriginalPos;
 			}
 		}
-
-		private void OnGUI()
-		{
-			if (GUILayout.Button("Test shake"))
-			{
-				StandardCameraShake();
-			}
-		}
 	}
 }
