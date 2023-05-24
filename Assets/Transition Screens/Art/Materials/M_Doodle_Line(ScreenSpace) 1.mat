@@ -89,8 +89,8 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _DoodleIntensity: 0.13
-    - _DoodleSpeed: 2.3
+    - _DoodleIntensity: 0.15
+    - _DoodleSpeed: 6
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
