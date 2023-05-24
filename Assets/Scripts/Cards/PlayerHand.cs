@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Holo.Input;
 using Holo.Racc.Game;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -47,7 +46,6 @@ namespace Holo.Cards
             input.OnCancelPressed += CancelSelection;
 
             phaseHandler.OnPlayEnd += ReturnCards;
-            //
         }
 
         private void OnDisable()
@@ -71,7 +69,7 @@ namespace Holo.Cards
             Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
             if (Physics.Raycast(ray, out RaycastHit hit, 100f, boardMask))
             {
-                SelectedCard.MoveToPoint(hit.point + new Vector3(0f, 2.75f, 0f), Quaternion.identity);
+                SelectedCard.MoveToPoint(hit.point + new Vector3(0f, 3.5f, 0f), Quaternion.identity);
             }
         }
 
