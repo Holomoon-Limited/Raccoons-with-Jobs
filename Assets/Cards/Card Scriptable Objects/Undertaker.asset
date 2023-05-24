@@ -15,5 +15,5 @@ MonoBehaviour:
   CardName: Undertaker
   Power: 3
   CardDescription: Has +1 for each ally raccoon that died this combat
-  Image: {fileID: 21300000, guid: 621d01a6356b2eb4e982ed6f59a58c0b, type: 3}
-  ID: 0
+  Image: {fileID: 21300000, guid: 2fb05df647d5f6a489641cc374f00ddb, type: 3}
+  LineImage: {fileID: 21300000, guid: 3748753a06d20aa4187efceb3162e1e9, type: 3}

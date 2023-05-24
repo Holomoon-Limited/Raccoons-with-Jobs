@@ -9,6 +9,7 @@ namespace Holo.Cards
         public int Power;
         public string CardDescription;
         public Sprite Image;
+        public Sprite LineImage;
         
         // public Effect Effect;
     }

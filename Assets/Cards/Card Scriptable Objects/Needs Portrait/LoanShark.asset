@@ -15,5 +15,5 @@ MonoBehaviour:
   CardName: Loan Shark
   Power: 2
   CardDescription: Start of combat destroy itself and the lowest power enemy minion
-  Image: {fileID: 21300000, guid: de855e6b5e6f6fa4b957ec6323e2173d, type: 3}
-  ID: 0
+  Image: {fileID: 21300000, guid: d0b9c67c2f792c640aaf186d8a159ff3, type: 3}
+  LineImage: {fileID: 21300000, guid: b7b1d524fd5a6a749998be26f1ce0b95, type: 3}
