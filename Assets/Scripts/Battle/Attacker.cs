@@ -47,10 +47,10 @@ namespace Holo.Racc.Battle
                 yield return new WaitForSeconds(timeBetweenAttacks);
 
                 //Make the raccoons fight 
-                for (int i = 0; i < battleSpawner.Zones; i++)
+                for (int i = 0; i < Board.Instance.PlayerZones.Count; i++)
                 {
-                    Card playerCard = battleSpawner.PlayerCardZones[i].HeldCard;
-                    Card enemyCard = battleSpawner.EnemyCardZones[i].HeldCard;
+                    Card playerCard = Board.Instance.PlayerZones[i].HeldCard;
+                    Card enemyCard = Board.Instance.EnemyZones[i].HeldCard;
                     if (playerCard == null || enemyCard == null) continue;
 
                     Debug.Log($"Run Attack effects for {playerCard.CardData.CardName} and {enemyCard.CardData.CardName}");
@@ -61,20 +61,16 @@ namespace Holo.Racc.Battle
                     yield return new WaitForSeconds(1f);
                     if (playerCard.Power > enemyCard.Power)
                     {
-                        battleSpawner.EnemyCardZones[i].DespawnCard();
-                        Debug.Log($"Run destroy effect for {enemyCard.CardData.CardName}");
+                        DestroyEnemyCard(Board.Instance.EnemyZones[i]);
                     }
                     else if (playerCard.Power < enemyCard.Power)
                     {
-                        battleSpawner.PlayerCardZones[i].MoveCardToHand();
-                        Debug.Log($"Run destroy effect for {playerCard.CardData.CardName}");
+                        DestroyPlayerCard(Board.Instance.PlayerZones[i]);
                     }
                     else
                     {
-                        battleSpawner.PlayerCardZones[i].MoveCardToHand();
-                        battleSpawner.EnemyCardZones[i].DespawnCard();
-                        Debug.Log($"Run destroy effect for {playerCard.CardData.CardName}");
-                        Debug.Log($"Run destroy effect for {enemyCard.CardData.CardName}");
+                        DestroyEnemyCard(Board.Instance.EnemyZones[i]);
+                        DestroyPlayerCard(Board.Instance.PlayerZones[i]);
                     }
                     yield return new WaitForSeconds(timeBetweenAttacks);
                 }
@@ -98,19 +94,41 @@ namespace Holo.Racc.Battle
                 {
                     scoreManager.IncreaseEnemyScore();
                 }
-                foreach (CardZone zone in battleSpawner.PlayerCardZones)
+                foreach (CardZone zone in Board.Instance.PlayerZones)
                 {
                     if (zone.HasCard)
                     { PlayerHand.Instance.AddCardToHand(zone.HeldCard); }
                 }
-
+                Board.Instance.ResetBoard();
                 StartCoroutine(phaseHandler.Co_EndBattlePhase());
+            }
+        }
+
+        private void DestroyEnemyCard(CardZone zone)
+        {
+            Card card = zone.HeldCard;
+            zone.DespawnCard();
+            Board.Instance.EnemyDestroyedCards.Add(card.CardData);
+            if (card.HasEffect && card.Effect.Timing == EffectTiming.OnCardDestroyed)
+            {
+                card.Effect.Use(card, Board.Instance);
+            }
+        }
+
+        private void DestroyPlayerCard(CardZone zone)
+        {
+            Card card = zone.HeldCard;
+            zone.MoveCardToHand();
+            Board.Instance.PlayerDestroyedCards.Add(card.CardData);
+            if (card.HasEffect && card.Effect.Timing == EffectTiming.OnCardDestroyed)
+            {
+                card.Effect.Use(card, Board.Instance);
             }
         }
 
         private bool PlayerHasCards()
         {
-            foreach (CardZone zone in battleSpawner.PlayerCardZones)
+            foreach (CardZone zone in Board.Instance.PlayerZones)
             {
                 if (zone.HasCard) return true;
             }
@@ -119,7 +137,7 @@ namespace Holo.Racc.Battle
 
         private bool EnemyHasCards()
         {
-            foreach (CardZone zone in battleSpawner.EnemyCardZones)
+            foreach (CardZone zone in Board.Instance.EnemyZones)
             {
                 if (zone.HasCard) return true;
             }

@@ -6,10 +6,9 @@ namespace Holo.Cards
     /// <summary>
     /// Base Effect class, to be inherited from
     /// </summary>
-    [System.Serializable]
-    public abstract class Effect
+    public abstract class Effect : ScriptableObject
     {
         [field: SerializeField] public EffectTiming Timing { get; private set; }
-        public abstract void Use(Card callingCard, List<Card> friendlyCards, List<Card> enemyCards);
+        public abstract void Use(Card callingCard, Board board);
     }
 }

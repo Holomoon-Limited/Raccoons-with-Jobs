@@ -45,26 +45,26 @@ namespace Holo.Cards
             effects.Clear();
         }
 
-        public void ApplyContinuousEffects(List<Card> playerCards, List<Card> enemyCards)
+        public void ApplyContinuousEffects()
         {
             Debug.Log("Applying Continuous Effects");
             foreach (KeyValuePair<Card, Effect> effect in effects)
             {
                 if (effect.Value.Timing == EffectTiming.Continuous)
                 {
-                    effect.Value.Use(effect.Key, playerCards, enemyCards);
+                    effect.Value.Use(effect.Key, Board.Instance);
                 }
             }
         }
 
-        public IEnumerator Co_RunBattleStartEffects(List<Card> playerCards, List<Card> enemyCards)
+        public IEnumerator Co_RunBattleStartEffects()
         {
             Debug.Log("Running Battle Start Effects");
             foreach (KeyValuePair<Card, Effect> effect in effects)
             {
                 if (effect.Value.Timing == EffectTiming.OnBattleStart)
                 {
-                    effect.Value.Use(effect.Key, playerCards, enemyCards);
+                    effect.Value.Use(effect.Key, Board.Instance);
                     yield return new WaitForSeconds(timeBetweenEffects);
                 }
             }

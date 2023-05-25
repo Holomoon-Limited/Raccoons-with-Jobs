@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 using Holo.Racc.Game;
+using System;
 
 namespace Holo.Racc.Battle
 {
@@ -26,25 +27,17 @@ namespace Holo.Racc.Battle
         [Header("Tuning variables")]
         [SerializeField][Min(0f)] private float timeBetweenShuffles = 0.5f;
 
-        public List<CardZone> PlayerCardZones { get; private set; } = new List<CardZone>();
-        public List<CardZone> EnemyCardZones { get; private set; } = new List<CardZone>();
-
-        List<Card> playerCards = new List<Card>();
-        List<Card> enemyCards = new List<Card>();
-
         //The number of zones to spawn 
         public int Zones { get; private set; } = 0;
 
         private void OnEnable()
         {
             battleHandler.OnBattleStart += SetupZones;
-            battleHandler.OnShuffleDown += ShuffleDown;
         }
 
         private void OnDisable()
         {
             battleHandler.OnBattleStart -= SetupZones;
-            battleHandler.OnShuffleDown -= ShuffleDown;
         }
 
         private void Start()
@@ -54,124 +47,81 @@ namespace Holo.Racc.Battle
 
         private void SetupZones()
         {
-            StartCoroutine(Co_SetupZones());
+            StartCoroutine(Co_SetupBoard());
         }
 
-        private IEnumerator Co_SetupZones()
+        private IEnumerator Co_SetupBoard()
         {
             DestroyZones();
-            PlayerCardZones = SpawnCardList(cardsInPlay.playerCardsInPlay, playerZoneParent, playerCardPrefab, true);
-            EnemyCardZones = SpawnCardList(cardsInPlay.enemyCardsInPlay, enemyZoneParent, enemyCardPrefab, false);
-            Zones = PlayerCardZones.Count;
 
-            EffectHandler.Instance.ApplyContinuousEffects(playerCards, enemyCards);
-            yield return EffectHandler.Instance.Co_RunBattleStartEffects(playerCards, enemyCards);
+            SpawnCardZones(cardsInPlay.playerCardsInPlay.Count);
+
+            SpawnPlayerCards();
+            SpawnEnemyCards();
+
+            EffectHandler.Instance.ApplyContinuousEffects();
+            yield return EffectHandler.Instance.Co_RunBattleStartEffects();
 
             battleHandler.StartAttacks();
         }
 
-        private List<CardZone> SpawnCardList(List<CardData> cardsToSpawn, Transform spawnParent, Card cardPrefab, bool arePlayers)
+        private void SpawnPlayerCards()
         {
-            List<CardZone> cardZones = new List<CardZone>();
-            Vector3 position = Vector3.zero;
-            if (cardsToSpawn.Count % 2 == 0)
+            for (int i = 0; i < Board.Instance.PlayerZones.Count; i++)
             {
-                position.x = -0.75f * (battleHandler.PlayerCards.Count - 1);
+                Card card = Instantiate(playerCardPrefab);
+                card.DisplayCard(cardsInPlay.playerCardsInPlay[i]);
+                Board.Instance.PlayerZones[i].AddCardToZone(card);
+            }
+        }
+
+        private void SpawnEnemyCards()
+        {
+            for (int i = 0; i < Board.Instance.EnemyZones.Count; i++)
+            {
+                Card card = Instantiate(enemyCardPrefab);
+                card.DisplayCard(cardsInPlay.enemyCardsInPlay[i]);
+                Board.Instance.EnemyZones[i].AddCardToZone(card);
+            }
+        }
+
+        public void SpawnCardZones(int numberOfZones)
+        {
+            Vector3 position = Vector3.zero;
+            if (numberOfZones % 2 == 0)
+            {
+                position.x = -0.75f * (battleHandler.PlayerCards.Count / 2);
             }
             else
             {
-                position.x = (float)(-1.5f * (int)(cardsToSpawn.Count / 2));
+                position.x = (float)(-1.5f * (int)(numberOfZones / 2));
             }
-            foreach (CardData cardData in cardsToSpawn)
+
+            for (int i = 0; i < numberOfZones; i++)
             {
-                CardZone zone = Instantiate(cardZonePrefab, spawnParent);
-                cardZones.Add(zone);
-                zone.transform.localPosition = position;
-                Card card = Instantiate(cardPrefab, spawnParent);
+                CardZone playerZone = Instantiate(cardZonePrefab, playerZoneParent);
+                playerZone.transform.localPosition = position;
+                Board.Instance.PlayerZones.Add(playerZone);
 
-                if (arePlayers)
-                {
-                    playerCards.Add(card);
-                }
-                else
-                {
-                    enemyCards.Add(card);
-                }
-
-                card.DisplayCard(cardData);
-                zone.AddCardToZone(card);
+                CardZone enemyZone = Instantiate(cardZonePrefab, enemyZoneParent);
+                enemyZone.transform.localPosition = position;
+                Board.Instance.EnemyZones.Add(enemyZone);
                 position.x += 1.5f;
             }
-            return cardZones;
-        }
-
-        private void ShuffleDown()
-        {
-            StartCoroutine(Co_ShuffleDownZones());
-        }
-
-        private IEnumerator Co_ShuffleDownZones()
-        {
-            List<CardZone> emptyPlayerZones = new List<CardZone>();
-            List<CardZone> emptyEnemyZones = new List<CardZone>();
-
-            for (int i = 0; i < Zones; i++)
-            {
-                if (PlayerCardZones[i].HeldCard == null)
-                {
-                    emptyPlayerZones.Add(PlayerCardZones[i]);
-                    continue;
-                }
-                else
-                {
-                    if (emptyPlayerZones.Count > 0)
-                    {
-                        emptyPlayerZones[0].AddCardToZone(PlayerCardZones[i].HeldCard);
-                        PlayerCardZones[i].RemoveCardFromZone();
-                        emptyPlayerZones.RemoveAt(0);
-                        emptyPlayerZones.Add(PlayerCardZones[i]);
-                    }
-                }
-                yield return new WaitForSeconds(timeBetweenShuffles);
-            }
-
-            for (int i = 0; i < Zones; i++)
-            {
-                if (EnemyCardZones[i].HeldCard == null)
-                {
-                    emptyEnemyZones.Add(EnemyCardZones[i]);
-                    continue;
-                }
-                else
-                {
-                    if (emptyEnemyZones.Count > 0)
-                    {
-                        emptyEnemyZones[0].AddCardToZone(EnemyCardZones[i].HeldCard);
-                        EnemyCardZones[i].RemoveCardFromZone();
-                        emptyEnemyZones.RemoveAt(0);
-                        emptyEnemyZones.Add(EnemyCardZones[i]);
-                    }
-                }
-                yield return new WaitForSeconds(timeBetweenShuffles);
-            }
-            battleHandler.StartAttacks();
         }
 
         private void DestroyZones()
         {
-            foreach (CardZone zone in PlayerCardZones)
+            foreach (CardZone zone in Board.Instance.PlayerZones)
             {
                 Destroy(zone.gameObject);
             }
-            foreach (CardZone zone in EnemyCardZones)
+            foreach (CardZone zone in Board.Instance.PlayerZones)
             {
                 Destroy(zone.gameObject);
             }
 
-            EnemyCardZones.Clear();
-            enemyCards.Clear();
-            PlayerCardZones.Clear();
-            playerCards.Clear();
+            Board.Instance.ResetBoard();
         }
     }
 }

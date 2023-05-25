@@ -1,13 +1,14 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Holo.Cards
 {
+    [CreateAssetMenu(fileName = "Necromancer Effect", menuName = "Cards/Effects/New Necromancer Effect", order = 1)]
     public class NecromancerEffect : Effect
     {
-        public override void Use(Card callingCard, List<Card> friendlyCards, List<Card> enemyCards)
+        public override void Use(Card callingCard, Board board)
         {
-            //Grab the last destroyed card and play it
-            throw new System.NotImplementedException();
+            //board.SpawnLastDestroyedCard(callingCard);
         }
     }
 }
