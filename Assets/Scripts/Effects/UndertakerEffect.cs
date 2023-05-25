@@ -7,6 +7,7 @@ namespace Holo.Cards
     {
         public override void Use(Card callingCard, Board board)
         {
+            if (callingCard.Negated) return;
             if (board.PlayerCards.Contains(callingCard))
             {
                 callingCard.SetPower(callingCard.Power + board.PlayerDestroyedCards.Count);

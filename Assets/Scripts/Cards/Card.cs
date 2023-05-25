@@ -31,6 +31,7 @@ namespace Holo.Cards
 
         public int Position { get; set; }
         public int Power { get; private set; }
+        public int BasePower { get; private set; }
 
         public Effect Effect => CardData.Effect;
         public bool HasEffect => CardData.HasEffect;
@@ -39,21 +40,23 @@ namespace Holo.Cards
 
         private Animator anim;
 
+        public bool Negated = false;
+
         private void Awake()
         {
             anim = this.GetComponent<Animator>();
-            DisplayCard(CardData);
+            SetCardData(CardData);
 
             targetPosition = this.transform.position;
             targetRotation = this.transform.rotation;
         }
 
-        public void DisplayCard(CardData newCardData)
+        public void SetCardData(CardData newCardData)
         {
             if (newCardData == null) return;
             // overwrites default with new value
             CardData = newCardData;
-            this.Power = CardData.Power;
+            SetBasePower(CardData.Power);
 
             // assign data to components 
             UpdateDisplay();
@@ -104,6 +107,13 @@ namespace Holo.Cards
             anim.SetTrigger("attack");
         }
 
+        public void SetBasePower(int power)
+        {
+            BasePower = power;
+            SetPower(BasePower);
+            UpdateDisplay();
+        }
+
         public void SetPower(int power)
         {
             this.Power = power;
@@ -112,7 +122,8 @@ namespace Holo.Cards
 
         public void ResetPower()
         {
-            this.Power = CardData.Power;
+            Negated = false;
+            this.Power = this.BasePower;
             UpdateDisplay();
         }
 

@@ -23,51 +23,41 @@ namespace Holo.Cards
 
         [SerializeField][Min(0f)] private float timeBetweenEffects;
 
-        Dictionary<Card, Effect> effects = new Dictionary<Card, Effect>();
-
-        public void RegisterEffect(Card card)
-        {
-            if (effects.ContainsKey(card)) return;
-            if (card.HasEffect == false) return;
-            effects.Add(card, card.Effect);
-        }
-
-        public void UnRegisterEffect(Card card)
-        {
-            if (effects.ContainsKey(card))
-            {
-                effects.Remove(card);
-            }
-        }
-
-        public void ClearEffects()
-        {
-            effects.Clear();
-        }
 
         public void ApplyContinuousEffects()
         {
             Board.Instance.ResetCardPower();
-            Debug.Log("Applying Continuous Effects");
-            foreach (KeyValuePair<Card, Effect> effect in effects)
+            for (int i = 0; i < Board.Instance.PlayerZones.Count; i++)
             {
-                if (effect.Value.Timing == EffectTiming.Continuous)
+                CardZone zone = Board.Instance.PlayerZones[i];
+                if (zone.HasCard && zone.HeldCard.HasEffect && zone.HeldCard.Effect.Timing == EffectTiming.Continuous)
                 {
-                    effect.Value.Use(effect.Key, Board.Instance);
+                    zone.HeldCard.Effect.Use(zone.HeldCard, Board.Instance);
+                }
+                zone = Board.Instance.EnemyZones[i];
+                if (zone.HasCard && zone.HeldCard.HasEffect && zone.HeldCard.Effect.Timing == EffectTiming.Continuous)
+                {
+                    zone.HeldCard.Effect.Use(zone.HeldCard, Board.Instance);
                 }
             }
         }
 
         public IEnumerator Co_RunBattleStartEffects()
         {
-            Debug.Log("Running Battle Start Effects");
-            foreach (KeyValuePair<Card, Effect> effect in effects)
+            yield return new WaitForSeconds(timeBetweenEffects);
+            for (int i = 0; i < Board.Instance.PlayerZones.Count; i++)
             {
-                if (effect.Value.Timing == EffectTiming.OnBattleStart)
+                CardZone zone = Board.Instance.PlayerZones[i];
+                if (zone.HasCard && zone.HeldCard.HasEffect && zone.HeldCard.Effect.Timing == EffectTiming.OnBattleStart)
                 {
-                    effect.Value.Use(effect.Key, Board.Instance);
-                    yield return new WaitForSeconds(timeBetweenEffects);
+                    zone.HeldCard.Effect.Use(zone.HeldCard, Board.Instance);
                 }
+                zone = Board.Instance.EnemyZones[i];
+                if (zone.HasCard && zone.HeldCard.HasEffect && zone.HeldCard.Effect.Timing == EffectTiming.OnBattleStart)
+                {
+                    zone.HeldCard.Effect.Use(zone.HeldCard, Board.Instance);
+                }
+                yield return timeBetweenEffects;
             }
         }
 

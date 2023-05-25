@@ -17,3 +17,5 @@ MonoBehaviour:
   CardDescription: When destroyed, this gives its power to one adjacent raccoon
   Image: {fileID: 21300000, guid: d4f0a08f43d389a4d8a61b4ecce40c1a, type: 3}
   LineImage: {fileID: 21300000, guid: a38ca7cc202958c459aa1c1639874c93, type: 3}
+  <Effect>k__BackingField: {fileID: 11400000, guid: 7e066d1f656464941b1c00d87df73d55,
+    type: 2}

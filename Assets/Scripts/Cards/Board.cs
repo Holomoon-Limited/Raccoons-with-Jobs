@@ -27,6 +27,9 @@ namespace Holo.Cards
         [SerializeField] private Card playerCardPrefab;
         [SerializeField] private Card enemyCardPrefab;
 
+        [SerializeField] private Transform playerGraveyard;
+        [SerializeField] private Transform enemyGraveyard;
+
         [SerializeField] private float timeBetweenSlides = 0.5f;
 
         public List<CardZone> PlayerZones = new List<CardZone>();
@@ -130,6 +133,7 @@ namespace Holo.Cards
                     return;
                 }
             }
+            EffectHandler.Instance.ApplyContinuousEffects();
         }
 
         public void ResetCardPower()
@@ -142,6 +146,34 @@ namespace Holo.Cards
             {
                 card.ResetPower();
             }
+        }
+
+        public void DestroyEnemyCard(CardZone zone)
+        {
+            Card card = zone.HeldCard;
+            zone.RemoveCardFromZone();
+            card.MoveToPoint(enemyGraveyard.position, enemyGraveyard.rotation);
+            Board.Instance.EnemyDestroyedCards.Add(card);
+            Board.Instance.DestroyedEnemyCardsNumber++;
+            if (card.HasEffect && card.Effect.Timing == EffectTiming.OnCardDestroyed)
+            {
+                card.Effect.Use(card, Board.Instance);
+            }
+            EffectHandler.Instance.ApplyContinuousEffects();
+        }
+
+        public void DestroyPlayerCard(CardZone zone)
+        {
+            Card card = zone.HeldCard;
+            zone.RemoveCardFromZone();
+            card.MoveToPoint(playerGraveyard.position, enemyGraveyard.rotation);
+            Board.Instance.PlayerDestroyedCards.Add(card);
+            Board.Instance.DestroyedPlayerCardsNumber++;
+            if (card.HasEffect && card.Effect.Timing == EffectTiming.OnCardDestroyed)
+            {
+                card.Effect.Use(card, Board.Instance);
+            }
+            EffectHandler.Instance.ApplyContinuousEffects();
         }
 
         public void ResetBoard()

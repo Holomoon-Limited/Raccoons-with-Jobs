@@ -17,3 +17,5 @@ MonoBehaviour:
   CardDescription: Negates the effects of the opposite raccoon
   Image: {fileID: 21300000, guid: 7243741d66db8474eb1a590b2a3953b1, type: 3}
   LineImage: {fileID: 21300000, guid: 2bb2ac03549063349b9d52b8a9af7ce8, type: 3}
+  <Effect>k__BackingField: {fileID: 11400000, guid: b1085240bb62f9947ad1a390991d1346,
+    type: 2}

@@ -21,7 +21,7 @@ namespace Holo.Cards
                 // InstantiateAllCards(playersCardData);
             }
         }
-        
+
         private void InstantiateAllCards(List<CardData> cardScriptableObjects)
         {
             for (int i = 0; i < cardScriptableObjects.Count; i++)
@@ -29,7 +29,7 @@ namespace Holo.Cards
                 Card newCard = Instantiate(baseCard, new Vector3(0, 0, 0), Quaternion.identity);
                 newCard.name = cardScriptableObjects[i].CardName;
                 newCard.SetActiveLocation(cardLocation);
-                newCard.DisplayCard(cardScriptableObjects[i]);
+                newCard.SetCardData(cardScriptableObjects[i]);
             }
         }
     }
