@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c3f3853391ec3842af5632bd47f8a3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  battleClip: {fileID: 8300000, guid: b10f72f5f80a05c46adf9167a0fede79, type: 3}
+  battleClip: {fileID: 8300000, guid: 3045770fb48c76d4cb8a5cb7b2b36009, type: 3}
   battleVolume: 0.7
 --- !u!82 &4219858147803125950
 AudioSource:
