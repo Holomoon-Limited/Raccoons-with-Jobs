@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,10 +10,10 @@ namespace Holo.Racc.Game
     {
         [Header("Asset References")] 
         [SerializeField] private ScoreManager scoreManager;
-        
+
         public int PlayCardZoneCount { get; private set; }
 
-        // Actions
+        // Actions for phases
         public event Action OnGameStart;
         public event Action OnDraftEnd;
         public event Action OnPlayEnd;

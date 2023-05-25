@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 8902068483560784870}
   - component: {fileID: 9134554687925497300}
   - component: {fileID: 6055187416193104331}
+  - component: {fileID: 6867085700322598737}
   m_Layer: 5
   m_Name: Hiring_SplashScreen
   m_TagString: Untagged
@@ -177,6 +178,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &6867085700322598737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2592550349887111699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92efa1623bd1f554da587d53d2d79a7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transitionHandler: {fileID: 11400000, guid: 0901e54f531db2949b90a4d77cd8cb4d, type: 2}
+  art: {fileID: 5992964827884948862}
 --- !u!1 &3004648235236481085
 GameObject:
   m_ObjectHideFlags: 0

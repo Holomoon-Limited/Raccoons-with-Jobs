@@ -30,6 +30,7 @@ namespace Holo.Racc.Draft
         [SerializeField] private DeckManager deck;
         [SerializeField] private InputManager input;
         [SerializeField] private DraftHandler draftHandler;
+       // [SerializeField]
         [SerializeField] private Card cardPrefab;
 
         [Header("Prefab References")]
