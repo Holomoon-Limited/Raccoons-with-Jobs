@@ -5,11 +5,21 @@ using UnityEngine;
 
 public class AudioPlayer : MonoBehaviour
 {
+    private static AudioPlayer instance;
+
+    public static AudioPlayer Instance {get { return instance;}}
+    
     [Header("Battle SFX")]
     [SerializeField] AudioClip battleClip;
     [SerializeField] [Range(0.0f, 1.0f)] float battleVolume = 1.0f;
 
-    static AudioPlayer instance;
+    [Header("Deal SFX")]
+    [SerializeField] AudioClip dealClip;
+    [SerializeField] [Range(0.0f, 1.0f)] float dealVolume = 1.0f;
+
+    [Header("Interact SFX")]
+    [SerializeField] AudioClip interactClip;
+    [SerializeField] [Range(0.0f,1.0f)] float InteractVolume = 1.0f;
     
     void Awake() 
     {
@@ -18,7 +28,7 @@ public class AudioPlayer : MonoBehaviour
 
     void ManageSingleton()
     {
-        if(instance != null)
+        if(instance != null && instance != this)
         {
             gameObject.SetActive(false);
             Destroy(gameObject);
@@ -32,9 +42,19 @@ public class AudioPlayer : MonoBehaviour
 
    
    
-    public void playBattleClip()
+    public void PlayBattleClip()
     {
         PlayClip(battleClip, battleVolume);
+    }
+
+    public void PlayDealClip()
+    {
+        PlayClip(dealClip, dealVolume);
+    }
+
+    public void PlayInteractClip()
+    {
+        PlayClip(interactClip, InteractVolume);
     }
 
     void PlayClip(AudioClip clip, float volume)

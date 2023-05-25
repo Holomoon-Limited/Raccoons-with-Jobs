@@ -38,12 +38,11 @@ namespace Holo.Cards
         public bool IsPlayers = false;
 
         private Animator anim;
-        private AudioPlayer audioPlayer;
+        
 
         private void Awake()
         {
             anim = this.GetComponent<Animator>();
-            audioPlayer = FindObjectOfType<AudioPlayer>();
             DisplayCard(CardData);
 
             targetPosition = this.transform.position;
@@ -122,7 +121,7 @@ namespace Holo.Cards
         public void CamShake()
         {
             CameraShake.instance.StandardCameraShake();
-            audioPlayer.playBattleClip();
+            AudioPlayer.Instance.PlayBattleClip();
         }
     }
 }

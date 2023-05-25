@@ -24,6 +24,7 @@ namespace Holo.Racc.Draft
             {
                 Instance = this;
             }
+
         }
 
         [Header("Asset References")]
@@ -43,6 +44,7 @@ namespace Holo.Racc.Draft
 
         //Tracks how many picks the player has made 
         private int playerPicks = 0;
+
 
         private void OnEnable()
         {
@@ -79,6 +81,7 @@ namespace Holo.Racc.Draft
                 card.Position = i;
                 cardPositions.Add(cardZones[i].transform.position);
                 AddCardToLocation(card);
+                AudioPlayer.Instance.PlayDealClip();
                 yield return new WaitForSeconds(timeBetweenCards);
             }
         }

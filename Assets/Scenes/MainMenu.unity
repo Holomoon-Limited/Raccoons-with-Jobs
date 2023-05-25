@@ -370,6 +370,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4219858147803125950, guid: 5a53269ae4d9969438f2848ad49bd08a,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6469328166901194195, guid: 5a53269ae4d9969438f2848ad49bd08a,
+        type: 3}
+      propertyPath: dealClip
+      value: 
+      objectReference: {fileID: 8300000, guid: abf517922b80ff841a443cc2e7803d50, type: 3}
+    - target: {fileID: 6469328166901194195, guid: 5a53269ae4d9969438f2848ad49bd08a,
+        type: 3}
+      propertyPath: battleVolume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6469328166901194195, guid: 5a53269ae4d9969438f2848ad49bd08a,
+        type: 3}
+      propertyPath: interactClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 46a6c617a92c04b49aeea3c481823b8b, type: 3}
     - target: {fileID: 7049403342749774689, guid: 5a53269ae4d9969438f2848ad49bd08a,
         type: 3}
       propertyPath: m_Name
