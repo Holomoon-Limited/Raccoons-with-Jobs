@@ -203,6 +203,7 @@ GameObject:
   - component: {fileID: 3049559453265830329}
   - component: {fileID: 3049559453265830310}
   - component: {fileID: 3049559453265830311}
+  - component: {fileID: 1973697833067835024}
   m_Layer: 5
   m_Name: Deploy_SplashScreen
   m_TagString: Untagged
@@ -292,6 +293,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &1973697833067835024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3049559453265830308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92efa1623bd1f554da587d53d2d79a7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transitionHandler: {fileID: 11400000, guid: 0901e54f531db2949b90a4d77cd8cb4d, type: 2}
+  art: {fileID: 3049559451773268804}
 --- !u!1 &3049559453545292576
 GameObject:
   m_ObjectHideFlags: 0
