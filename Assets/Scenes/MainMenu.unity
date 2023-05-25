@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7f54cc63a4e21d4f870ce3415b3a24d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeBetweenEffects: 0
 --- !u!1 &200930861
 GameObject:
   m_ObjectHideFlags: 0
@@ -528,6 +529,62 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1004148916}
   m_CullTransparentMesh: 1
+--- !u!1 &1294395132
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1294395134}
+  - component: {fileID: 1294395133}
+  m_Layer: 0
+  m_Name: Board
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1294395133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294395132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28b0dbcd4a21139408deb09642e80b2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  battleHandler: {fileID: 11400000, guid: 06d5e877e39da7741aab3ef86694de08, type: 2}
+  playerCardPrefab: {fileID: 6791326910361522039, guid: 93c8a6396d6e84447bebc50d5ec91bae,
+    type: 3}
+  enemyCardPrefab: {fileID: 8411342079589048298, guid: 1f5842dcaab1f75408a98450d7a59ee0,
+    type: 3}
+  timeBetweenSlides: 0.5
+  PlayerZones: []
+  EnemyZones: []
+  PlayerCards: []
+  EnemyCards: []
+  PlayerDestroyedCards: []
+  EnemyDestroyedCards: []
+--- !u!4 &1294395134
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294395132}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1660602222
 GameObject:
   m_ObjectHideFlags: 0
@@ -640,6 +697,7 @@ GameObject:
   - component: {fileID: 1735037150}
   - component: {fileID: 1735037149}
   - component: {fileID: 1735037148}
+  - component: {fileID: 1735037151}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -713,6 +771,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1735037151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1735037147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1001 &1941996378
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -723,12 +814,22 @@ PrefabInstance:
     - target: {fileID: 3891680141199340074, guid: 7e5595e7daad69f41bd07619fa77542a,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 22.700012
+      value: 22.699951
       objectReference: {fileID: 0}
     - target: {fileID: 3891680141199340074, guid: 7e5595e7daad69f41bd07619fa77542a,
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -21.588867
+      objectReference: {fileID: 0}
+    - target: {fileID: 3891680141897664468, guid: 7e5595e7daad69f41bd07619fa77542a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 22.699951
+      objectReference: {fileID: 0}
+    - target: {fileID: 3891680141897664468, guid: 7e5595e7daad69f41bd07619fa77542a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -57.592896
       objectReference: {fileID: 0}
     - target: {fileID: 3891680142507578065, guid: 7e5595e7daad69f41bd07619fa77542a,
         type: 3}
