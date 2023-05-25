@@ -30,7 +30,7 @@ namespace Holo.Racc.Draft
         [SerializeField] private DeckManager deck;
         [SerializeField] private InputManager input;
         [SerializeField] private DraftHandler draftHandler;
-       // [SerializeField]
+        [SerializeField] private TransitionHandler transitionHandler;
         [SerializeField] private Card cardPrefab;
 
         [Header("Prefab References")]
@@ -49,18 +49,18 @@ namespace Holo.Racc.Draft
         {
             input.OnSubmitPressed += MoveCardToHand;
             draftHandler.OnStartDraft += DealCards;
+            transitionHandler.OnTransitionOver += StartDraft;
         }
 
         private void OnDisable()
         {
             input.OnSubmitPressed -= MoveCardToHand;
             draftHandler.OnStartDraft -= DealCards;
+            transitionHandler.OnTransitionOver -= StartDraft;
         }
 
-        private void Start()
+        private void StartDraft()
         {
-            // Deck now reset itself when the game starts
-            // deck.ResetPoolOfCurrentCards();
             draftHandler.StartDraft();
         }
 

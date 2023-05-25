@@ -535,6 +535,7 @@ MonoBehaviour:
   deck: {fileID: 11400000, guid: c2c247b58f6b55b4db83a6e557494258, type: 2}
   input: {fileID: 11400000, guid: ac751458ea8ac0447bfd06189dc39bfe, type: 2}
   draftHandler: {fileID: 11400000, guid: a895a5e1cd2eebf44a41925f9e271a83, type: 2}
+  transitionHandler: {fileID: 11400000, guid: 0901e54f531db2949b90a4d77cd8cb4d, type: 2}
   cardPrefab: {fileID: 6791326910361522039, guid: 93c8a6396d6e84447bebc50d5ec91bae,
     type: 3}
   cardZones:
@@ -1184,6 +1185,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Hiring_SplashScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 2592550349887111699, guid: 906ce971d11e16c4ba88bcc01fbf8935,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5992964827884948862, guid: 906ce971d11e16c4ba88bcc01fbf8935,
         type: 3}
