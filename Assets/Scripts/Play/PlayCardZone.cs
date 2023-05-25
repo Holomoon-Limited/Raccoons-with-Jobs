@@ -16,8 +16,16 @@ namespace Holo.Racc.Play
 
         PlayerBoard board;
 
+        // Audio
+        //AudioPlayer audioPlayer;
+
         // PlayPhase subbed to manage assigned cards
         public static event Action<CardData, int> OnCardAssigned = (cardData, position) => { };
+
+        private void Awake() 
+        {
+            
+        }
 
         private void OnEnable()
         {
@@ -59,6 +67,7 @@ namespace Holo.Racc.Play
             {
                 AddCardToZone(PlayerHand.Instance.SelectedCard);
                 PlayerHand.Instance.RemoveCardFromLocation(HeldCard);
+                AudioPlayer.Instance.PlayInteractClip();
             }
 
             // if (isHoveredOver)

@@ -39,6 +39,7 @@ namespace Holo.Cards
         public bool IsPlayers = false;
 
         private Animator anim;
+        
 
         public bool Negated = false;
 
@@ -105,6 +106,7 @@ namespace Holo.Cards
         public void Attack()
         {
             anim.SetTrigger("attack");
+            
         }
 
         public void SetBasePower(int power)
@@ -130,6 +132,7 @@ namespace Holo.Cards
         public void CamShake()
         {
             CameraShake.instance.StandardCameraShake();
+            AudioPlayer.Instance.PlayBattleClip();
         }
     }
 }

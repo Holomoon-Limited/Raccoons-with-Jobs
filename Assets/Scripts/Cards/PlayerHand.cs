@@ -21,6 +21,7 @@ namespace Holo.Cards
                 DontDestroyOnLoad(this.gameObject);
                 Instance = this;
             }
+
         }
 
         [Header("Temp Player Hand Card Data")]
@@ -152,6 +153,7 @@ namespace Holo.Cards
             card.transform.parent = handParent;
             card.name = card.CardData.CardName;
             card.SetActiveLocation(this);
+            AudioPlayer.Instance.PlayInteractClip();
         }
 
         public override void AddCardToLocation(Card card)
