@@ -45,8 +45,9 @@ namespace Holo.Cards
         {
             input.OnSubmitPressed += SelectCard;
             input.OnCancelPressed += CancelSelection;
-
+            
             phaseHandler.OnPlayEnd += ReturnCards;
+            phaseHandler.OnGameEnd += ReturnCards;
         }
 
         private void OnDisable()
@@ -55,6 +56,7 @@ namespace Holo.Cards
             input.OnCancelPressed -= CancelSelection;
 
             phaseHandler.OnPlayEnd -= ReturnCards;
+            phaseHandler.OnGameEnd -= ReturnCards;
         }
 
         private void Start()
@@ -178,24 +180,6 @@ namespace Holo.Cards
             }
 
             HeldCards.Clear();
-
-            // List<CardData> excessCardData = new List<CardData>();
-
-            // for (int i = 0; i < handParent.transform.childCount; ++i)
-            // {
-            //     GameObject child = handParent.transform.GetChild(i).gameObject;
-            //     Card childCard = child.GetComponent<Card>();
-            //     excessCardData.Add(childCard.CardData);
-            //     Destroy(child);
-            // }
-
-            // for (int i = 0; i < excessCardData.Count; i++)
-            // {
-            //     deckManager.AddCardToPool(excessCardData[i]);
-            // }
-
-            // HeldCards.Clear();
-            // cardPositions.Clear();
         }
     }
 }
