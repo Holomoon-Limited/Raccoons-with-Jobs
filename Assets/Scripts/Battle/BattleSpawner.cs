@@ -13,8 +13,8 @@ namespace Holo.Racc.Battle
     public class BattleSpawner : MonoBehaviour
     {
         [Header("Project References")]
-        [SerializeField] private ScoreManager scoreManager;
         [SerializeField] CardsInPlayContainer cardsInPlay;
+        [SerializeField] private TransitionHandler transitionHandler;
         [SerializeField] BattleHandler battleHandler;
         [SerializeField] private CardZone cardZonePrefab;
         [SerializeField] private Card playerCardPrefab;
@@ -27,11 +27,13 @@ namespace Holo.Racc.Battle
         private void OnEnable()
         {
             battleHandler.OnBattleStart += SetupZones;
+            transitionHandler.OnTransitionOver += InitiateBattle;
         }
 
         private void OnDisable()
         {
             battleHandler.OnBattleStart -= SetupZones;
+            transitionHandler.OnTransitionOver -= InitiateBattle;
         }
 
         private void Start()
@@ -41,10 +43,10 @@ namespace Holo.Racc.Battle
 
         private void SetupZones()
         {
-            StartCoroutine(Co_SetupBoard());
+            SetupBoard();
         }
 
-        private IEnumerator Co_SetupBoard()
+        private void SetupBoard()
         {
             DestroyZones();
 
@@ -52,7 +54,15 @@ namespace Holo.Racc.Battle
 
             SpawnPlayerCards();
             SpawnEnemyCards();
+        }
 
+        private void InitiateBattle()
+        {
+            StartCoroutine(Co_InitiateBattle());
+        }
+
+        private IEnumerator Co_InitiateBattle()
+        {
             EffectHandler.Instance.ApplyContinuousEffects();
             yield return EffectHandler.Instance.Co_RunBattleStartEffects();
 
