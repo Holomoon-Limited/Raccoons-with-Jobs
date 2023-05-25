@@ -14,6 +14,7 @@ namespace Holo.Racc.Game
         public int Picks { get; private set; }
 
         public event Action OnStartDraft;
+        public event Action<int> OnPlayerPick;
         public event Action<int> OnAIPick;
 
         private DraftPhase draftPhase;
@@ -35,6 +36,7 @@ namespace Holo.Racc.Game
                 case DraftPhase.FirstPick:
                     input.EnableInput();
                     Picks = 1;
+                    OnPlayerPick?.Invoke(Picks);
                     break;
                 case DraftPhase.SecondPick:
                     input.DisableInput();
@@ -43,6 +45,7 @@ namespace Holo.Racc.Game
                 case DraftPhase.ThirdPick:
                     input.EnableInput();
                     Picks = 2;
+                    OnPlayerPick?.Invoke(Picks);
                     break;
                 case DraftPhase.FourthPick:
                     input.DisableInput();
