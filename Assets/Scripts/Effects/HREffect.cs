@@ -11,7 +11,7 @@ namespace Holo.Cards
             int index = callingCard.Position - 1;
             if (board.PlayerCards.Contains(callingCard))
             {
-                if (board.PlayerZones[index].HasCard)
+                if (index >= 0 && board.PlayerZones[index].HasCard)
                 {
                     board.PlayerZones[index].HeldCard.SetPower(board.PlayerZones[index].HeldCard.Power + 2);
                 }
@@ -23,7 +23,7 @@ namespace Holo.Cards
             }
             else
             {
-                if (board.EnemyZones[index].HasCard)
+                if (index >= 0 && board.EnemyZones[index].HasCard)
                 {
                     board.EnemyZones[index].HeldCard.SetPower(board.EnemyZones[index].HeldCard.Power + 2);
                 }
