@@ -7,6 +7,7 @@ namespace Holo.Cards
     {
         public override void Use(Card callingCard, Board board)
         {
+            if (callingCard.Negated) return;
             if (Board.Instance.PlayerCards.Contains(callingCard))
             {
                 foreach (Card card in board.PlayerCards)

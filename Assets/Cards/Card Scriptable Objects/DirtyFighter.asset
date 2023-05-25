@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: DirtyFighter
   m_EditorClassIdentifier: 
   CardName: Dirty Fighter
-  Power: 2
+  Power: 0
   CardDescription: Takes out any raccoon it fights with.
   Image: {fileID: 21300000, guid: c9f9aa71559774c49bc609b4c0bc759e, type: 3}
   LineImage: {fileID: 21300000, guid: e4df48081ee4b694fa02e9d1c62b61a0, type: 3}
+  <Effect>k__BackingField: {fileID: 11400000, guid: 9381e40ab1d706b4e8b9f45c3bc5c809,
+    type: 2}

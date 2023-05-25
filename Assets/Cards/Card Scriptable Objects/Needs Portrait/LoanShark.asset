@@ -17,3 +17,5 @@ MonoBehaviour:
   CardDescription: Start of combat destroy itself and the lowest power enemy minion
   Image: {fileID: 21300000, guid: d0b9c67c2f792c640aaf186d8a159ff3, type: 3}
   LineImage: {fileID: 21300000, guid: b7b1d524fd5a6a749998be26f1ce0b95, type: 3}
+  <Effect>k__BackingField: {fileID: 11400000, guid: 8704b0ae6b90b3e44b9dee278c7eff79,
+    type: 2}

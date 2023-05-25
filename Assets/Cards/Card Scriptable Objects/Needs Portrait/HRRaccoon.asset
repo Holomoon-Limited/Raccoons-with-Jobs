@@ -17,3 +17,5 @@ MonoBehaviour:
   CardDescription: At the start of combat, give adjacent raccoons +2 power
   Image: {fileID: 21300000, guid: 1d45a17518bb12d46bb25b3bc8aa3388, type: 3}
   LineImage: {fileID: 21300000, guid: c52cf9e7d7cd5384b851a441e5ec08ac, type: 3}
+  <Effect>k__BackingField: {fileID: 11400000, guid: 39d516a1da9a10949a03ad0cd6c5591f,
+    type: 2}

@@ -10,9 +10,6 @@ namespace Holo.Racc.Battle
     /// </summary>
     public class Attacker : MonoBehaviour
     {
-        [SerializeField] private Transform playerGraveyard;
-        [SerializeField] private Transform enemyGraveyard;
-
         [SerializeField] BattleHandler battleHandler;
         [SerializeField] PhaseHandler phaseHandler;
         [SerializeField] ScoreManager scoreManager;
@@ -56,16 +53,16 @@ namespace Holo.Racc.Battle
                     yield return new WaitForSeconds(1f);
                     if (playerCard.Power > enemyCard.Power)
                     {
-                        DestroyEnemyCard(Board.Instance.EnemyZones[i]);
+                        Board.Instance.DestroyEnemyCard(Board.Instance.EnemyZones[i]);
                     }
                     else if (playerCard.Power < enemyCard.Power)
                     {
-                        DestroyPlayerCard(Board.Instance.PlayerZones[i]);
+                        Board.Instance.DestroyPlayerCard(Board.Instance.PlayerZones[i]);
                     }
                     else
                     {
-                        DestroyEnemyCard(Board.Instance.EnemyZones[i]);
-                        DestroyPlayerCard(Board.Instance.PlayerZones[i]);
+                        Board.Instance.DestroyEnemyCard(Board.Instance.EnemyZones[i]);
+                        Board.Instance.DestroyPlayerCard(Board.Instance.PlayerZones[i]);
                     }
                     yield return new WaitForSeconds(timeBetweenAttacks);
                 }
@@ -97,36 +94,6 @@ namespace Holo.Racc.Battle
                 Board.Instance.ResetBoard();
                 StartCoroutine(phaseHandler.Co_EndBattlePhase());
             }
-        }
-
-        private void DestroyEnemyCard(CardZone zone)
-        {
-            Card card = zone.HeldCard;
-            zone.RemoveCardFromZone();
-            card.MoveToPoint(enemyGraveyard.position, enemyGraveyard.rotation);
-            Board.Instance.EnemyDestroyedCards.Add(card);
-            Board.Instance.DestroyedEnemyCardsNumber++;
-            if (card.HasEffect && card.Effect.Timing == EffectTiming.OnCardDestroyed)
-            {
-                card.Effect.Use(card, Board.Instance);
-            }
-            EffectHandler.Instance.UnRegisterEffect(card);
-            EffectHandler.Instance.ApplyContinuousEffects();
-        }
-
-        private void DestroyPlayerCard(CardZone zone)
-        {
-            Card card = zone.HeldCard;
-            zone.RemoveCardFromZone();
-            card.MoveToPoint(playerGraveyard.position, enemyGraveyard.rotation);
-            Board.Instance.PlayerDestroyedCards.Add(card);
-            Board.Instance.DestroyedPlayerCardsNumber++;
-            if (card.HasEffect && card.Effect.Timing == EffectTiming.OnCardDestroyed)
-            {
-                card.Effect.Use(card, Board.Instance);
-            }
-            EffectHandler.Instance.UnRegisterEffect(card);
-            EffectHandler.Instance.ApplyContinuousEffects();
         }
 
         private bool PlayerHasCards()

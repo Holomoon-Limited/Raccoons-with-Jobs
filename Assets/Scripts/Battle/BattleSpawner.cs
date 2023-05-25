@@ -64,11 +64,10 @@ namespace Holo.Racc.Battle
             for (int i = 0; i < Board.Instance.PlayerZones.Count; i++)
             {
                 Card card = Instantiate(playerCardPrefab);
-                card.DisplayCard(cardsInPlay.playerCardsInPlay[i]);
+                card.SetCardData(cardsInPlay.playerCardsInPlay[i]);
                 card.Position = i;
                 Board.Instance.PlayerZones[i].AddCardToZone(card);
                 Board.Instance.PlayerCards.Add(card);
-                EffectHandler.Instance.RegisterEffect(card);
             }
         }
 
@@ -77,11 +76,10 @@ namespace Holo.Racc.Battle
             for (int i = 0; i < Board.Instance.EnemyZones.Count; i++)
             {
                 Card card = Instantiate(enemyCardPrefab);
-                card.DisplayCard(cardsInPlay.enemyCardsInPlay[i]);
+                card.SetCardData(cardsInPlay.enemyCardsInPlay[i]);
                 card.Position = i;
                 Board.Instance.EnemyZones[i].AddCardToZone(card);
                 Board.Instance.EnemyCards.Add(card);
-                EffectHandler.Instance.RegisterEffect(card);
             }
         }
 

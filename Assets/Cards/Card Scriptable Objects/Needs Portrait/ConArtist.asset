@@ -17,3 +17,5 @@ MonoBehaviour:
   CardDescription: The raccoon opposite this has its attack halved
   Image: {fileID: 21300000, guid: 16e3eef32ef1e5c44a013841fdf07aef, type: 3}
   LineImage: {fileID: 21300000, guid: d93d0952d19914c40a7bc85805220973, type: 3}
+  <Effect>k__BackingField: {fileID: 11400000, guid: e117c0a8a18554844b6c7939421c7dc0,
+    type: 2}

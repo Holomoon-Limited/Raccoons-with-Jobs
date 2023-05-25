@@ -74,7 +74,7 @@ namespace Holo.Racc.Draft
             for (int i = 0; i < cardZones.Count; i++)
             {
                 Card card = Instantiate(cardPrefab, cardSpawnLocation.position, Quaternion.Euler(0, 0, 180f));
-                card.DisplayCard(deck.DrawCard());
+                card.SetCardData(deck.DrawCard());
                 cardZones[i].AddCardToZone(card);
                 card.Position = i;
                 cardPositions.Add(cardZones[i].transform.position);

@@ -80,7 +80,7 @@ namespace Holo.Cards
                 Card newCard = Instantiate(baseCard, new Vector3(0, 0, 0), Quaternion.identity, handParent.transform);
                 newCard.name = cardData[i].CardName;
                 newCard.SetActiveLocation(this);
-                newCard.DisplayCard(cardData[i]);
+                newCard.SetCardData(cardData[i]);
             }
         }
 
