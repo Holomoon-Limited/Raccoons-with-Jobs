@@ -481,7 +481,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2393dc5f207ea846bae987d1a676389, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreManager: {fileID: 0}
+  scoreManager: {fileID: 11400000, guid: a679469c45ab2794b863987b14ff1ba5, type: 2}
   cardsInPlay: {fileID: 11400000, guid: 32e6e6ed244026c46b54fb1bc5fa426b, type: 2}
   battleHandler: {fileID: 11400000, guid: 06d5e877e39da7741aab3ef86694de08, type: 2}
   cardZonePrefab: {fileID: 669468793291817966, guid: 0c1961fd3d347fc40932e6cbbfbaa217,
