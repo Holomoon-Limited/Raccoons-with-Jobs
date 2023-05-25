@@ -148,28 +148,28 @@ namespace Holo.Cards
             }
         }
 
-        public void DestroyEnemyCard(CardZone zone)
+        public void DestroyEnemyCard(CardZone zone, bool triggerEffect = true)
         {
             Card card = zone.HeldCard;
             zone.RemoveCardFromZone();
             card.MoveToPoint(enemyGraveyard.position, enemyGraveyard.rotation);
             Board.Instance.EnemyDestroyedCards.Add(card);
             Board.Instance.DestroyedEnemyCardsNumber++;
-            if (card.HasEffect && card.Effect.Timing == EffectTiming.OnCardDestroyed)
+            if (card.HasEffect && card.Effect.Timing == EffectTiming.OnCardDestroyed && triggerEffect)
             {
                 card.Effect.Use(card, Board.Instance);
             }
             EffectHandler.Instance.ApplyContinuousEffects();
         }
 
-        public void DestroyPlayerCard(CardZone zone)
+        public void DestroyPlayerCard(CardZone zone, bool triggerEffect = true)
         {
             Card card = zone.HeldCard;
             zone.RemoveCardFromZone();
             card.MoveToPoint(playerGraveyard.position, enemyGraveyard.rotation);
             Board.Instance.PlayerDestroyedCards.Add(card);
             Board.Instance.DestroyedPlayerCardsNumber++;
-            if (card.HasEffect && card.Effect.Timing == EffectTiming.OnCardDestroyed)
+            if (card.HasEffect && card.Effect.Timing == EffectTiming.OnCardDestroyed && triggerEffect)
             {
                 card.Effect.Use(card, Board.Instance);
             }

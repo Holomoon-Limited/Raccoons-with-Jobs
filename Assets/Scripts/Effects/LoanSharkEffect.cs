@@ -22,7 +22,7 @@ namespace Holo.Cards
                 }
                 if (zoneToDestroy != null)
                 {
-                    board.DestroyEnemyCard(zoneToDestroy);
+                    board.DestroyEnemyCard(zoneToDestroy, false);
                 }
             }
             else
@@ -38,7 +38,7 @@ namespace Holo.Cards
                 }
                 if (zoneToDestroy != null)
                 {
-                    board.DestroyEnemyCard(zoneToDestroy);
+                    board.DestroyEnemyCard(zoneToDestroy, false);
                 }
             }
         }

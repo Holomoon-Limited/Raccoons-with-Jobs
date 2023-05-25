@@ -12,6 +12,7 @@ namespace Holo.Cards
 
             if (board.PlayerCards.Contains(callingCard))
             {
+                if (targetPosition > board.PlayerZones.Count - 1 || targetPosition < 0) return;
                 CardZone zone = board.PlayerZones[targetPosition];
                 if (zone.HasCard)
                 {
@@ -20,6 +21,7 @@ namespace Holo.Cards
             }
             else
             {
+                if (targetPosition > board.EnemyZones.Count - 1 || targetPosition < 0) return;
                 CardZone zone = board.EnemyZones[targetPosition];
                 if (zone.HasCard)
                 {
