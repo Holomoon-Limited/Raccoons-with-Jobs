@@ -65,7 +65,22 @@ PrefabInstance:
     - target: {fileID: 7324551845601774129, guid: 0c1961fd3d347fc40932e6cbbfbaa217,
         type: 3}
       propertyPath: m_Name
-      value: Draft Card Zone
+      value: Draft Card Zone Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721340810133956261, guid: 0c1961fd3d347fc40932e6cbbfbaa217,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721340810133956261, guid: 0c1961fd3d347fc40932e6cbbfbaa217,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721340810133956261, guid: 0c1961fd3d347fc40932e6cbbfbaa217,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c1961fd3d347fc40932e6cbbfbaa217, type: 3}

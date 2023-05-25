@@ -11,6 +11,7 @@ namespace Holo.Racc.Play
         [SerializeField] private PlayerBoard playerBoard;
 
         private Button button;
+        
         void Awake()
         {
             button = GetComponent<Button>();
