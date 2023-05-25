@@ -95,10 +95,6 @@ namespace Holo.Racc.Play
             {
                 CardData card = zone.HeldCard.CardData;
                 playerCards.Add(card);
-                if (card.HasEffect)
-                {
-                    EffectHandler.Instance.RegisterEffect(zone.HeldCard);
-                }
             }
 
             cardsInPlayContainer.UpdateCardsInPlay(true, playerCards);

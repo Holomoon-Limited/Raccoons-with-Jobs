@@ -47,6 +47,7 @@ namespace Holo.Cards
 
         public void ApplyContinuousEffects()
         {
+            Board.Instance.ResetCardPower();
             Debug.Log("Applying Continuous Effects");
             foreach (KeyValuePair<Card, Effect> effect in effects)
             {

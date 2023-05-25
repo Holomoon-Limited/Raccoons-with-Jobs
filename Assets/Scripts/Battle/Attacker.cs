@@ -10,19 +10,14 @@ namespace Holo.Racc.Battle
     /// </summary>
     public class Attacker : MonoBehaviour
     {
+        [SerializeField] private Transform playerGraveyard;
+        [SerializeField] private Transform enemyGraveyard;
+
         [SerializeField] BattleHandler battleHandler;
         [SerializeField] PhaseHandler phaseHandler;
         [SerializeField] ScoreManager scoreManager;
 
         [SerializeField][Min(0f)] private float timeBetweenAttacks = 0.5f;
-
-        private BattleSpawner battleSpawner;
-
-        private void Awake()
-        {
-            //Needs the spawned to get the frickin zone lists 
-            battleSpawner = this.GetComponent<BattleSpawner>();
-        }
 
         private void OnEnable()
         {
@@ -107,23 +102,31 @@ namespace Holo.Racc.Battle
         private void DestroyEnemyCard(CardZone zone)
         {
             Card card = zone.HeldCard;
-            zone.DespawnCard();
-            Board.Instance.EnemyDestroyedCards.Add(card.CardData);
+            zone.RemoveCardFromZone();
+            card.MoveToPoint(enemyGraveyard.position, enemyGraveyard.rotation);
+            Board.Instance.EnemyDestroyedCards.Add(card);
+            Board.Instance.DestroyedEnemyCardsNumber++;
             if (card.HasEffect && card.Effect.Timing == EffectTiming.OnCardDestroyed)
             {
                 card.Effect.Use(card, Board.Instance);
             }
+            EffectHandler.Instance.UnRegisterEffect(card);
+            EffectHandler.Instance.ApplyContinuousEffects();
         }
 
         private void DestroyPlayerCard(CardZone zone)
         {
             Card card = zone.HeldCard;
-            zone.MoveCardToHand();
-            Board.Instance.PlayerDestroyedCards.Add(card.CardData);
+            zone.RemoveCardFromZone();
+            card.MoveToPoint(playerGraveyard.position, enemyGraveyard.rotation);
+            Board.Instance.PlayerDestroyedCards.Add(card);
+            Board.Instance.DestroyedPlayerCardsNumber++;
             if (card.HasEffect && card.Effect.Timing == EffectTiming.OnCardDestroyed)
             {
                 card.Effect.Use(card, Board.Instance);
             }
+            EffectHandler.Instance.UnRegisterEffect(card);
+            EffectHandler.Instance.ApplyContinuousEffects();
         }
 
         private bool PlayerHasCards()

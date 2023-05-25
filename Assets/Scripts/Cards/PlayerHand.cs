@@ -147,6 +147,7 @@ namespace Holo.Cards
         public void AddCardToHand(Card card)
         {
             AddCardToLocation(card);
+            card.IsPlayers = true;
             card.GetComponent<Collider>().enabled = true;
             card.transform.parent = handParent;
             card.name = card.CardData.CardName;
