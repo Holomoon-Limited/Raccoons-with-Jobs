@@ -35,6 +35,8 @@ namespace Holo.Cards
         public Effect Effect => CardData.Effect;
         public bool HasEffect => CardData.HasEffect;
 
+        public bool IsPlayers = false;
+
         private Animator anim;
 
         private void Awake()
@@ -51,14 +53,22 @@ namespace Holo.Cards
             if (newCardData == null) return;
             // overwrites default with new value
             CardData = newCardData;
+            this.Power = CardData.Power;
+
+            // assign data to components 
+            UpdateDisplay();
+        }
+
+        public void UpdateDisplay()
+        {
+            if (this.CardData == null) return;
 
             // assign data to components 
             cardNameTMP.text = CardData.CardName;
-            powerTMP.text = CardData.Power.ToString();
+            powerTMP.text = this.Power.ToString();
             cardDescriptionTMP.text = CardData.CardDescription;
             imageImage.sprite = CardData.Image;
             lineImage.sprite = CardData.LineImage;
-            this.Power = CardData.Power;
         }
 
         public void SetActiveLocation(CardLocation activeLocation)
@@ -92,6 +102,18 @@ namespace Holo.Cards
         public void Attack()
         {
             anim.SetTrigger("attack");
+        }
+
+        public void SetPower(int power)
+        {
+            this.Power = power;
+            UpdateDisplay();
+        }
+
+        public void ResetPower()
+        {
+            this.Power = CardData.Power;
+            UpdateDisplay();
         }
 
         public void CamShake()

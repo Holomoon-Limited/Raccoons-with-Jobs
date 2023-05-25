@@ -32,38 +32,14 @@ namespace Holo.Cards
         public List<CardZone> PlayerZones = new List<CardZone>();
         public List<CardZone> EnemyZones = new List<CardZone>();
 
-        public IEnumerator<Card> PlayerCards
-        {
-            get
-            {
-                foreach (CardZone zone in PlayerZones)
-                {
-                    if (zone.HasCard)
-                    {
-                        yield return zone.HeldCard;
-                    }
-                    else continue;
-                }
-            }
-        }
+        public List<Card> PlayerDestroyedCards = new List<Card>();
+        public List<Card> EnemyDestroyedCards = new List<Card>();
 
-        public IEnumerator<Card> EnemyCards
-        {
-            get
-            {
-                foreach (CardZone zone in EnemyZones)
-                {
-                    if (zone.HasCard)
-                    {
-                        yield return zone.HeldCard;
-                    }
-                    else continue;
-                }
-            }
-        }
+        public List<Card> PlayerCards = new List<Card>();
+        public List<Card> EnemyCards = new List<Card>();
 
-        public List<CardData> PlayerDestroyedCards = new List<CardData>();
-        public List<CardData> EnemyDestroyedCards = new List<CardData>();
+        public int DestroyedPlayerCardsNumber = 0;
+        public int DestroyedEnemyCardsNumber = 0;
 
         private void OnEnable()
         {
@@ -129,34 +105,60 @@ namespace Holo.Cards
 
         public void SpawnLastDestroyedCard(Card callingCard)
         {
-            if (PlayerDestroyedCards.Count < 2) return;
-            for (int i = 0; i < PlayerDestroyedCards.Count - 1; i--)
+            if (PlayerCards.Contains(callingCard))
             {
-                if (PlayerDestroyedCards[i] == callingCard) continue;
-                Debug.Log($"Card to spawn: {PlayerDestroyedCards[i]}");
+                if (PlayerDestroyedCards.Count < 2) return;
+                for (int i = PlayerDestroyedCards.Count - 1; i >= 0; i--)
+                {
+                    if (PlayerDestroyedCards[i] == callingCard) continue;
+                    PlayerZones[callingCard.Position].AddCardToZone(PlayerDestroyedCards[i]);
+                    PlayerDestroyedCards.Remove(PlayerDestroyedCards[i]);
+                    Debug.Log($"Card to spawn: {PlayerDestroyedCards[i].CardData.CardName}");
+                    return;
+                }
             }
-
-
-            if (EnemyDestroyedCards.Count < 2) return;
-            for (int i = 0; i < EnemyDestroyedCards.Count - 1; i--)
+            else
             {
-                if (EnemyDestroyedCards[i] == callingCard) continue;
-                Debug.Log($"Card to spawn: {EnemyDestroyedCards[i]}");
+
+                if (EnemyDestroyedCards.Count < 2) return;
+                for (int i = EnemyDestroyedCards.Count - 1; i >= 0; i--)
+                {
+                    if (EnemyDestroyedCards[i] == callingCard) continue;
+                    EnemyZones[callingCard.Position].AddCardToZone(EnemyDestroyedCards[i]);
+                    EnemyDestroyedCards.Remove(EnemyDestroyedCards[i]);
+                    Debug.Log($"Card to spawn: {EnemyDestroyedCards[i].CardData.CardName}");
+                    return;
+                }
             }
         }
 
-        // private bool IsPlayerCard(Card card)
-        // {
-        //     foreach (Card card in PlayerCards)
-        //     {
-
-        //     }
-        // }
+        public void ResetCardPower()
+        {
+            foreach (Card card in PlayerCards)
+            {
+                card.ResetPower();
+            }
+            foreach (Card card in EnemyCards)
+            {
+                card.ResetPower();
+            }
+        }
 
         public void ResetBoard()
         {
+            foreach (Card card in PlayerCards)
+            {
+                card.ResetPower();
+                PlayerHand.Instance.AddCardToHand(card);
+            }
+
+            DestroyedPlayerCardsNumber = 0;
+            DestroyedEnemyCardsNumber = 0;
+
             PlayerZones.Clear();
             EnemyZones.Clear();
+            PlayerCards.Clear();
+            EnemyCards.Clear();
             PlayerDestroyedCards.Clear();
             EnemyDestroyedCards.Clear();
         }

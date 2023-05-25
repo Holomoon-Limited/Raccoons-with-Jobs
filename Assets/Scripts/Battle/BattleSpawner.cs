@@ -24,12 +24,6 @@ namespace Holo.Racc.Battle
         [SerializeField] private Transform playerZoneParent;
         [SerializeField] private Transform enemyZoneParent;
 
-        [Header("Tuning variables")]
-        [SerializeField][Min(0f)] private float timeBetweenShuffles = 0.5f;
-
-        //The number of zones to spawn 
-        public int Zones { get; private set; } = 0;
-
         private void OnEnable()
         {
             battleHandler.OnBattleStart += SetupZones;
@@ -71,7 +65,10 @@ namespace Holo.Racc.Battle
             {
                 Card card = Instantiate(playerCardPrefab);
                 card.DisplayCard(cardsInPlay.playerCardsInPlay[i]);
+                card.Position = i;
                 Board.Instance.PlayerZones[i].AddCardToZone(card);
+                Board.Instance.PlayerCards.Add(card);
+                EffectHandler.Instance.RegisterEffect(card);
             }
         }
 
@@ -81,7 +78,10 @@ namespace Holo.Racc.Battle
             {
                 Card card = Instantiate(enemyCardPrefab);
                 card.DisplayCard(cardsInPlay.enemyCardsInPlay[i]);
+                card.Position = i;
                 Board.Instance.EnemyZones[i].AddCardToZone(card);
+                Board.Instance.EnemyCards.Add(card);
+                EffectHandler.Instance.RegisterEffect(card);
             }
         }
 

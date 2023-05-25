@@ -8,7 +8,7 @@ namespace Holo.Cards
     {
         public override void Use(Card callingCard, Board board)
         {
-            //board.SpawnLastDestroyedCard(callingCard);
+            board.SpawnLastDestroyedCard(callingCard);
         }
     }
 }
