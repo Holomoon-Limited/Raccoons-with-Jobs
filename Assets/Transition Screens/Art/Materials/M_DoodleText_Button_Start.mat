@@ -90,7 +90,7 @@ Material:
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DoodleIntensity: 0.05
-    - _DoodleSpeed: 0
+    - _DoodleSpeed: 7.5
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
