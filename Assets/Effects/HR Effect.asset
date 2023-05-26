@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a030abffc04ac247971f04df11a3373, type: 3}
   m_Name: HR Effect
   m_EditorClassIdentifier: 
-  <Timing>k__BackingField: 0
+  <Timing>k__BackingField: 1
