@@ -98,11 +98,11 @@ namespace Holo.Racc.Battle
             Vector3 position = Vector3.zero;
             if (numberOfZones % 2 == 0)
             {
-                position.x = -0.75f * (battleHandler.PlayerCards.Count / 2);
+                position.x = -1f * (numberOfZones - 1);
             }
             else
             {
-                position.x = (float)(-1.5f * (int)(numberOfZones / 2));
+                position.x = (float)(-2f * (int)(numberOfZones / 2));
             }
 
             for (int i = 0; i < numberOfZones; i++)
@@ -114,7 +114,7 @@ namespace Holo.Racc.Battle
                 CardZone enemyZone = Instantiate(cardZonePrefab, enemyZoneParent);
                 enemyZone.transform.localPosition = position;
                 Board.Instance.EnemyZones.Add(enemyZone);
-                position.x += 1.5f;
+                position.x += 2f;
             }
         }
 
