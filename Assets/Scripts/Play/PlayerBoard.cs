@@ -60,7 +60,7 @@ namespace Holo.Racc.Play
             Vector3 position = Vector3.zero;
             if (zones % 2 == 0)
             {
-                position.x = (-0.75f * (zones - 1));
+                position.x = (-1f * (zones - 1));
             }
             else
             {
