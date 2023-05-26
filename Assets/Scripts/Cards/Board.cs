@@ -61,62 +61,65 @@ namespace Holo.Cards
 
         private IEnumerator Co_SlideZonesDown()
         {
-            List<CardZone> emptyPlayerZones = new List<CardZone>();
-            List<CardZone> emptyEnemyZones = new List<CardZone>();
+            List<int> emptyIndexes = new List<int>();
 
             for (int i = 0; i < PlayerZones.Count; i++)
             {
                 if (PlayerZones[i].HeldCard == null)
                 {
-                    emptyPlayerZones.Add(PlayerZones[i]);
+                    emptyIndexes.Add(i);
                     continue;
                 }
                 else
                 {
-                    if (emptyPlayerZones.Count > 0)
+                    if (emptyIndexes.Count > 0)
                     {
-                        emptyPlayerZones[0].AddCardToZone(Board.Instance.PlayerZones[i].HeldCard);
+                        PlayerZones[emptyIndexes[0]].AddCardToZone(Board.Instance.PlayerZones[i].HeldCard);
+                        PlayerZones[emptyIndexes[0]].HeldCard.Position = emptyIndexes[0];
                         PlayerZones[i].RemoveCardFromZone();
-                        emptyPlayerZones.RemoveAt(0);
-                        emptyPlayerZones.Add(Board.Instance.PlayerZones[i]);
+                        emptyIndexes.RemoveAt(0);
+                        emptyIndexes.Add(i);
                     }
                 }
                 yield return new WaitForSeconds(timeBetweenSlides);
             }
 
-            for (int i = 0; i < PlayerZones.Count; i++)
+            emptyIndexes.Clear();
+
+            for (int i = 0; i < EnemyZones.Count; i++)
             {
                 if (Board.Instance.EnemyZones[i].HeldCard == null)
                 {
-                    emptyEnemyZones.Add(Board.Instance.EnemyZones[i]);
+                    emptyIndexes.Add(i);
                     continue;
                 }
                 else
                 {
-                    if (emptyEnemyZones.Count > 0)
+                    if (emptyIndexes.Count > 0)
                     {
-                        emptyEnemyZones[0].AddCardToZone(Board.Instance.EnemyZones[i].HeldCard);
+                        EnemyZones[emptyIndexes[0]].AddCardToZone(Board.Instance.EnemyZones[i].HeldCard);
+                        EnemyZones[emptyIndexes[0]].HeldCard.Position = emptyIndexes[0];
                         Board.Instance.EnemyZones[i].RemoveCardFromZone();
-                        emptyEnemyZones.RemoveAt(0);
-                        emptyEnemyZones.Add(Board.Instance.EnemyZones[i]);
+                        emptyIndexes.RemoveAt(0);
+                        emptyIndexes.Add(i);
                     }
                 }
                 yield return new WaitForSeconds(timeBetweenSlides);
             }
+            EffectHandler.Instance.ApplyContinuousEffects();
             battleHandler.StartAttacks();
         }
 
-        public void SpawnLastDestroyedCard(Card callingCard)
+        public void SpawnLastDestroyedCard(Card callingCard, Effect effect)
         {
             if (PlayerCards.Contains(callingCard))
             {
                 if (PlayerDestroyedCards.Count < 2) return;
                 for (int i = PlayerDestroyedCards.Count - 1; i >= 0; i--)
                 {
-                    if (PlayerDestroyedCards[i] == callingCard) continue;
+                    if (PlayerDestroyedCards[i].HasEffect && PlayerDestroyedCards[i].Effect == effect) continue;
                     PlayerZones[callingCard.Position].AddCardToZone(PlayerDestroyedCards[i]);
                     PlayerDestroyedCards.Remove(PlayerDestroyedCards[i]);
-                    Debug.Log($"Card to spawn: {PlayerDestroyedCards[i].CardData.CardName}");
                     return;
                 }
             }
@@ -126,10 +129,9 @@ namespace Holo.Cards
                 if (EnemyDestroyedCards.Count < 2) return;
                 for (int i = EnemyDestroyedCards.Count - 1; i >= 0; i--)
                 {
-                    if (EnemyDestroyedCards[i] == callingCard) continue;
+                    if (EnemyDestroyedCards[i].HasEffect && EnemyDestroyedCards[i].Effect == effect) continue;
                     EnemyZones[callingCard.Position].AddCardToZone(EnemyDestroyedCards[i]);
                     EnemyDestroyedCards.Remove(EnemyDestroyedCards[i]);
-                    Debug.Log($"Card to spawn: {EnemyDestroyedCards[i].CardData.CardName}");
                     return;
                 }
             }
@@ -151,11 +153,12 @@ namespace Holo.Cards
         public void DestroyEnemyCard(CardZone zone, bool triggerEffect = true)
         {
             Card card = zone.HeldCard;
+            bool negated = card.Negated;
             zone.RemoveCardFromZone();
             card.MoveToPoint(enemyGraveyard.position, enemyGraveyard.rotation);
             Board.Instance.EnemyDestroyedCards.Add(card);
             Board.Instance.DestroyedEnemyCardsNumber++;
-            if (card.HasEffect && card.Effect.Timing == EffectTiming.OnCardDestroyed && triggerEffect)
+            if (card.HasEffect && card.Effect.Timing == EffectTiming.OnCardDestroyed && triggerEffect && negated == false)
             {
                 card.Effect.Use(card, Board.Instance);
             }
@@ -165,11 +168,12 @@ namespace Holo.Cards
         public void DestroyPlayerCard(CardZone zone, bool triggerEffect = true)
         {
             Card card = zone.HeldCard;
+            bool negated = card.Negated;
             zone.RemoveCardFromZone();
             card.MoveToPoint(playerGraveyard.position, enemyGraveyard.rotation);
             Board.Instance.PlayerDestroyedCards.Add(card);
             Board.Instance.DestroyedPlayerCardsNumber++;
-            if (card.HasEffect && card.Effect.Timing == EffectTiming.OnCardDestroyed && triggerEffect)
+            if (card.HasEffect && card.Effect.Timing == EffectTiming.OnCardDestroyed && triggerEffect && negated == false)
             {
                 card.Effect.Use(card, Board.Instance);
             }
