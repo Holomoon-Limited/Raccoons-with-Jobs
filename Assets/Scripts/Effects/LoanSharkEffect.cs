@@ -15,7 +15,7 @@ namespace Holo.Cards
                 CardZone zoneToDestroy = null;
                 foreach (CardZone zone in board.EnemyZones)
                 {
-                    if (zoneToDestroy == null || (zoneToDestroy.HasCard && zoneToDestroy.HeldCard.Power < zoneToDestroy.HeldCard.Power))
+                    if (zoneToDestroy == null || (zoneToDestroy.HasCard && zone.HeldCard.Power < zoneToDestroy.HeldCard.Power))
                     {
                         zoneToDestroy = zone;
                     }
@@ -31,7 +31,7 @@ namespace Holo.Cards
                 CardZone zoneToDestroy = null;
                 foreach (CardZone zone in board.PlayerZones)
                 {
-                    if (zoneToDestroy == null || (zoneToDestroy.HasCard && zoneToDestroy.HeldCard.Power < zoneToDestroy.HeldCard.Power))
+                    if (zoneToDestroy == null || (zoneToDestroy.HasCard && zone.HeldCard.Power < zoneToDestroy.HeldCard.Power))
                     {
                         zoneToDestroy = zone;
                     }

@@ -9,7 +9,7 @@ namespace Holo.Cards
         public override void Use(Card callingCard, Board board)
         {
             if (callingCard.Negated) return;
-            board.SpawnLastDestroyedCard(callingCard);
+            board.SpawnLastDestroyedCard(callingCard, this);
         }
     }
 }

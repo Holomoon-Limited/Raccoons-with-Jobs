@@ -45,7 +45,6 @@ namespace Holo.Racc.Battle
                     Card enemyCard = Board.Instance.EnemyZones[i].HeldCard;
                     if (playerCard == null || enemyCard == null) continue;
 
-                    Debug.Log($"Run Attack effects for {playerCard.CardData.CardName} and {enemyCard.CardData.CardName}");
                     playerCard.Attack();
                     enemyCard.Attack();
 
