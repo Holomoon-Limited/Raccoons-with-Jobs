@@ -152,12 +152,13 @@ namespace Holo.Cards
 
         public void DestroyEnemyCard(CardZone zone, bool triggerEffect = true)
         {
+            if (zone.HasCard == false) return;
             Card card = zone.HeldCard;
             bool negated = card.Negated;
             zone.RemoveCardFromZone();
             card.MoveToPoint(enemyGraveyard.position, enemyGraveyard.rotation);
-            Board.Instance.EnemyDestroyedCards.Add(card);
-            Board.Instance.DestroyedEnemyCardsNumber++;
+            EnemyDestroyedCards.Add(card);
+            DestroyedEnemyCardsNumber++;
             if (card.HasEffect && card.Effect.Timing == EffectTiming.OnCardDestroyed && triggerEffect && negated == false)
             {
                 card.Effect.Use(card, Board.Instance);
@@ -167,12 +168,13 @@ namespace Holo.Cards
 
         public void DestroyPlayerCard(CardZone zone, bool triggerEffect = true)
         {
+            if (zone.HasCard == false) return;
             Card card = zone.HeldCard;
             bool negated = card.Negated;
             zone.RemoveCardFromZone();
-            card.MoveToPoint(playerGraveyard.position, enemyGraveyard.rotation);
-            Board.Instance.PlayerDestroyedCards.Add(card);
-            Board.Instance.DestroyedPlayerCardsNumber++;
+            card.MoveToPoint(playerGraveyard.position, playerGraveyard.rotation);
+            PlayerDestroyedCards.Add(card);
+            DestroyedPlayerCardsNumber++;
             if (card.HasEffect && card.Effect.Timing == EffectTiming.OnCardDestroyed && triggerEffect && negated == false)
             {
                 card.Effect.Use(card, Board.Instance);
@@ -184,7 +186,7 @@ namespace Holo.Cards
         {
             foreach (Card card in PlayerCards)
             {
-                card.ResetPower();
+                card.ResetCardEffects();
                 PlayerHand.Instance.AddCardToHand(card);
             }
 

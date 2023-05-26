@@ -12,6 +12,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Edge
+    second: {fileID: 2100000, guid: e9ae68cbca69e9e4d89d3ba77c8f1af9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Front
     second: {fileID: 2100000, guid: c3fa58d8b0c4bbb49a86ce5d8e44ac3b, type: 2}
   materials:

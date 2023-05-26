@@ -2047,7 +2047,7 @@ PrefabInstance:
     - target: {fileID: 3843663087393442672, guid: 8fbc6bba1d0a53a478f4ff7584aee5ea,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.75
       objectReference: {fileID: 0}
     - target: {fileID: 3843663087393442672, guid: 8fbc6bba1d0a53a478f4ff7584aee5ea,
         type: 3}
@@ -2093,6 +2093,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Scenery
+      objectReference: {fileID: 0}
+    - target: {fileID: 6733822249891015499, guid: 8fbc6bba1d0a53a478f4ff7584aee5ea,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8fbc6bba1d0a53a478f4ff7584aee5ea, type: 3}

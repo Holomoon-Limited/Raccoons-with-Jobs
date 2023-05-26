@@ -39,7 +39,7 @@ namespace Holo.Cards
         public bool IsPlayers = false;
 
         private Animator anim;
-        
+
 
         public bool Negated = false;
 
@@ -106,7 +106,6 @@ namespace Holo.Cards
         public void Attack()
         {
             anim.SetTrigger("attack");
-            
         }
 
         public void SetBasePower(int power)
@@ -126,6 +125,13 @@ namespace Holo.Cards
         {
             Negated = false;
             this.Power = this.BasePower;
+            UpdateDisplay();
+        }
+
+        public void ResetCardEffects()
+        {
+            Negated = false;
+            this.Power = CardData.Power;
             UpdateDisplay();
         }
 
