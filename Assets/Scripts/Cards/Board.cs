@@ -161,6 +161,7 @@ namespace Holo.Cards
             DestroyedEnemyCardsNumber++;
             if (card.HasEffect && card.Effect.Timing == EffectTiming.OnCardDestroyed && triggerEffect && negated == false)
             {
+                card.ActivateEffect();
                 card.Effect.Use(card, Board.Instance);
             }
             EffectHandler.Instance.ApplyContinuousEffects();
@@ -177,6 +178,7 @@ namespace Holo.Cards
             DestroyedPlayerCardsNumber++;
             if (card.HasEffect && card.Effect.Timing == EffectTiming.OnCardDestroyed && triggerEffect && negated == false)
             {
+                card.ActivateEffect();
                 card.Effect.Use(card, Board.Instance);
             }
             EffectHandler.Instance.ApplyContinuousEffects();

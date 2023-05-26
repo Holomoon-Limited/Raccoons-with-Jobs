@@ -108,6 +108,11 @@ namespace Holo.Cards
             anim.SetTrigger("attack");
         }
 
+        public void ActivateEffect()
+        {
+            anim.SetTrigger("effect");
+        }
+
         public void SetBasePower(int power)
         {
             BasePower = power;
@@ -117,6 +122,11 @@ namespace Holo.Cards
 
         public void SetPower(int power)
         {
+            if (power != this.Power)
+            {
+                anim.SetTrigger("increasePower");
+            }
+
             this.Power = power;
             UpdateDisplay();
         }

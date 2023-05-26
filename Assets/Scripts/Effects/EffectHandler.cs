@@ -50,14 +50,17 @@ namespace Holo.Cards
                 CardZone zone = Board.Instance.PlayerZones[i];
                 if (zone.HasCard && zone.HeldCard.HasEffect && zone.HeldCard.Effect.Timing == EffectTiming.OnBattleStart)
                 {
+                    zone.HeldCard.ActivateEffect();
                     zone.HeldCard.Effect.Use(zone.HeldCard, Board.Instance);
+                    yield return timeBetweenEffects;
                 }
                 zone = Board.Instance.EnemyZones[i];
                 if (zone.HasCard && zone.HeldCard.HasEffect && zone.HeldCard.Effect.Timing == EffectTiming.OnBattleStart)
                 {
+                    zone.HeldCard.ActivateEffect();
                     zone.HeldCard.Effect.Use(zone.HeldCard, Board.Instance);
+                    yield return timeBetweenEffects;
                 }
-                yield return timeBetweenEffects;
             }
         }
 
