@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CardName: Business Raccumen
   Power: 5
-  CardDescription: No effect
+  CardDescription: Very good at e-mails
   Image: {fileID: 21300000, guid: e80291d1408f41c419b43231ed0abf0b, type: 3}
   LineImage: {fileID: 21300000, guid: af156ccce5f5aed4f8f904bfa21c811f, type: 3}
+  <Effect>k__BackingField: {fileID: 0}

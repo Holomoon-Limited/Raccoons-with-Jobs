@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: BurnoutRaccoon
   m_EditorClassIdentifier: 
   CardName: Burnout Raccoon
-  Power: 6
-  CardDescription: Loses 1 power after every fight
+  Power: 0
+  CardDescription: Just a tired little guy
   Image: {fileID: 21300000, guid: a5c0153539c5c9348a4c2220f06df738, type: 3}
   LineImage: {fileID: 21300000, guid: 4898316eb330641498e74996371dd1ae, type: 3}
+  <Effect>k__BackingField: {fileID: 0}
