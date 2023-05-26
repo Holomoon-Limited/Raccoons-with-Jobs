@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 965c306699d5a23409cec92a3225a809, type: 3}
   m_Name: MicrosoftTeamsSpirit
   m_EditorClassIdentifier: 
-  CardName: MicrosoftTeamsSpirit
+  CardName: Teams Spirit
   Power: 2
   CardDescription: When Fired, gives its Power to next Raccoon
   Image: {fileID: 21300000, guid: d4f0a08f43d389a4d8a61b4ecce40c1a, type: 3}
