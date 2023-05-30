@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ConArtist
   m_EditorClassIdentifier: 
   CardName: Con Artist
-  Power: 4
+  Power: 3
   CardDescription: Opposite Raccoon has its Power halved
   Image: {fileID: 21300000, guid: 16e3eef32ef1e5c44a013841fdf07aef, type: 3}
   LineImage: {fileID: 21300000, guid: d93d0952d19914c40a7bc85805220973, type: 3}
