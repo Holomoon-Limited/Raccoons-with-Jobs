@@ -24,7 +24,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     ""name"": ""PlayerControls"",
     ""maps"": [
         {
-            ""name"": ""Player"",
+            ""name"": ""Keyboard"",
             ""id"": ""861ab851-f953-4b06-a908-a193b9759419"",
             ""actions"": [
                 {
@@ -69,17 +69,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""f435a3f3-efad-42ac-b056-485c1c01cbcf"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Submit"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""6d367081-ae35-4132-8865-d28f14d0f004"",
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
@@ -90,7 +79,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""1D Axis"",
+                    ""name"": ""Scroll Wheel"",
                     ""id"": ""efdc0c31-19a9-4375-80a0-198ab4a4bf89"",
                     ""path"": ""1DAxis"",
                     ""interactions"": """",
@@ -123,15 +112,143 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""Gamepad"",
+            ""id"": ""a6a39462-28c9-4e6c-9f5a-7a3e0e63842b"",
+            ""actions"": [
+                {
+                    ""name"": ""Submit"",
+                    ""type"": ""Button"",
+                    ""id"": ""edd72249-77ee-448e-924f-03dc67a00c71"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Cancel"",
+                    ""type"": ""Button"",
+                    ""id"": ""ada80b9d-1cd2-4905-b85d-3b0779e71292"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Scroll"",
+                    ""type"": ""Value"",
+                    ""id"": ""0f430a27-355f-4fdc-9c02-b1ff84def653"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""ac4031f7-fcfb-4d29-ae5d-06afd56dcdea"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Submit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""17ba8bee-a20d-41c9-9f56-ff23b748edc5"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Right Stick"",
+                    ""id"": ""fd9cb2c4-465a-49a5-b7c8-b187af233df6"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Scroll"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""c1378a9c-17ea-4457-a7ff-a917f36fdbfb"",
+                    ""path"": ""<Gamepad>/rightStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Scroll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""4ae9ade4-e204-4440-8389-020b1195d1bd"",
+                    ""path"": ""<Gamepad>/rightStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Scroll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Shoulder Buttons"",
+                    ""id"": ""c540cdf0-b9bd-49d8-8227-83664d3cfe6e"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Scroll"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""02871bfd-b79f-4613-849a-a81e3bd6561f"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Scroll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""bd25c33e-5ca1-4ed0-80b4-16689099e0e3"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Scroll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
 }");
-        // Player
-        m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
-        m_Player_Submit = m_Player.FindAction("Submit", throwIfNotFound: true);
-        m_Player_Cancel = m_Player.FindAction("Cancel", throwIfNotFound: true);
-        m_Player_MouseScroll = m_Player.FindAction("MouseScroll", throwIfNotFound: true);
+        // Keyboard
+        m_Keyboard = asset.FindActionMap("Keyboard", throwIfNotFound: true);
+        m_Keyboard_Submit = m_Keyboard.FindAction("Submit", throwIfNotFound: true);
+        m_Keyboard_Cancel = m_Keyboard.FindAction("Cancel", throwIfNotFound: true);
+        m_Keyboard_MouseScroll = m_Keyboard.FindAction("MouseScroll", throwIfNotFound: true);
+        // Gamepad
+        m_Gamepad = asset.FindActionMap("Gamepad", throwIfNotFound: true);
+        m_Gamepad_Submit = m_Gamepad.FindAction("Submit", throwIfNotFound: true);
+        m_Gamepad_Cancel = m_Gamepad.FindAction("Cancel", throwIfNotFound: true);
+        m_Gamepad_Scroll = m_Gamepad.FindAction("Scroll", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -188,39 +305,39 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // Player
-    private readonly InputActionMap m_Player;
-    private IPlayerActions m_PlayerActionsCallbackInterface;
-    private readonly InputAction m_Player_Submit;
-    private readonly InputAction m_Player_Cancel;
-    private readonly InputAction m_Player_MouseScroll;
-    public struct PlayerActions
+    // Keyboard
+    private readonly InputActionMap m_Keyboard;
+    private IKeyboardActions m_KeyboardActionsCallbackInterface;
+    private readonly InputAction m_Keyboard_Submit;
+    private readonly InputAction m_Keyboard_Cancel;
+    private readonly InputAction m_Keyboard_MouseScroll;
+    public struct KeyboardActions
     {
         private @PlayerControls m_Wrapper;
-        public PlayerActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Submit => m_Wrapper.m_Player_Submit;
-        public InputAction @Cancel => m_Wrapper.m_Player_Cancel;
-        public InputAction @MouseScroll => m_Wrapper.m_Player_MouseScroll;
-        public InputActionMap Get() { return m_Wrapper.m_Player; }
+        public KeyboardActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Submit => m_Wrapper.m_Keyboard_Submit;
+        public InputAction @Cancel => m_Wrapper.m_Keyboard_Cancel;
+        public InputAction @MouseScroll => m_Wrapper.m_Keyboard_MouseScroll;
+        public InputActionMap Get() { return m_Wrapper.m_Keyboard; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(PlayerActions set) { return set.Get(); }
-        public void SetCallbacks(IPlayerActions instance)
+        public static implicit operator InputActionMap(KeyboardActions set) { return set.Get(); }
+        public void SetCallbacks(IKeyboardActions instance)
         {
-            if (m_Wrapper.m_PlayerActionsCallbackInterface != null)
+            if (m_Wrapper.m_KeyboardActionsCallbackInterface != null)
             {
-                @Submit.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSubmit;
-                @Submit.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSubmit;
-                @Submit.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSubmit;
-                @Cancel.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCancel;
-                @Cancel.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCancel;
-                @Cancel.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCancel;
-                @MouseScroll.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouseScroll;
-                @MouseScroll.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouseScroll;
-                @MouseScroll.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouseScroll;
+                @Submit.started -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnSubmit;
+                @Submit.performed -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnSubmit;
+                @Submit.canceled -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnSubmit;
+                @Cancel.started -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnCancel;
+                @Cancel.performed -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnCancel;
+                @Cancel.canceled -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnCancel;
+                @MouseScroll.started -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnMouseScroll;
+                @MouseScroll.performed -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnMouseScroll;
+                @MouseScroll.canceled -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnMouseScroll;
             }
-            m_Wrapper.m_PlayerActionsCallbackInterface = instance;
+            m_Wrapper.m_KeyboardActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @Submit.started += instance.OnSubmit;
@@ -235,11 +352,66 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
             }
         }
     }
-    public PlayerActions @Player => new PlayerActions(this);
-    public interface IPlayerActions
+    public KeyboardActions @Keyboard => new KeyboardActions(this);
+
+    // Gamepad
+    private readonly InputActionMap m_Gamepad;
+    private IGamepadActions m_GamepadActionsCallbackInterface;
+    private readonly InputAction m_Gamepad_Submit;
+    private readonly InputAction m_Gamepad_Cancel;
+    private readonly InputAction m_Gamepad_Scroll;
+    public struct GamepadActions
+    {
+        private @PlayerControls m_Wrapper;
+        public GamepadActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Submit => m_Wrapper.m_Gamepad_Submit;
+        public InputAction @Cancel => m_Wrapper.m_Gamepad_Cancel;
+        public InputAction @Scroll => m_Wrapper.m_Gamepad_Scroll;
+        public InputActionMap Get() { return m_Wrapper.m_Gamepad; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(GamepadActions set) { return set.Get(); }
+        public void SetCallbacks(IGamepadActions instance)
+        {
+            if (m_Wrapper.m_GamepadActionsCallbackInterface != null)
+            {
+                @Submit.started -= m_Wrapper.m_GamepadActionsCallbackInterface.OnSubmit;
+                @Submit.performed -= m_Wrapper.m_GamepadActionsCallbackInterface.OnSubmit;
+                @Submit.canceled -= m_Wrapper.m_GamepadActionsCallbackInterface.OnSubmit;
+                @Cancel.started -= m_Wrapper.m_GamepadActionsCallbackInterface.OnCancel;
+                @Cancel.performed -= m_Wrapper.m_GamepadActionsCallbackInterface.OnCancel;
+                @Cancel.canceled -= m_Wrapper.m_GamepadActionsCallbackInterface.OnCancel;
+                @Scroll.started -= m_Wrapper.m_GamepadActionsCallbackInterface.OnScroll;
+                @Scroll.performed -= m_Wrapper.m_GamepadActionsCallbackInterface.OnScroll;
+                @Scroll.canceled -= m_Wrapper.m_GamepadActionsCallbackInterface.OnScroll;
+            }
+            m_Wrapper.m_GamepadActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Submit.started += instance.OnSubmit;
+                @Submit.performed += instance.OnSubmit;
+                @Submit.canceled += instance.OnSubmit;
+                @Cancel.started += instance.OnCancel;
+                @Cancel.performed += instance.OnCancel;
+                @Cancel.canceled += instance.OnCancel;
+                @Scroll.started += instance.OnScroll;
+                @Scroll.performed += instance.OnScroll;
+                @Scroll.canceled += instance.OnScroll;
+            }
+        }
+    }
+    public GamepadActions @Gamepad => new GamepadActions(this);
+    public interface IKeyboardActions
     {
         void OnSubmit(InputAction.CallbackContext context);
         void OnCancel(InputAction.CallbackContext context);
         void OnMouseScroll(InputAction.CallbackContext context);
+    }
+    public interface IGamepadActions
+    {
+        void OnSubmit(InputAction.CallbackContext context);
+        void OnCancel(InputAction.CallbackContext context);
+        void OnScroll(InputAction.CallbackContext context);
     }
 }

@@ -13,7 +13,7 @@ namespace Holo.Input
         public event Action OnCancelPressed;
         public event Action OnMouseScrolledUp;
         public event Action OnMouseScrolledDown;
-        
+
         private void OnEnable()
         {
             this.hideFlags = HideFlags.DontUnloadUnusedAsset;
@@ -21,21 +21,38 @@ namespace Holo.Input
             Controls = new PlayerControls();
             Controls.Enable();
 
-            Controls.Player.Submit.performed += ctx => SubmitPressed();
-            Controls.Player.Cancel.performed += ctx => CancelPressed();
-            
-            Controls.Player.MouseScroll.performed += ctx => MouseScrolled();
+            Controls.Keyboard.Submit.performed += ctx => SubmitPressed();
+            Controls.Gamepad.Submit.performed += ctx => SubmitPressed();
 
+            Controls.Keyboard.Cancel.performed += ctx => CancelPressed();
+            Controls.Gamepad.Cancel.performed += ctx => CancelPressed();
+
+            Controls.Keyboard.MouseScroll.performed += ctx => MouseScrolled(ctx.ReadValue<float>());
+            Controls.Gamepad.Scroll.performed += ctx => MouseScrolled(ctx.ReadValue<float>());
+        }
+
+        public void EnableKeyboardControls()
+        {
+            Controls.Gamepad.Disable();
+            Controls.Keyboard.Enable();
+            Debug.Log("Mouse controls enabled");
+        }
+
+        public void EnableGamepadControls()
+        {
+            Controls.Keyboard.Disable();
+            Controls.Gamepad.Enable();
+            Debug.Log("Gamepad controls enabled");
         }
 
         public void EnableInput()
         {
-            Controls.Player.Enable();
+            Controls.Enable();
         }
 
         public void DisableInput()
         {
-            Controls.Player.Disable();
+            Controls.Disable();
         }
 
         public void SubmitPressed()
@@ -48,17 +65,14 @@ namespace Holo.Input
             OnCancelPressed?.Invoke();
         }
 
-        public void MouseScrolled()
+        public void MouseScrolled(float value)
         {
-            object objAxisAmount = Controls.Player.MouseScroll.ReadValueAsObject();
-            int axisAmount = Convert.ToInt32(objAxisAmount);
-
-            if (axisAmount > 0)
+            if (value > 0)
             {
                 OnMouseScrolledUp?.Invoke();
             }
-            
-            else if (axisAmount < 0)
+
+            else if (value < 0)
             {
                 OnMouseScrolledDown?.Invoke();
             }

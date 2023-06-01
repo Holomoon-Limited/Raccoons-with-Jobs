@@ -418,6 +418,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 61707713572478193, guid: 8fbc6bba1d0a53a478f4ff7584aee5ea,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3843663087393442672, guid: 8fbc6bba1d0a53a478f4ff7584aee5ea,
         type: 3}
       propertyPath: m_RootOrder
@@ -481,7 +486,7 @@ PrefabInstance:
     - target: {fileID: 6733822249891015499, guid: 8fbc6bba1d0a53a478f4ff7584aee5ea,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8fbc6bba1d0a53a478f4ff7584aee5ea, type: 3}
@@ -552,7 +557,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &990725534
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -643,6 +648,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 'Board '
+      objectReference: {fileID: 0}
+    - target: {fileID: 8185202509634801012, guid: d7b686f4d43dcb542856cb948c22ac6a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8185202509634801014, guid: d7b686f4d43dcb542856cb948c22ac6a,
         type: 3}
