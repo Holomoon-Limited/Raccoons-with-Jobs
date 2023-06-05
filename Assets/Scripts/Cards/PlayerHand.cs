@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 namespace Holo.Cards
 {
-    public class PlayerHand : CardLocation
+    public class PlayerHand : CardLocation, IGamepadLocation
     {
         public static PlayerHand Instance;
 
@@ -45,7 +45,7 @@ namespace Holo.Cards
         {
             input.OnSubmitPressed += SelectCard;
             input.OnCancelPressed += CancelSelection;
-            
+
             phaseHandler.OnPlayEnd += ReturnCards;
             phaseHandler.OnGameEnd += ReturnCards;
         }
@@ -180,6 +180,33 @@ namespace Holo.Cards
             }
 
             HeldCards.Clear();
+        }
+
+        public void OnControllerActivated()
+        {
+            SetHighlightedCard(HeldCards[0]);
+        }
+
+        public void OnNavigate(float value)
+        {
+            if (value > 0)
+            {
+
+            }
+            else if (value < 0)
+            {
+
+            }
+        }
+
+        public void OnSubmit()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void OnCancel()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

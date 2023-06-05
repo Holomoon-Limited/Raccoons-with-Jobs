@@ -10,9 +10,12 @@ namespace Holo.Input
         public PlayerControls Controls { get; private set; }
 
         public event Action OnSubmitPressed;
+        public event Action OnGamepadSubmit;
         public event Action OnCancelPressed;
         public event Action OnMouseScrolledUp;
         public event Action OnMouseScrolledDown;
+
+        public bool GamepadEnabled => Controls.Gamepad.enabled == true;
 
         private void OnEnable()
         {
@@ -58,6 +61,12 @@ namespace Holo.Input
         public void SubmitPressed()
         {
             OnSubmitPressed?.Invoke();
+        }
+
+        public void GamepadSubmitPressed()
+        {
+            OnGamepadSubmit?.Invoke();
+
         }
 
         public void CancelPressed()
