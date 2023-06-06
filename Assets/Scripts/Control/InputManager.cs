@@ -10,10 +10,15 @@ namespace Holo.Input
         public PlayerControls Controls { get; private set; }
 
         public event Action OnSubmitPressed;
+        public event Action OnGamepadSubmit;
         public event Action OnCancelPressed;
+        public event Action OnGamepadCancel;
         public event Action OnMouseScrolledUp;
         public event Action OnMouseScrolledDown;
-        
+        public event Action OnStartBattle;
+
+        public bool GamepadEnabled => Controls.Gamepad.enabled == true;
+
         private void OnEnable()
         {
             this.hideFlags = HideFlags.DontUnloadUnusedAsset;
@@ -21,21 +26,40 @@ namespace Holo.Input
             Controls = new PlayerControls();
             Controls.Enable();
 
-            Controls.Player.Submit.performed += ctx => SubmitPressed();
-            Controls.Player.Cancel.performed += ctx => CancelPressed();
-            
-            Controls.Player.MouseScroll.performed += ctx => MouseScrolled();
+            Controls.Keyboard.Submit.performed += ctx => SubmitPressed();
+            Controls.Gamepad.Submit.performed += ctx => GamepadSubmitPressed();
 
+            Controls.Keyboard.Cancel.performed += ctx => CancelPressed();
+            Controls.Gamepad.Cancel.performed += ctx => GamepadCancelPressed();
+
+            Controls.Gamepad.Battle.performed += ctx => StartBattle();
+
+            Controls.Keyboard.MouseScroll.performed += ctx => MouseScrolled(ctx.ReadValue<float>());
+            Controls.Gamepad.Scroll.performed += ctx => MouseScrolled(ctx.ReadValue<float>());
+        }
+
+        public void EnableKeyboardControls()
+        {
+            Controls.Gamepad.Disable();
+            Controls.Keyboard.Enable();
+            Debug.Log("Mouse controls enabled");
+        }
+
+        public void EnableGamepadControls()
+        {
+            Controls.Keyboard.Disable();
+            Controls.Gamepad.Enable();
+            Debug.Log("Gamepad controls enabled");
         }
 
         public void EnableInput()
         {
-            Controls.Player.Enable();
+            Controls.Enable();
         }
 
         public void DisableInput()
         {
-            Controls.Player.Disable();
+            Controls.Disable();
         }
 
         public void SubmitPressed()
@@ -43,22 +67,34 @@ namespace Holo.Input
             OnSubmitPressed?.Invoke();
         }
 
+        public void GamepadSubmitPressed()
+        {
+            OnGamepadSubmit?.Invoke();
+        }
+
         public void CancelPressed()
         {
             OnCancelPressed?.Invoke();
         }
 
-        public void MouseScrolled()
+        public void GamepadCancelPressed()
         {
-            object objAxisAmount = Controls.Player.MouseScroll.ReadValueAsObject();
-            int axisAmount = Convert.ToInt32(objAxisAmount);
+            OnGamepadCancel?.Invoke();
+        }
 
-            if (axisAmount > 0)
+        public void StartBattle()
+        {
+            OnStartBattle?.Invoke();
+        }
+
+        public void MouseScrolled(float value)
+        {
+            if (value > 0)
             {
                 OnMouseScrolledUp?.Invoke();
             }
-            
-            else if (axisAmount < 0)
+
+            else if (value < 0)
             {
                 OnMouseScrolledDown?.Invoke();
             }

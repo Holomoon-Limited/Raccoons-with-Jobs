@@ -1,24 +1,28 @@
 using System.Collections.Generic;
 using Holo.Cards;
+using Holo.Input;
 using Holo.Racc.Game;
 using UnityEngine;
 
 namespace Holo.Racc.Play
 {
-    public class PlayerBoard : MonoBehaviour
+    public class PlayerBoard : MonoBehaviour, IGamepadLocation
     {
         [Header("Asset References")]
         [SerializeField] private PhaseHandler phaseHandler;
+        [SerializeField] private PlayHandler playHandler;
         [SerializeField] private CardsInPlayContainer cardsInPlayContainer;
 
         [Header("Prefab References")]
         [SerializeField] private PlayCardZone playCardZonePrefab;
 
+        [SerializeField] InputManager input;
+
         //Reference to game
-        private List<CardZone> cardZones = new List<CardZone>();
+        private List<PlayCardZone> cardZones = new List<PlayCardZone>();
         private int cardZoneCount = 3;
 
-        public CardZone HighlightedZone { get; private set; }
+        public PlayCardZone HighlightedZone { get; private set; }
 
         public bool CanEndPlayPhase
         {
@@ -38,11 +42,15 @@ namespace Holo.Racc.Play
         private void OnEnable()
         {
             phaseHandler.OnPlayEnd += UpdatePlayerCards;
+            PlayerHand.Instance.OnCardSelected += UpdateGamepadControls;
+            input.OnStartBattle += EndPlayPhase;
         }
 
         private void OnDisable()
         {
             phaseHandler.OnPlayEnd -= UpdatePlayerCards;
+            PlayerHand.Instance.OnCardSelected -= UpdateGamepadControls;
+            input.OnStartBattle -= EndPlayPhase;
         }
 
         private void Start()
@@ -73,18 +81,29 @@ namespace Holo.Racc.Play
                 zone.transform.localPosition = position;
                 this.cardZones.Add(zone);
                 zone.SetPlayerBoard(this);
+                zone.Position = i;
                 position.x += 2f;
             }
         }
 
-        public void SetHighlightedZone(CardZone zone)
+        public void SetHighlightedZone(PlayCardZone zone)
         {
             if (HighlightedZone != null && HighlightedZone != zone)
             {
+                HighlightedZone.EndZoneHighlight();
                 HighlightedZone = null;
             }
             if (zone == null) return;
             this.HighlightedZone = zone;
+            this.HighlightedZone.HighlightZone();
+        }
+
+        private void EndPlayPhase()
+        {
+            if (CanEndPlayPhase)
+            {
+                playHandler.EndPlayPhase();
+            }
         }
 
         private void UpdatePlayerCards()
@@ -98,6 +117,48 @@ namespace Holo.Racc.Play
             }
 
             cardsInPlayContainer.UpdateCardsInPlay(true, playerCards);
+        }
+
+        private void UpdateGamepadControls()
+        {
+            GamepadControls.Instance.activeLocation = this;
+            SetHighlightedZone(cardZones[0]);
+        }
+
+        public void OnControllerActivated()
+        {
+            SetHighlightedZone(cardZones[0]);
+        }
+
+        public void OnNavigate(float value)
+        {
+            if (value > 0)
+            {
+                int index = HighlightedZone.Position + 1;
+                if (index > cardZones.Count - 1) index = 0;
+                SetHighlightedZone(cardZones[index]);
+            }
+            else if (value < 0)
+            {
+                int index = HighlightedZone.Position - 1;
+                if (index < 0) index = cardZones.Count - 1;
+                SetHighlightedZone(cardZones[index]);
+            }
+        }
+
+        public void OnSubmit()
+        {
+            if (HighlightedZone != null)
+            {
+                HighlightedZone.AddCardToZone();
+            }
+            OnCancel();
+        }
+
+        public void OnCancel()
+        {
+            SetHighlightedZone(null);
+            PlayerHand.Instance.OnCancel();
         }
     }
 

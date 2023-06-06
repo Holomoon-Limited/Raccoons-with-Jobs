@@ -129,3 +129,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 439536794baf21642ac0102653c2cd18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultColor: {r: 0.21960784, g: 0.21960784, b: 0.21960784, a: 0}
+  highlightColor: {r: 1, g: 0.890345, b: 0, a: 1}

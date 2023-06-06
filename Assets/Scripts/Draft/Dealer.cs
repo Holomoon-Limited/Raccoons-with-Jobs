@@ -4,13 +4,14 @@ using Holo.Cards;
 using UnityEngine;
 using Holo.Input;
 using Holo.Racc.Game;
+using System;
 
 namespace Holo.Racc.Draft
 {
     /// <summary>
     /// Singleton responsible for displaying dealt cards during Draft selection
     /// </summary>
-    public class Dealer : CardLocation
+    public class Dealer : CardLocation, IGamepadLocation
     {
         public static Dealer Instance;
 
@@ -24,7 +25,6 @@ namespace Holo.Racc.Draft
             {
                 Instance = this;
             }
-
         }
 
         [Header("Asset References")]
@@ -46,12 +46,12 @@ namespace Holo.Racc.Draft
         //Tracks how many picks the player has made 
         private int playerPicks = 0;
 
-
         private void OnEnable()
         {
             input.OnSubmitPressed += MoveCardToHand;
             draftHandler.OnStartDraft += DealCards;
             transitionHandler.OnTransitionOver += StartDraft;
+            draftHandler.OnPlayerPick += SelectFirstCard;
         }
 
         private void OnDisable()
@@ -59,6 +59,7 @@ namespace Holo.Racc.Draft
             input.OnSubmitPressed -= MoveCardToHand;
             draftHandler.OnStartDraft -= DealCards;
             transitionHandler.OnTransitionOver -= StartDraft;
+            draftHandler.OnPlayerPick -= SelectFirstCard;
         }
 
         private void StartDraft()
@@ -85,6 +86,11 @@ namespace Holo.Racc.Draft
                 AudioPlayer.Instance.PlayDealClip();
                 yield return new WaitForSeconds(timeBetweenCards);
             }
+            if (input.GamepadEnabled)
+            {
+                SetHighlightedCard(HeldCards[0]);
+                GamepadControls.Instance.activeLocation = this;
+            }
         }
 
         public override void AddCardToLocation(Card card)
@@ -99,7 +105,17 @@ namespace Holo.Racc.Draft
         {
             if (HeldCards.Contains(card))
             {
-                HeldCards.Remove(card);
+                HeldCards.RemoveAt(card.Position);
+                cardPositions.RemoveAt(card.Position);
+            }
+            UpdateCardPositions();
+        }
+
+        private void UpdateCardPositions()
+        {
+            for (int i = 0; i < HeldCards.Count; i++)
+            {
+                HeldCards[i].Position = i;
             }
         }
 
@@ -128,8 +144,8 @@ namespace Holo.Racc.Draft
         private void MoveCardToHand()
         {
             if (HighlightedCard == null) return;
-            SetSelectedCard(HighlightedCard);
             RemoveCardFromLocation(HighlightedCard);
+            SetSelectedCard(HighlightedCard);
             HighlightedCard = null;
             playerPicks++;
             if (playerPicks >= draftHandler.Picks)
@@ -137,6 +153,46 @@ namespace Holo.Racc.Draft
                 draftHandler.ProgressPhase();
                 playerPicks = 0;
             }
+            else
+            {
+                SelectFirstCard(playerPicks);
+            }
+        }
+
+        private void SelectFirstCard(int picks)
+        {
+            SetHighlightedCard(HeldCards[0]);
+        }
+
+        public void OnControllerActivated()
+        {
+            SetHighlightedCard(HeldCards[0]);
+        }
+
+        public void OnNavigate(float value)
+        {
+            if (value > 0)
+            {
+                int index = HighlightedCard.Position + 1;
+                if (index > HeldCards.Count - 1) index = 0;
+                SetHighlightedCard(HeldCards[index]);
+            }
+            else if (value < 0)
+            {
+                int index = HighlightedCard.Position - 1;
+                if (index < 0) index = HeldCards.Count - 1;
+                SetHighlightedCard(HeldCards[index]);
+            }
+        }
+
+        public void OnSubmit()
+        {
+            MoveCardToHand();
+        }
+
+        public void OnCancel()
+        {
+
         }
     }
 }

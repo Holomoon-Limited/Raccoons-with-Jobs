@@ -10,8 +10,13 @@ namespace Holo.Cards
     /// </summary>
     public class CardZone : MonoBehaviour
     {
+        [SerializeField] private Color defaultColor;
+        [SerializeField] private Color highlightColor;
+
         public Card HeldCard { get; protected set; }
         public bool HasCard => (HeldCard != null);
+
+        public int Position { get; set; }
 
         public void AddCardToZone(Card card)
         {
@@ -25,6 +30,16 @@ namespace Holo.Cards
         {
             if (HeldCard == null) return;
             HeldCard = null;
+        }
+
+        public void HighlightZone()
+        {
+            this.GetComponentInChildren<SpriteRenderer>().color = highlightColor;
+        }
+
+        public void EndZoneHighlight()
+        {
+            this.GetComponentInChildren<SpriteRenderer>().color = defaultColor;
         }
 
         public void MoveCardToHand()

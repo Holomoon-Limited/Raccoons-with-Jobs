@@ -8,7 +8,7 @@ namespace Holo.Racc.Game
     [CreateAssetMenu(fileName = "Phase Handler", menuName = "Game/New Phase Handler", order = 0)]
     public class PhaseHandler : ScriptableObject
     {
-        [Header("Asset References")] 
+        [Header("Asset References")]
         [SerializeField] private ScoreManager scoreManager;
 
         public int PlayCardZoneCount { get; private set; }
@@ -16,10 +16,11 @@ namespace Holo.Racc.Game
         // Actions for phases
         public event Action OnGameStart;
         public event Action OnDraftEnd;
+        public event Action OnPlayStart;
         public event Action OnPlayEnd;
         public event Action OnBattleEnd;
         public event Action OnGameEnd;
-        
+
 
         private void OnEnable()
         {
@@ -30,7 +31,7 @@ namespace Holo.Racc.Game
         public void StartGame()
         {
             PlayCardZoneCount = 3;
-            
+
             OnGameStart?.Invoke();
 
             StartDraftPhase();
@@ -51,7 +52,9 @@ namespace Holo.Racc.Game
         private void StartPlayPhase()
         {
             SceneManager.LoadScene("Play");
+            OnPlayStart?.Invoke();
         }
+
         public void EndPlayPhase()
         {
             OnPlayEnd?.Invoke();

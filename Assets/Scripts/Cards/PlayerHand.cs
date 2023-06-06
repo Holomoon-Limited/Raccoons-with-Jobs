@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Holo.Input;
 using Holo.Racc.Game;
@@ -6,7 +7,7 @@ using UnityEngine.InputSystem;
 
 namespace Holo.Cards
 {
-    public class PlayerHand : CardLocation
+    public class PlayerHand : CardLocation, IGamepadLocation
     {
         public static PlayerHand Instance;
 
@@ -39,15 +40,20 @@ namespace Holo.Cards
 
         [SerializeField] LayerMask boardMask = -1;
 
+        public event Action OnCardSelected;
+        public event Action OnBecomeActive;
+
         private List<Vector3> cardPositions = new List<Vector3>();
 
         private void OnEnable()
         {
             input.OnSubmitPressed += SelectCard;
             input.OnCancelPressed += CancelSelection;
-            
+
             phaseHandler.OnPlayEnd += ReturnCards;
             phaseHandler.OnGameEnd += ReturnCards;
+
+            phaseHandler.OnPlayStart += UpdateGamepadControls;
         }
 
         private void OnDisable()
@@ -57,6 +63,8 @@ namespace Holo.Cards
 
             phaseHandler.OnPlayEnd -= ReturnCards;
             phaseHandler.OnGameEnd -= ReturnCards;
+
+            phaseHandler.OnPlayStart -= UpdateGamepadControls;
         }
 
         private void Start()
@@ -69,6 +77,7 @@ namespace Holo.Cards
         private void Update()
         {
             if (SelectedCard == null) return;
+            if (input.GamepadEnabled) return;
             Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
             if (Physics.Raycast(ray, out RaycastHit hit, 100f, boardMask))
             {
@@ -180,6 +189,49 @@ namespace Holo.Cards
             }
 
             HeldCards.Clear();
+        }
+
+        private void UpdateGamepadControls()
+        {
+            GamepadControls.Instance.activeLocation = this;
+            OnBecomeActive?.Invoke();
+            OnControllerActivated();
+        }
+
+        public void OnControllerActivated()
+        {
+            if (HeldCards.Count <= 0) return;
+            SetHighlightedCard(HeldCards[0]);
+        }
+
+        public void OnNavigate(float value)
+        {
+            if (SelectedCard != null) return;
+            if (HeldCards.Count <= 0) return;
+            if (value > 0)
+            {
+                int index = HighlightedCard.Position + 1;
+                if (index > HeldCards.Count - 1) index = 0;
+                SetHighlightedCard(HeldCards[index]);
+            }
+            else if (value < 0)
+            {
+                int index = HighlightedCard.Position - 1;
+                if (index < 0) index = HeldCards.Count - 1;
+                SetHighlightedCard(HeldCards[index]);
+            }
+        }
+
+        public void OnSubmit()
+        {
+            SelectCard();
+            OnCardSelected?.Invoke();
+        }
+
+        public void OnCancel()
+        {
+            SelectedCard = null;
+            UpdateGamepadControls();
         }
     }
 }

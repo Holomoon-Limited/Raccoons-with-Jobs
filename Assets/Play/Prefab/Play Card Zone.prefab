@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4075b09423f2bec4ea37c425ec7851d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  assignedCard: {fileID: 0}
+  defaultColor: {r: 0.21960784, g: 0.21960784, b: 0.21960784, a: 1}
+  highlightColor: {r: 1, g: 0.8901961, b: 0, a: 1}
   input: {fileID: 11400000, guid: ac751458ea8ac0447bfd06189dc39bfe, type: 2}
-  playPlayerHand: {fileID: 0}
+  wasClicked: 0

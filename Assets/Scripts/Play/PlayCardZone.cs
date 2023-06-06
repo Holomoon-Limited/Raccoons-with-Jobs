@@ -22,9 +22,9 @@ namespace Holo.Racc.Play
         // PlayPhase subbed to manage assigned cards
         public static event Action<CardData, int> OnCardAssigned = (cardData, position) => { };
 
-        private void Awake() 
+        private void Awake()
         {
-            
+
         }
 
         private void OnEnable()
@@ -55,7 +55,7 @@ namespace Holo.Racc.Play
             // wasClicked = false;
         }
 
-        private void AddCardToZone()
+        public void AddCardToZone()
         {
             if (board.HighlightedZone != this) return;
             if (this.HeldCard != null)
