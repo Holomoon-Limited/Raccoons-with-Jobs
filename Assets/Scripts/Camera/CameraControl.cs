@@ -3,6 +3,7 @@ using UnityEngine;
 using Cinemachine;
 using Holo.Input;
 using UnityEngine.SceneManagement;
+using Holo.Cards;
 
 namespace Holo.Cam
 {
@@ -10,7 +11,7 @@ namespace Holo.Cam
     {
         [Header("Asset References")]
         [SerializeField] private InputManager inputManager;
-        
+
         [Header("Component References")]
         [SerializeField] private CinemachineVirtualCamera playerHandCamera;
         [SerializeField] private CinemachineVirtualCamera boardCamera;
@@ -24,12 +25,16 @@ namespace Holo.Cam
         {
             inputManager.OnMouseScrolledUp += DisplayBoardView;
             inputManager.OnMouseScrolledDown += DisplayHandView;
+            PlayerHand.Instance.OnCardSelected += DisplayBoardView;
+            PlayerHand.Instance.OnBecomeActive += DisplayHandView;
         }
 
         private void OnDisable()
         {
             inputManager.OnMouseScrolledUp -= DisplayBoardView;
             inputManager.OnMouseScrolledDown -= DisplayHandView;
+            PlayerHand.Instance.OnCardSelected -= DisplayBoardView;
+            PlayerHand.Instance.OnBecomeActive -= DisplayHandView;
         }
 
         void Start()
@@ -50,10 +55,10 @@ namespace Holo.Cam
         {
             playerHandCamera.Priority = 10;
             boardCamera.Priority = 11;
-            
+
             OnBoardView?.Invoke();
         }
-        
+
         private void DisplayHandView()
         {
             // disable hand view in Battle
@@ -61,7 +66,7 @@ namespace Holo.Cam
 
             playerHandCamera.Priority = 11;
             boardCamera.Priority = 10;
-            
+
             OnHandView?.Invoke();
         }
     }

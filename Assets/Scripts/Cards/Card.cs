@@ -58,6 +58,7 @@ namespace Holo.Cards
             // overwrites default with new value
             CardData = newCardData;
             SetBasePower(CardData.Power);
+            this.gameObject.name = CardData.CardName;
 
             // assign data to components 
             UpdateDisplay();

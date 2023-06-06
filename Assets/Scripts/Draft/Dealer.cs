@@ -51,7 +51,7 @@ namespace Holo.Racc.Draft
             input.OnSubmitPressed += MoveCardToHand;
             draftHandler.OnStartDraft += DealCards;
             transitionHandler.OnTransitionOver += StartDraft;
-            draftHandler.OnPlayerPick += OnPlayerPick;
+            draftHandler.OnPlayerPick += SelectFirstCard;
         }
 
         private void OnDisable()
@@ -59,7 +59,7 @@ namespace Holo.Racc.Draft
             input.OnSubmitPressed -= MoveCardToHand;
             draftHandler.OnStartDraft -= DealCards;
             transitionHandler.OnTransitionOver -= StartDraft;
-            draftHandler.OnPlayerPick -= OnPlayerPick;
+            draftHandler.OnPlayerPick -= SelectFirstCard;
         }
 
         private void StartDraft()
@@ -144,8 +144,8 @@ namespace Holo.Racc.Draft
         private void MoveCardToHand()
         {
             if (HighlightedCard == null) return;
-            SetSelectedCard(HighlightedCard);
             RemoveCardFromLocation(HighlightedCard);
+            SetSelectedCard(HighlightedCard);
             HighlightedCard = null;
             playerPicks++;
             if (playerPicks >= draftHandler.Picks)
@@ -153,9 +153,13 @@ namespace Holo.Racc.Draft
                 draftHandler.ProgressPhase();
                 playerPicks = 0;
             }
+            else
+            {
+                SelectFirstCard(playerPicks);
+            }
         }
 
-        private void OnPlayerPick(int picks)
+        private void SelectFirstCard(int picks)
         {
             SetHighlightedCard(HeldCards[0]);
         }
@@ -183,12 +187,12 @@ namespace Holo.Racc.Draft
 
         public void OnSubmit()
         {
-            throw new System.NotImplementedException();
+            MoveCardToHand();
         }
 
         public void OnCancel()
         {
-            throw new System.NotImplementedException();
+
         }
     }
 }

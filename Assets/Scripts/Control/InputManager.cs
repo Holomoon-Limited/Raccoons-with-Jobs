@@ -12,8 +12,10 @@ namespace Holo.Input
         public event Action OnSubmitPressed;
         public event Action OnGamepadSubmit;
         public event Action OnCancelPressed;
+        public event Action OnGamepadCancel;
         public event Action OnMouseScrolledUp;
         public event Action OnMouseScrolledDown;
+        public event Action OnStartBattle;
 
         public bool GamepadEnabled => Controls.Gamepad.enabled == true;
 
@@ -25,10 +27,12 @@ namespace Holo.Input
             Controls.Enable();
 
             Controls.Keyboard.Submit.performed += ctx => SubmitPressed();
-            Controls.Gamepad.Submit.performed += ctx => SubmitPressed();
+            Controls.Gamepad.Submit.performed += ctx => GamepadSubmitPressed();
 
             Controls.Keyboard.Cancel.performed += ctx => CancelPressed();
-            Controls.Gamepad.Cancel.performed += ctx => CancelPressed();
+            Controls.Gamepad.Cancel.performed += ctx => GamepadCancelPressed();
+
+            Controls.Gamepad.Battle.performed += ctx => StartBattle();
 
             Controls.Keyboard.MouseScroll.performed += ctx => MouseScrolled(ctx.ReadValue<float>());
             Controls.Gamepad.Scroll.performed += ctx => MouseScrolled(ctx.ReadValue<float>());
@@ -66,12 +70,21 @@ namespace Holo.Input
         public void GamepadSubmitPressed()
         {
             OnGamepadSubmit?.Invoke();
-
         }
 
         public void CancelPressed()
         {
             OnCancelPressed?.Invoke();
+        }
+
+        public void GamepadCancelPressed()
+        {
+            OnGamepadCancel?.Invoke();
+        }
+
+        public void StartBattle()
+        {
+            OnStartBattle?.Invoke();
         }
 
         public void MouseScrolled(float value)

@@ -152,6 +152,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Battle"",
+                    ""type"": ""Button"",
+                    ""id"": ""804e849c-8aaf-4f65-a789-27787c2b9b91"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -308,6 +317,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Navigate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""580ec711-7efd-4f8b-a763-19632698d11e"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Battle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -325,6 +345,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Gamepad_Cancel = m_Gamepad.FindAction("Cancel", throwIfNotFound: true);
         m_Gamepad_Scroll = m_Gamepad.FindAction("Scroll", throwIfNotFound: true);
         m_Gamepad_Navigate = m_Gamepad.FindAction("Navigate", throwIfNotFound: true);
+        m_Gamepad_Battle = m_Gamepad.FindAction("Battle", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -437,6 +458,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Gamepad_Cancel;
     private readonly InputAction m_Gamepad_Scroll;
     private readonly InputAction m_Gamepad_Navigate;
+    private readonly InputAction m_Gamepad_Battle;
     public struct GamepadActions
     {
         private @PlayerControls m_Wrapper;
@@ -445,6 +467,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Cancel => m_Wrapper.m_Gamepad_Cancel;
         public InputAction @Scroll => m_Wrapper.m_Gamepad_Scroll;
         public InputAction @Navigate => m_Wrapper.m_Gamepad_Navigate;
+        public InputAction @Battle => m_Wrapper.m_Gamepad_Battle;
         public InputActionMap Get() { return m_Wrapper.m_Gamepad; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -466,6 +489,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Navigate.started -= m_Wrapper.m_GamepadActionsCallbackInterface.OnNavigate;
                 @Navigate.performed -= m_Wrapper.m_GamepadActionsCallbackInterface.OnNavigate;
                 @Navigate.canceled -= m_Wrapper.m_GamepadActionsCallbackInterface.OnNavigate;
+                @Battle.started -= m_Wrapper.m_GamepadActionsCallbackInterface.OnBattle;
+                @Battle.performed -= m_Wrapper.m_GamepadActionsCallbackInterface.OnBattle;
+                @Battle.canceled -= m_Wrapper.m_GamepadActionsCallbackInterface.OnBattle;
             }
             m_Wrapper.m_GamepadActionsCallbackInterface = instance;
             if (instance != null)
@@ -482,6 +508,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Navigate.started += instance.OnNavigate;
                 @Navigate.performed += instance.OnNavigate;
                 @Navigate.canceled += instance.OnNavigate;
+                @Battle.started += instance.OnBattle;
+                @Battle.performed += instance.OnBattle;
+                @Battle.canceled += instance.OnBattle;
             }
         }
     }
@@ -498,5 +527,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnCancel(InputAction.CallbackContext context);
         void OnScroll(InputAction.CallbackContext context);
         void OnNavigate(InputAction.CallbackContext context);
+        void OnBattle(InputAction.CallbackContext context);
     }
 }

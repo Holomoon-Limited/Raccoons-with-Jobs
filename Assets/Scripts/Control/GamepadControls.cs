@@ -1,3 +1,4 @@
+using System;
 using Holo.Input;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -15,6 +16,7 @@ public class GamepadControls : MonoBehaviour
         else
         {
             Instance = this;
+            DontDestroyOnLoad(this.gameObject);
         }
     }
 
@@ -84,6 +86,15 @@ public class GamepadControls : MonoBehaviour
                     break;
             }
         };
+
+        input.OnGamepadSubmit += GamepadSubmit;
+        input.OnGamepadCancel += GamepadCancel;
+    }
+
+    private void OnDisable()
+    {
+        input.OnGamepadSubmit -= GamepadSubmit;
+        input.OnGamepadCancel -= GamepadCancel;
     }
 
     private void Update()
@@ -98,5 +109,15 @@ public class GamepadControls : MonoBehaviour
             }
         }
         timeSinceHighlight += Time.deltaTime;
+    }
+
+    private void GamepadSubmit()
+    {
+        activeLocation?.OnSubmit();
+    }
+
+    private void GamepadCancel()
+    {
+        activeLocation?.OnCancel();
     }
 }
