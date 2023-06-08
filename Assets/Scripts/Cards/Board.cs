@@ -79,9 +79,9 @@ namespace Holo.Cards
                         PlayerZones[i].RemoveCardFromZone();
                         emptyIndexes.RemoveAt(0);
                         emptyIndexes.Add(i);
+                        yield return new WaitForSeconds(timeBetweenSlides);
                     }
                 }
-                yield return new WaitForSeconds(timeBetweenSlides);
             }
 
             emptyIndexes.Clear();
@@ -102,9 +102,9 @@ namespace Holo.Cards
                         Board.Instance.EnemyZones[i].RemoveCardFromZone();
                         emptyIndexes.RemoveAt(0);
                         emptyIndexes.Add(i);
+                        yield return new WaitForSeconds(timeBetweenSlides);
                     }
                 }
-                yield return new WaitForSeconds(timeBetweenSlides);
             }
             EffectHandler.Instance.ApplyContinuousEffects();
             battleHandler.StartAttacks();

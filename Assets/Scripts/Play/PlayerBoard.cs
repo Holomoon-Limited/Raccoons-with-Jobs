@@ -132,6 +132,7 @@ namespace Holo.Racc.Play
 
         public void OnNavigate(float value)
         {
+            if (HighlightedZone == null) SetHighlightedZone(cardZones[0]);
             if (value > 0)
             {
                 int index = HighlightedZone.Position + 1;

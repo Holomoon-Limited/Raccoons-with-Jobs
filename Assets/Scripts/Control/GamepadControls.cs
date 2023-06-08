@@ -35,6 +35,7 @@ public class GamepadControls : MonoBehaviour
             if (activeLocation != null)
             {
                 activeLocation.OnControllerActivated();
+                HideCursor();
             }
         }
     }
@@ -53,6 +54,7 @@ public class GamepadControls : MonoBehaviour
                         if (activeLocation != null)
                         {
                             activeLocation.OnControllerActivated();
+                            HideCursor();
                         }
                     }
                     break;
@@ -61,6 +63,7 @@ public class GamepadControls : MonoBehaviour
                     if (InputSystem.GetDevice<Gamepad>() == null)
                     {
                         input.EnableKeyboardControls();
+                        ShowCursor();
                     }
                     break;
                 case InputDeviceChange.Reconnected:
@@ -71,6 +74,7 @@ public class GamepadControls : MonoBehaviour
                         if (activeLocation != null)
                         {
                             activeLocation.OnControllerActivated();
+                            HideCursor();
                         }
                     }
                     break;
@@ -79,6 +83,7 @@ public class GamepadControls : MonoBehaviour
                     if (InputSystem.GetDevice<Gamepad>() == null)
                     {
                         input.EnableKeyboardControls();
+                        ShowCursor();
                     }
                     break;
                 default:
@@ -89,6 +94,12 @@ public class GamepadControls : MonoBehaviour
 
         input.OnGamepadSubmit += GamepadSubmit;
         input.OnGamepadCancel += GamepadCancel;
+    }
+
+    private static void ShowCursor()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     private void OnDisable()
@@ -102,6 +113,7 @@ public class GamepadControls : MonoBehaviour
         float navigation = input.Controls.Gamepad.Navigate.ReadValue<float>();
         if (Mathf.Abs(navigation) > Mathf.Epsilon && timeSinceHighlight > highlightCooldown)
         {
+            HideCursor();
             if (activeLocation != null)
             {
                 activeLocation.OnNavigate(navigation);
@@ -111,13 +123,21 @@ public class GamepadControls : MonoBehaviour
         timeSinceHighlight += Time.deltaTime;
     }
 
+    private static void HideCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
     private void GamepadSubmit()
     {
         activeLocation?.OnSubmit();
+        HideCursor();
     }
 
     private void GamepadCancel()
     {
         activeLocation?.OnCancel();
+        HideCursor();
     }
 }

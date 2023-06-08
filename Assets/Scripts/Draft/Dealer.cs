@@ -171,6 +171,8 @@ namespace Holo.Racc.Draft
 
         public void OnNavigate(float value)
         {
+            if (HighlightedCard == null) SelectFirstCard(0);
+
             if (value > 0)
             {
                 int index = HighlightedCard.Position + 1;

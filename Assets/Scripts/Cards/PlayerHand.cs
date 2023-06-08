@@ -208,6 +208,7 @@ namespace Holo.Cards
         {
             if (SelectedCard != null) return;
             if (HeldCards.Count <= 0) return;
+            if (HighlightedCard == null) SetHighlightedCard(HeldCards[0]);
             if (value > 0)
             {
                 int index = HighlightedCard.Position + 1;
